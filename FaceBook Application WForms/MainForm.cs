@@ -8,7 +8,7 @@ using FacebookWrapper;
 
 namespace FaceBook_Application_WForms
 {
-    public partial class MainForm: Form
+    public partial class MainForm : Form
     {
         private PictureBox profilePictureBox;
         private Label fullNameUser;
@@ -17,6 +17,10 @@ namespace FaceBook_Application_WForms
         private Label postLabel;
         private TextBox postTextBox;
         private Button postButton;
+        private Label PostsLable;
+        private ListBox PostsListBox;
+        private Label EventsLable;
+        private ListBox EventsListBox;
         LoginForm r_loginForm = new LoginForm();
         User m_LoggedInUser;
 
@@ -33,6 +37,8 @@ namespace FaceBook_Application_WForms
 
             m_LoggedInUser = r_loginForm.LogInInfo.LoggedInUser;
             fetchUserInfo();
+            fetchPosts();
+            fetchEvents();
         }
 
         private void fetchUserInfo()
@@ -46,37 +52,68 @@ namespace FaceBook_Application_WForms
         private void postButton_Click(object sender, EventArgs e)
         {
             Status postNewStatus = m_LoggedInUser.PostStatus(postTextBox.Text);
-            MessageBox.Show(string.Format("Status Posted! {0}{1}" ,Environment.NewLine, postTextBox.Text));
+            MessageBox.Show(string.Format("Status Posted! {0}{1}", Environment.NewLine, postTextBox.Text));
         }
 
         private void fetchPosts()
         {
-            User loggedInUser = r_loginForm.LogInInfo.LoggedInUser;
-            foreach (Post post in loggedInUser.Posts)
+            if(m_LoggedInUser.Posts.Count > 10)
             {
-                if (post.Message != null)
+                for (int i = 0; i < 10; i++)
                 {
-                    PostsListBox.Items.Add(post.Message);
+                    Post post = m_LoggedInUser.Posts[i];
+                    if (post.Message != null)
+                    {
+                        PostsListBox.Items.Add(post.Message);
+                    }
+                    else if (post.Caption != null)
+                    {
+                        PostsListBox.Items.Add(post.Caption);
+                    }
+                    else
+                    {
+                        PostsListBox.Items.Add(string.Format("[{0}]", post.Type));
+                    }
                 }
-                else if (post.Caption != null)
+            }
+            else
+            {
+                foreach (Post post in m_LoggedInUser.Posts)
                 {
-                    PostsListBox.Items.Add(post.Caption);
-                }
-                else
-                {
-                    PostsListBox.Items.Add(string.Format("[{0}]", post.Type));
+                    if (post.Message != null)
+                    {
+                        PostsListBox.Items.Add(post.Message);
+                    }
+                    else if (post.Caption != null)
+                    {
+                        PostsListBox.Items.Add(post.Caption);
+                    }
+                    else
+                    {
+                        PostsListBox.Items.Add(string.Format("[{0}]", post.Type));
+                    }
                 }
             }
         }
 
         private void fetchEvents()
         {
-            User loggedInUser = r_loginForm.LogInInfo.LoggedInUser;
             EventsListBox.Items.Clear();
             EventsListBox.DisplayMember = "Name";
-            foreach (Event fbEvent in loggedInUser.Events)
+            if(m_LoggedInUser.Events.Count > 10)
             {
-                EventsListBox.Items.Add(fbEvent);
+                for (int i = 0; i < 10; i++)
+                {
+                    Event fbEvent = m_LoggedInUser.Events[i];
+                    EventsListBox.Items.Add(fbEvent);
+                }
+            }
+            else
+            {
+                foreach (Event fbEvent in m_LoggedInUser.Events)
+                {
+                    EventsListBox.Items.Add(fbEvent);
+                }
             }
         }
 
@@ -110,7 +147,7 @@ namespace FaceBook_Application_WForms
             this.fullNameUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fullNameUser.Location = new System.Drawing.Point(136, 25);
             this.fullNameUser.Name = "fullNameUser";
-            this.fullNameUser.Size = new System.Drawing.Size(243, 55);
+            this.fullNameUser.Size = new System.Drawing.Size(167, 37);
             this.fullNameUser.TabIndex = 1;
             this.fullNameUser.Text = "Full name";
             // 
@@ -120,7 +157,7 @@ namespace FaceBook_Application_WForms
             this.emailUserLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.emailUserLabel.Location = new System.Drawing.Point(140, 88);
             this.emailUserLabel.Name = "emailUserLabel";
-            this.emailUserLabel.Size = new System.Drawing.Size(74, 29);
+            this.emailUserLabel.Size = new System.Drawing.Size(48, 20);
             this.emailUserLabel.TabIndex = 2;
             this.emailUserLabel.Text = "Email";
             // 
@@ -130,7 +167,7 @@ namespace FaceBook_Application_WForms
             this.birthdayLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.birthdayLabel.Location = new System.Drawing.Point(139, 62);
             this.birthdayLabel.Name = "birthdayLabel";
-            this.birthdayLabel.Size = new System.Drawing.Size(134, 37);
+            this.birthdayLabel.Size = new System.Drawing.Size(92, 26);
             this.birthdayLabel.TabIndex = 3;
             this.birthdayLabel.Text = "Birthday";
             // 
@@ -140,16 +177,16 @@ namespace FaceBook_Application_WForms
             this.postLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.postLabel.Location = new System.Drawing.Point(12, 135);
             this.postLabel.Name = "postLabel";
-            this.postLabel.Size = new System.Drawing.Size(310, 40);
+            this.postLabel.Size = new System.Drawing.Size(211, 29);
             this.postLabel.TabIndex = 4;
             this.postLabel.Text = "Write new status:";
             // 
             // postTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(220, 144);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(548, 20);
-            this.textBox1.TabIndex = 5;
+            this.postTextBox.Location = new System.Drawing.Point(219, 143);
+            this.postTextBox.Name = "postTextBox";
+            this.postTextBox.Size = new System.Drawing.Size(550, 20);
+            this.postTextBox.TabIndex = 12;
             // 
             // postButton
             // 
@@ -165,39 +202,37 @@ namespace FaceBook_Application_WForms
             // PostsLable
             // 
             this.PostsLable.AutoSize = true;
-            this.PostsLable.Location = new System.Drawing.Point(15, 241);
+            this.PostsLable.Location = new System.Drawing.Point(16, 175);
             this.PostsLable.Name = "PostsLable";
             this.PostsLable.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.PostsLable.Size = new System.Drawing.Size(53, 20);
+            this.PostsLable.Size = new System.Drawing.Size(36, 13);
             this.PostsLable.TabIndex = 8;
             this.PostsLable.Text = "Posts:";
             // 
             // PostsListBox
             // 
             this.PostsListBox.FormattingEnabled = true;
-            this.PostsListBox.ItemHeight = 20;
-            this.PostsListBox.Location = new System.Drawing.Point(19, 264);
+            this.PostsListBox.Location = new System.Drawing.Point(19, 191);
             this.PostsListBox.Name = "PostsListBox";
-            this.PostsListBox.Size = new System.Drawing.Size(171, 144);
+            this.PostsListBox.Size = new System.Drawing.Size(171, 134);
             this.PostsListBox.TabIndex = 9;
             // 
             // EventsLable
             // 
             this.EventsLable.AutoSize = true;
-            this.EventsLable.Location = new System.Drawing.Point(216, 241);
+            this.EventsLable.Location = new System.Drawing.Point(217, 175);
             this.EventsLable.Name = "EventsLable";
             this.EventsLable.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.EventsLable.Size = new System.Drawing.Size(62, 20);
+            this.EventsLable.Size = new System.Drawing.Size(43, 13);
             this.EventsLable.TabIndex = 10;
             this.EventsLable.Text = "Events:";
             // 
             // EventsListBox
             // 
             this.EventsListBox.FormattingEnabled = true;
-            this.EventsListBox.ItemHeight = 20;
-            this.EventsListBox.Location = new System.Drawing.Point(220, 264);
+            this.EventsListBox.Location = new System.Drawing.Point(219, 191);
             this.EventsListBox.Name = "EventsListBox";
-            this.EventsListBox.Size = new System.Drawing.Size(171, 144);
+            this.EventsListBox.Size = new System.Drawing.Size(171, 134);
             this.EventsListBox.TabIndex = 11;
             // 
             // MainForm
@@ -218,11 +253,6 @@ namespace FaceBook_Application_WForms
             ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
-        }
-
-        private void postButton_Click(object sender, EventArgs e)
-        {
 
         }
     }
