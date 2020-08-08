@@ -18,6 +18,7 @@ namespace FaceBook_Application_WForms
         private TextBox postTextBox;
         private Button postButton;
         LoginForm r_loginForm = new LoginForm();
+        User m_LoggedInUser;
 
         public MainForm()
         {
@@ -32,7 +33,6 @@ namespace FaceBook_Application_WForms
 
             m_LoggedInUser = r_loginForm.LogInInfo.LoggedInUser;
             fetchUserInfo();
-
         }
 
         private void fetchUserInfo()
