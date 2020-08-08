@@ -15,9 +15,10 @@ namespace FaceBook_Application_WForms
         private Label emailUserLabel;
         private Label birthdayLabel;
         private Label postLabel;
-        private TextBox textBox1;
+        private TextBox postTextBox;
         private Button postButton;
-        LoginForm r_loginForm = new LoginForm();
+        private LoginForm r_loginForm = new LoginForm();
+        private User m_LoggedInUser;
 
         public MainForm()
         {
@@ -30,17 +31,23 @@ namespace FaceBook_Application_WForms
                 Application.Exit();
             }
 
+            m_LoggedInUser = r_loginForm.LogInInfo.LoggedInUser;
             fetchUserInfo();
-
+            
         }
 
         private void fetchUserInfo()
         {
-            User loggedInUser = r_loginForm.LogInInfo.LoggedInUser;
-            profilePictureBox.LoadAsync(loggedInUser.PictureNormalURL);
-            fullNameUser.Text = loggedInUser.Name;
-            birthdayLabel.Text = loggedInUser.Birthday;
-            emailUserLabel.Text = loggedInUser.Email;
+            profilePictureBox.LoadAsync(m_LoggedInUser.PictureNormalURL);
+            fullNameUser.Text = m_LoggedInUser.Name;
+            birthdayLabel.Text = m_LoggedInUser.Birthday;
+            emailUserLabel.Text = m_LoggedInUser.Email;
+        }
+
+        private void postButton_Click(object sender, EventArgs e)
+        {
+            Status postNewStatus = m_LoggedInUser.PostStatus(postTextBox.Text);
+            MessageBox.Show(string.Format("Status Posted! {0}{1}" ,Environment.NewLine, postTextBox.Text));
         }
 
         private void InitializeComponent()
@@ -50,7 +57,7 @@ namespace FaceBook_Application_WForms
             this.emailUserLabel = new System.Windows.Forms.Label();
             this.birthdayLabel = new System.Windows.Forms.Label();
             this.postLabel = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.postTextBox = new System.Windows.Forms.TextBox();
             this.postButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).BeginInit();
             this.SuspendLayout();
@@ -103,12 +110,12 @@ namespace FaceBook_Application_WForms
             this.postLabel.TabIndex = 4;
             this.postLabel.Text = "Write new status:";
             // 
-            // textBox1
+            // postTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(220, 144);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(548, 20);
-            this.textBox1.TabIndex = 5;
+            this.postTextBox.Location = new System.Drawing.Point(220, 144);
+            this.postTextBox.Name = "postTextBox";
+            this.postTextBox.Size = new System.Drawing.Size(548, 20);
+            this.postTextBox.TabIndex = 5;
             // 
             // postButton
             // 
@@ -125,7 +132,7 @@ namespace FaceBook_Application_WForms
             // 
             this.ClientSize = new System.Drawing.Size(884, 461);
             this.Controls.Add(this.postButton);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.postTextBox);
             this.Controls.Add(this.postLabel);
             this.Controls.Add(this.birthdayLabel);
             this.Controls.Add(this.emailUserLabel);
@@ -135,11 +142,6 @@ namespace FaceBook_Application_WForms
             ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
-        }
-
-        private void postButton_Click(object sender, EventArgs e)
-        {
 
         }
     }
