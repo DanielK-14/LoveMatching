@@ -14,6 +14,9 @@ namespace FaceBook_Application_WForms
         private Label fullNameUser;
         private Label emailUserLabel;
         private Label birthdayLabel;
+        private Label postLabel;
+        private TextBox textBox1;
+        private Button postButton;
         LoginForm r_loginForm = new LoginForm();
 
         public MainForm()
@@ -46,6 +49,9 @@ namespace FaceBook_Application_WForms
             this.fullNameUser = new System.Windows.Forms.Label();
             this.emailUserLabel = new System.Windows.Forms.Label();
             this.birthdayLabel = new System.Windows.Forms.Label();
+            this.postLabel = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.postButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,7 +62,6 @@ namespace FaceBook_Application_WForms
             this.profilePictureBox.Size = new System.Drawing.Size(100, 100);
             this.profilePictureBox.TabIndex = 0;
             this.profilePictureBox.TabStop = false;
-            this.profilePictureBox.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // fullNameUser
             // 
@@ -88,9 +93,40 @@ namespace FaceBook_Application_WForms
             this.birthdayLabel.TabIndex = 3;
             this.birthdayLabel.Text = "Birthday";
             // 
+            // postLabel
+            // 
+            this.postLabel.AutoSize = true;
+            this.postLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.postLabel.Location = new System.Drawing.Point(12, 135);
+            this.postLabel.Name = "postLabel";
+            this.postLabel.Size = new System.Drawing.Size(211, 29);
+            this.postLabel.TabIndex = 4;
+            this.postLabel.Text = "Write new status:";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(220, 144);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(548, 20);
+            this.textBox1.TabIndex = 5;
+            // 
+            // postButton
+            // 
+            this.postButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.postButton.Location = new System.Drawing.Point(775, 135);
+            this.postButton.Name = "postButton";
+            this.postButton.Size = new System.Drawing.Size(97, 32);
+            this.postButton.TabIndex = 6;
+            this.postButton.Text = "Post";
+            this.postButton.UseVisualStyleBackColor = true;
+            this.postButton.Click += new System.EventHandler(this.postButton_Click);
+            // 
             // MainForm
             // 
             this.ClientSize = new System.Drawing.Size(884, 461);
+            this.Controls.Add(this.postButton);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.postLabel);
             this.Controls.Add(this.birthdayLabel);
             this.Controls.Add(this.emailUserLabel);
             this.Controls.Add(this.fullNameUser);
@@ -102,7 +138,7 @@ namespace FaceBook_Application_WForms
 
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void postButton_Click(object sender, EventArgs e)
         {
 
         }
