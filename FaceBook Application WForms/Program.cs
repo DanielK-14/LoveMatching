@@ -5,7 +5,7 @@ using System.Windows.Forms;
 namespace FaceBook_Application_WForms
 {
     static class Program
-    {   ///lsllsls
+    {   
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -14,7 +14,7 @@ namespace FaceBook_Application_WForms
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new MainForm());
         }
     }
 }
