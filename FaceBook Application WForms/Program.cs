@@ -5,7 +5,7 @@ using System.Windows.Forms;
 namespace FaceBook_Application_WForms
 {
     static class Program
-    {
+    {   ///lsllsls
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
