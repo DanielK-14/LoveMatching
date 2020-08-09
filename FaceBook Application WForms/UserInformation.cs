@@ -17,6 +17,7 @@ namespace FaceBook_Application_WForms
         public UserInformation(User i_User)
         {
             InitializeComponent();
+            r_User = i_User;
             fetchUserInfo();
             fetchPhotos();
         }
@@ -33,6 +34,11 @@ namespace FaceBook_Application_WForms
         private void fetchPhotos()
         {
             
+        }
+
+        private void BackButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

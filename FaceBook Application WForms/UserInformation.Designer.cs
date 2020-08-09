@@ -48,9 +48,10 @@
             // 
             // CoverPictureBox
             // 
-            this.CoverPictureBox.Location = new System.Drawing.Point(-1, 3);
+            this.CoverPictureBox.Location = new System.Drawing.Point(-1, 2);
+            this.CoverPictureBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.CoverPictureBox.Name = "CoverPictureBox";
-            this.CoverPictureBox.Size = new System.Drawing.Size(900, 221);
+            this.CoverPictureBox.Size = new System.Drawing.Size(887, 144);
             this.CoverPictureBox.TabIndex = 0;
             this.CoverPictureBox.TabStop = false;
             // 
@@ -58,9 +59,10 @@
             // 
             this.NameLabel.AutoSize = true;
             this.NameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.NameLabel.Location = new System.Drawing.Point(12, 319);
+            this.NameLabel.Location = new System.Drawing.Point(8, 207);
+            this.NameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.NameLabel.Name = "NameLabel";
-            this.NameLabel.Size = new System.Drawing.Size(181, 37);
+            this.NameLabel.Size = new System.Drawing.Size(124, 26);
             this.NameLabel.TabIndex = 2;
             this.NameLabel.Text = "NameLabel";
             // 
@@ -68,76 +70,85 @@
             // 
             this.EmailLabel.AutoSize = true;
             this.EmailLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.EmailLabel.Location = new System.Drawing.Point(14, 368);
+            this.EmailLabel.Location = new System.Drawing.Point(9, 239);
+            this.EmailLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.EmailLabel.Name = "EmailLabel";
-            this.EmailLabel.Size = new System.Drawing.Size(121, 26);
+            this.EmailLabel.Size = new System.Drawing.Size(80, 18);
             this.EmailLabel.TabIndex = 3;
             this.EmailLabel.Text = "EmailLabel";
             // 
-            // AgeLabel
+            // BirthdayLabel
             // 
             this.BirthdayLabel.AutoSize = true;
             this.BirthdayLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.BirthdayLabel.Location = new System.Drawing.Point(14, 399);
-            this.BirthdayLabel.Name = "AgeLabel";
-            this.BirthdayLabel.Size = new System.Drawing.Size(96, 25);
+            this.BirthdayLabel.Location = new System.Drawing.Point(9, 259);
+            this.BirthdayLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.BirthdayLabel.Name = "BirthdayLabel";
+            this.BirthdayLabel.Size = new System.Drawing.Size(68, 17);
             this.BirthdayLabel.TabIndex = 4;
             this.BirthdayLabel.Text = "AgeLable";
             // 
-            // pictureBox1
+            // PictureBox1
             // 
-            this.PictureBox1.Location = new System.Drawing.Point(447, 274);
-            this.PictureBox1.Name = "pictureBox1";
-            this.PictureBox1.Size = new System.Drawing.Size(196, 150);
+            this.PictureBox1.Location = new System.Drawing.Point(298, 178);
+            this.PictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PictureBox1.Name = "PictureBox1";
+            this.PictureBox1.Size = new System.Drawing.Size(131, 97);
             this.PictureBox1.TabIndex = 5;
             this.PictureBox1.TabStop = false;
             // 
-            // pictureBox2
+            // PictureBox2
             // 
-            this.PictureBox2.Location = new System.Drawing.Point(664, 274);
-            this.PictureBox2.Name = "pictureBox2";
-            this.PictureBox2.Size = new System.Drawing.Size(178, 150);
+            this.PictureBox2.Location = new System.Drawing.Point(443, 178);
+            this.PictureBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PictureBox2.Name = "PictureBox2";
+            this.PictureBox2.Size = new System.Drawing.Size(119, 97);
             this.PictureBox2.TabIndex = 6;
             this.PictureBox2.TabStop = false;
             // 
-            // pictureBox3
+            // PictureBox3
             // 
-            this.PictureBox3.Location = new System.Drawing.Point(447, 446);
-            this.PictureBox3.Name = "pictureBox3";
-            this.PictureBox3.Size = new System.Drawing.Size(196, 150);
+            this.PictureBox3.Location = new System.Drawing.Point(298, 290);
+            this.PictureBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PictureBox3.Name = "PictureBox3";
+            this.PictureBox3.Size = new System.Drawing.Size(131, 97);
             this.PictureBox3.TabIndex = 7;
             this.PictureBox3.TabStop = false;
             // 
-            // pictureBox4
+            // PictureBox4
             // 
-            this.PictureBox4.Location = new System.Drawing.Point(664, 446);
-            this.PictureBox4.Name = "pictureBox4";
-            this.PictureBox4.Size = new System.Drawing.Size(178, 150);
+            this.PictureBox4.Location = new System.Drawing.Point(443, 290);
+            this.PictureBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PictureBox4.Name = "PictureBox4";
+            this.PictureBox4.Size = new System.Drawing.Size(119, 97);
             this.PictureBox4.TabIndex = 8;
             this.PictureBox4.TabStop = false;
             // 
             // BackButton
             // 
-            this.BackButton.Location = new System.Drawing.Point(19, 553);
+            this.BackButton.Location = new System.Drawing.Point(13, 359);
+            this.BackButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.BackButton.Name = "BackButton";
-            this.BackButton.Size = new System.Drawing.Size(98, 43);
+            this.BackButton.Size = new System.Drawing.Size(65, 28);
             this.BackButton.TabIndex = 9;
             this.BackButton.Text = "Go Back";
             this.BackButton.UseVisualStyleBackColor = true;
+            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
             // 
             // ProfilePictureBox
             // 
-            this.ProfilePictureBox.Location = new System.Drawing.Point(19, 135);
+            this.ProfilePictureBox.Location = new System.Drawing.Point(13, 88);
+            this.ProfilePictureBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ProfilePictureBox.Name = "ProfilePictureBox";
-            this.ProfilePictureBox.Size = new System.Drawing.Size(256, 181);
+            this.ProfilePictureBox.Size = new System.Drawing.Size(171, 118);
             this.ProfilePictureBox.TabIndex = 1;
             this.ProfilePictureBox.TabStop = false;
             // 
             // UserInformation
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(878, 644);
+            this.ClientSize = new System.Drawing.Size(884, 661);
             this.Controls.Add(this.BackButton);
             this.Controls.Add(this.PictureBox4);
             this.Controls.Add(this.PictureBox3);
@@ -149,6 +160,7 @@
             this.Controls.Add(this.ProfilePictureBox);
             this.Controls.Add(this.CoverPictureBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.Name = "UserInformation";
             this.Text = "UserInformation";

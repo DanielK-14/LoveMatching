@@ -43,6 +43,8 @@
             this.friendFirstNameLabel = new System.Windows.Forms.Label();
             this.friendLastNameLabel = new System.Windows.Forms.Label();
             this.showFriendsButton = new System.Windows.Forms.Button();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSelectedPictureBox)).BeginInit();
             this.SuspendLayout();
@@ -118,7 +120,7 @@
             // 
             this.fullNameUser.AutoSize = true;
             this.fullNameUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fullNameUser.Location = new System.Drawing.Point(153, 55);
+            this.fullNameUser.Location = new System.Drawing.Point(159, 35);
             this.fullNameUser.Name = "fullNameUser";
             this.fullNameUser.Size = new System.Drawing.Size(243, 55);
             this.fullNameUser.TabIndex = 13;
@@ -202,11 +204,35 @@
             this.showFriendsButton.UseVisualStyleBackColor = false;
             this.showFriendsButton.Click += new System.EventHandler(this.showFriendsButton_Click);
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(0, 0);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(55, 13);
+            this.linkLabel1.TabIndex = 31;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "linkLabel1";
+            // 
+            // linkLabel2
+            // 
+            this.linkLabel2.AutoSize = true;
+            this.linkLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabel2.Location = new System.Drawing.Point(173, 96);
+            this.linkLabel2.Name = "linkLabel2";
+            this.linkLabel2.Size = new System.Drawing.Size(69, 24);
+            this.linkLabel2.TabIndex = 32;
+            this.linkLabel2.TabStop = true;
+            this.linkLabel2.Text = "Profile";
+            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+            // 
             // MainPageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 661);
+            this.Controls.Add(this.linkLabel2);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.showFriendsButton);
             this.Controls.Add(this.friendLastNameLabel);
             this.Controls.Add(this.friendFirstNameLabel);
@@ -248,5 +274,7 @@
         private System.Windows.Forms.Label friendFirstNameLabel;
         private System.Windows.Forms.Label friendLastNameLabel;
         private System.Windows.Forms.Button showFriendsButton;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel linkLabel2;
     }
 }
