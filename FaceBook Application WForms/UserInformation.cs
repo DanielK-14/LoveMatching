@@ -21,6 +21,7 @@ namespace FaceBook_Application_WForms
             InitializeComponent();
             r_User = i_User;
             fetchUserInfo();
+            fetchPhotos();
         }
 
         private void fetchUserInfo()
@@ -36,6 +37,30 @@ namespace FaceBook_Application_WForms
             EmailLabel.Text = r_User.Email;
         }
 
+        private void fetchPhotos()
+        {
+            IEnumerator<Photo> PhotosEnumerator = r_User.PhotosTaggedIn.GetEnumerator();
+            if (PhotosEnumerator.MoveNext())
+            {
+                PictureBox1.LoadAsync(PhotosEnumerator.Current.PictureNormalURL);
+            }
+
+            if (PhotosEnumerator.MoveNext())
+            {
+                PictureBox2.LoadAsync(PhotosEnumerator.Current.PictureNormalURL);
+            }
+
+            if (PhotosEnumerator.MoveNext())
+            {
+                PictureBox3.LoadAsync(PhotosEnumerator.Current.PictureNormalURL);
+            }
+
+            if (PhotosEnumerator.MoveNext())
+            {
+                PictureBox4.LoadAsync(PhotosEnumerator.Current.PictureNormalURL);
+            }
+        }
+
         private void BackButton_Click(object sender, EventArgs e)
         {
             if (BackButtonOperation != null)
@@ -43,6 +68,5 @@ namespace FaceBook_Application_WForms
                 BackButtonOperation.Invoke();
             }
         }
-
     }
 }
