@@ -29,5 +29,10 @@ namespace FaceBook_Application_WForms
             matchSignNameLabel.Visible = true;
             fateQuotePicture.Visible = true;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

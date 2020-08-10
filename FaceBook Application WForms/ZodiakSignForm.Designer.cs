@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ZodiakSignForm));
             this.YouAreLabel = new System.Windows.Forms.Label();
             this.AndYouMachBestLabel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -36,6 +37,7 @@
             this.matchSignNameLabel = new System.Windows.Forms.Label();
             this.fateQuotePicture = new System.Windows.Forms.PictureBox();
             this.findButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fateQuotePicture)).BeginInit();
@@ -129,11 +131,25 @@
             this.findButton.UseVisualStyleBackColor = true;
             this.findButton.Click += new System.EventHandler(this.findButton_Click);
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(13, 13);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "Go back";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // ZodiakSignForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(884, 661);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.findButton);
             this.Controls.Add(this.fateQuotePicture);
             this.Controls.Add(this.matchSignNameLabel);
@@ -163,5 +179,6 @@
         private System.Windows.Forms.Label matchSignNameLabel;
         private System.Windows.Forms.PictureBox fateQuotePicture;
         private System.Windows.Forms.Button findButton;
+        private System.Windows.Forms.Button button1;
     }
 }
