@@ -235,5 +235,25 @@ namespace FaceBook_Application_WForms
                 ProfileLinkOperation.Invoke();
             }
         }
+
+        private void GetMatchesButton_Click(object sender, EventArgs e)
+        {
+            cleanDataSelcetedComboBoxAndAnalyst();
+            ButtonClicked = LastButtonClicked.Friends;
+
+            List<User> friendsToMatchWith = AvailableFriends.GetAvailabeFriends(m_LoggedInUser);
+            int counter = 0;
+            foreach (User friend in friendsToMatchWith)
+            {
+                if (counter == 10)
+                {
+                    break;
+                }
+
+                comboBoxDecisionData.Items.Add(friend);
+                friend.ReFetch(DynamicWrapper.eLoadOptions.Full);
+                counter++;
+            }
+        }
     }
 }
