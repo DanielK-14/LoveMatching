@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AvailableFriends.cs" />
+    <Compile Include="DataAnalyst.cs" />
     <Compile Include="FormsManager.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.Button Login;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             Login = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -42,22 +43,23 @@
             Login.Cursor = System.Windows.Forms.Cursors.Hand;
             Login.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             Login.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            Login.Location = new System.Drawing.Point(600, 277);
+            Login.Image = ((System.Drawing.Image)(resources.GetObject("Login.Image")));
+            Login.Location = new System.Drawing.Point(290, 343);
             Login.Margin = new System.Windows.Forms.Padding(0);
             Login.Name = "Login";
-            Login.Size = new System.Drawing.Size(150, 77);
+            Login.Size = new System.Drawing.Size(306, 52);
             Login.TabIndex = 0;
-            Login.Text = "Login";
             Login.UseVisualStyleBackColor = false;
             Login.Click += new System.EventHandler(this.loginAndInit);
             // 
             // LoginForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1326, 709);
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(884, 661);
             this.Controls.Add(Login);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "LoginForm";
             this.Text = "Form1";
             this.ResumeLayout(false);

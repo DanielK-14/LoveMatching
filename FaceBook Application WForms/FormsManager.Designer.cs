@@ -32,10 +32,11 @@
             // 
             // FormsManager
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(878, 644);
+            this.ClientSize = new System.Drawing.Size(585, 419);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FormsManager";
             this.Text = "FormsManager";
             this.Shown += new System.EventHandler(this.FormsManager_Show);
