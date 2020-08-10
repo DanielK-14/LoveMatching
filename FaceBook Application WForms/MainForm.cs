@@ -21,21 +21,15 @@ namespace FaceBook_Application_WForms
         private ListBox PostsListBox;
         private Label EventsLable;
         private ListBox EventsListBox;
-        LoginForm r_loginForm = new LoginForm();
         User m_LoggedInUser;
 
-        public MainForm()
+        public MainForm(User i_User)
         {
             InitializeComponent();
             FacebookWrapper.FacebookService.s_CollectionLimit = 200;
             FacebookWrapper.FacebookService.s_FbApiVersion = 2.8f;
 
-            if (r_loginForm.ShowDialog() != DialogResult.OK)
-            {
-                Application.Exit();
-            }
-
-            m_LoggedInUser = r_loginForm.LogInInfo.LoggedInUser;
+            m_LoggedInUser = i_User;
             fetchUserInfo();
             fetchPosts();
             fetchEvents();

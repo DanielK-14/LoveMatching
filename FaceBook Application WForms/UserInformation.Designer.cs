@@ -74,44 +74,44 @@
             this.EmailLabel.TabIndex = 3;
             this.EmailLabel.Text = "EmailLabel";
             // 
-            // AgeLabel
+            // BirthdayLabel
             // 
             this.BirthdayLabel.AutoSize = true;
             this.BirthdayLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.BirthdayLabel.Location = new System.Drawing.Point(14, 399);
-            this.BirthdayLabel.Name = "AgeLabel";
+            this.BirthdayLabel.Name = "BirthdayLabel";
             this.BirthdayLabel.Size = new System.Drawing.Size(96, 25);
             this.BirthdayLabel.TabIndex = 4;
             this.BirthdayLabel.Text = "AgeLable";
             // 
-            // pictureBox1
+            // PictureBox1
             // 
             this.PictureBox1.Location = new System.Drawing.Point(447, 274);
-            this.PictureBox1.Name = "pictureBox1";
+            this.PictureBox1.Name = "PictureBox1";
             this.PictureBox1.Size = new System.Drawing.Size(196, 150);
             this.PictureBox1.TabIndex = 5;
             this.PictureBox1.TabStop = false;
             // 
-            // pictureBox2
+            // PictureBox2
             // 
             this.PictureBox2.Location = new System.Drawing.Point(664, 274);
-            this.PictureBox2.Name = "pictureBox2";
+            this.PictureBox2.Name = "PictureBox2";
             this.PictureBox2.Size = new System.Drawing.Size(178, 150);
             this.PictureBox2.TabIndex = 6;
             this.PictureBox2.TabStop = false;
             // 
-            // pictureBox3
+            // PictureBox3
             // 
             this.PictureBox3.Location = new System.Drawing.Point(447, 446);
-            this.PictureBox3.Name = "pictureBox3";
+            this.PictureBox3.Name = "PictureBox3";
             this.PictureBox3.Size = new System.Drawing.Size(196, 150);
             this.PictureBox3.TabIndex = 7;
             this.PictureBox3.TabStop = false;
             // 
-            // pictureBox4
+            // PictureBox4
             // 
             this.PictureBox4.Location = new System.Drawing.Point(664, 446);
-            this.PictureBox4.Name = "pictureBox4";
+            this.PictureBox4.Name = "PictureBox4";
             this.PictureBox4.Size = new System.Drawing.Size(178, 150);
             this.PictureBox4.TabIndex = 8;
             this.PictureBox4.TabStop = false;
@@ -124,6 +124,7 @@
             this.BackButton.TabIndex = 9;
             this.BackButton.Text = "Go Back";
             this.BackButton.UseVisualStyleBackColor = true;
+            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
             // 
             // ProfilePictureBox
             // 

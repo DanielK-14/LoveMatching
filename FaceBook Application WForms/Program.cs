@@ -14,7 +14,7 @@ namespace FaceBook_Application_WForms
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(new FormsManager());
         }
     }
 }
