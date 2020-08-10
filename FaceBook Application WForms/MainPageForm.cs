@@ -11,9 +11,11 @@ using FacebookWrapper;
 
 namespace FaceBook_Application_WForms
 {
+
     public partial class MainPageForm : Form
     {
-        internal LoginForm r_loginForm = new LoginForm();
+        public delegate void ProfileLinkDelegate();
+        public event ProfileLinkDelegate ProfileLinkOperation;
         internal User m_LoggedInUser;
         private LastButtonClicked m_LastButtonClicked;
 
@@ -30,19 +32,13 @@ namespace FaceBook_Application_WForms
             set { m_LastButtonClicked = value; }
         }
 
-        public MainPageForm()
+        public MainPageForm(User i_User)
         {
             InitializeComponent();
             FacebookService.s_CollectionLimit = 200;
             FacebookService.s_FbApiVersion = 2.8f;
 
-            if (r_loginForm.ShowDialog() != DialogResult.OK)
-            {
-                Application.Exit();
-            }
-
-            m_LoggedInUser = r_loginForm.LogInInfo.LoggedInUser;
-
+            m_LoggedInUser = i_User;
             profilePictureBox.LoadAsync(m_LoggedInUser.PictureNormalURL);
             fullNameUser.Text = m_LoggedInUser.Name;;
         }
@@ -234,7 +230,10 @@ namespace FaceBook_Application_WForms
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            
+            if (ProfileLinkOperation != null)
+            {
+                ProfileLinkOperation.Invoke();
+            }
         }
     }
 }

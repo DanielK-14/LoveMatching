@@ -38,6 +38,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "FormsManager";
             this.Text = "FormsManager";
+            this.Shown += new System.EventHandler(this.FormsManager_Show);
             this.ResumeLayout(false);
 
         }

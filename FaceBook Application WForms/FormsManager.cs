@@ -13,7 +13,7 @@ namespace FaceBook_Application_WForms
 {
     public partial class FormsManager : Form
     {
-        private readonly MainForm r_MainForm;
+        private readonly MainPageForm r_MainForm;
         private readonly UserInformation r_UserInformation;
         private readonly User r_LoggedInUser;
 
@@ -30,23 +30,37 @@ namespace FaceBook_Application_WForms
             }
 
             r_LoggedInUser = loginForm.LogInInfo.LoggedInUser;
-            r_MainForm = new MainForm(r_LoggedInUser);
+            r_MainForm = new MainPageForm(r_LoggedInUser);
             r_UserInformation = new UserInformation(r_LoggedInUser);
 
+            r_MainForm.FormClosing += endApplication;
+            r_MainForm.ProfileLinkOperation += switchToUserInformation;
+            r_UserInformation.FormClosing += endApplication;
             r_UserInformation.BackButtonOperation += switchToMainForm;
-            r_MainForm.ShowDialog();
+            r_MainForm.Show();
         }
 
         private void switchToUserInformation()
         {
+            r_UserInformation.Show();
             r_MainForm.Hide();
-            r_UserInformation.ShowDialog();
         }
 
         private void switchToMainForm()
         {
+            r_MainForm.Show();
             r_UserInformation.Hide();
-            r_MainForm.ShowDialog();
+        }
+
+        private void FormsManager_Show(object sender, EventArgs e)
+        {
+            Hide();
+            Visible = false;
+        }
+
+        private void endApplication(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
