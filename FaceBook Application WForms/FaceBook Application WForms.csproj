@@ -75,6 +75,7 @@
     <Compile Include="UserInformation.Designer.cs">
       <DependentUpon>UserInformation.cs</DependentUpon>
     </Compile>
+    <Compile Include="ZodiakSign.cs" />
     <EmbeddedResource Include="FormsManager.resx">
       <DependentUpon>FormsManager.cs</DependentUpon>
     </EmbeddedResource>

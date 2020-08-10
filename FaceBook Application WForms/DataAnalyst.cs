@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace FaceBook_Application_WForms
 {
     internal static class DataAnalyst
-    {
+    {/*
         public static List<string> AnalyzeData(object obj)
         {
             List<string> analayzedData = new List<string>();
@@ -41,5 +41,8 @@ namespace FaceBook_Application_WForms
         {
             throw new NotImplementedException();
         }
+    }
+}
+*/
     }
 }
