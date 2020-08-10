@@ -20,18 +20,25 @@ namespace FaceBook_Application_WForms
         public FormsManager()
         {
             InitializeComponent();
-            FacebookWrapper.FacebookService.s_CollectionLimit = 200;
-            FacebookWrapper.FacebookService.s_FbApiVersion = 2.8f;
+            FacebookService.s_CollectionLimit = 200;
+            FacebookService.s_FbApiVersion = 2.8f;
 
             LoginForm loginForm = new LoginForm();
             if (loginForm.ShowDialog() != DialogResult.OK)
             {
                 Application.Exit();
             }
-
+            
             r_LoggedInUser = loginForm.LogInInfo.LoggedInUser;
-            r_MainForm = new MainPageForm(r_LoggedInUser);
-            r_UserInformation = new UserInformation(r_LoggedInUser);
+            try
+            {
+                r_MainForm = new MainPageForm(r_LoggedInUser);
+                r_UserInformation = new UserInformation(r_LoggedInUser);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
             r_MainForm.FormClosing += endApplication;
             r_MainForm.ProfileLinkOperation += switchToUserInformation;

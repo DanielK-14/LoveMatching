@@ -9,24 +9,41 @@ namespace FaceBook_Application_WForms
 {
     internal static class DataAnalyst
     {
-        public static List<string> AnalyzeData(object obj)
+        public static LastButtonClicked s_ButtonClicked;
+
+        public enum LastButtonClicked
+        {
+            Posts,
+            Events,
+            Friends
+        }
+
+        public static LastButtonClicked ButtonClicked
+        {
+            get { return s_ButtonClicked; }
+            set { s_ButtonClicked = value; }
+        }
+
+        public static List<string> AnalyzeData(int i_Index, User i_User)
         {
             List<string> analayzedData = new List<string>();
-            out string pictureUrl;
-            out string infoString;
-            if (obj is Post)
+            string pictureUrl, infoString;
+
+            if (ButtonClicked == LastButtonClicked.Posts)
             {
-                analyzePost(obj as Post, out infoString, out pictureUrl);
+                analyzePost(i_User.Posts[i_Index], out infoString, out pictureUrl);
             }
-            else if (obj is User)
+            else if (ButtonClicked == LastButtonClicked.Friends)
             {
-                analyzeFriend(obj as User, out infoString, out pictureUrl);
+                analyzeFriend(i_User.Friends[i_Index], out infoString, out pictureUrl);
             }
             else
             {
-                analyzeEvent(obj as Event, out infoString, out pictureUrl);
+                analyzeEvent(i_User.Events[i_Index], out infoString, out pictureUrl);
             }
 
+            analayzedData.Add(infoString);
+            analayzedData.Add(pictureUrl);
             return analayzedData;
         }
 

@@ -14,23 +14,9 @@ namespace FaceBook_Application_WForms
 
     public partial class MainPageForm : Form
     {
-        public delegate void ProfileLinkDelegate();
-        public event ProfileLinkDelegate ProfileLinkOperation;
-        internal User m_LoggedInUser;
-        private LastButtonClicked m_LastButtonClicked;
-
-        public enum LastButtonClicked
-        {
-            Posts,
-            Events,
-            Friends
-        }
-
-        public LastButtonClicked ButtonClicked
-        {
-            get { return m_LastButtonClicked; }
-            set { m_LastButtonClicked = value; }
-        }
+        internal delegate void ProfileLinkDelegate();
+        internal event ProfileLinkDelegate ProfileLinkOperation;
+        internal readonly User r_LoggedInUser;
 
         public MainPageForm(User i_User)
         {
@@ -38,16 +24,16 @@ namespace FaceBook_Application_WForms
             FacebookService.s_CollectionLimit = 200;
             FacebookService.s_FbApiVersion = 2.8f;
 
-            m_LoggedInUser = i_User;
-            profilePictureBox.LoadAsync(m_LoggedInUser.PictureNormalURL);
-            fullNameUser.Text = m_LoggedInUser.Name;;
+            r_LoggedInUser = i_User;
+            profilePictureBox.LoadAsync(r_LoggedInUser.PictureLargeURL);
+            fullNameUser.Text = r_LoggedInUser.Name;;
         }
 
         private void fetchEvents()
         {
 
             int counter = 0;
-            foreach(Event eventFSB in m_LoggedInUser.Events)
+            foreach(Event eventFSB in r_LoggedInUser.Events)
             {
                 if(counter == 15)
                 {
@@ -60,7 +46,7 @@ namespace FaceBook_Application_WForms
                 counter++;
             }
 
-            if (m_LoggedInUser.Events.Count == 0)
+            if (r_LoggedInUser.Events.Count == 0)
             {
                 MessageBox.Show("No events to retrieve!");
             }
@@ -69,7 +55,7 @@ namespace FaceBook_Application_WForms
         private void fetchPosts()
         {
             int counter = 0;
-            foreach (Post post in m_LoggedInUser.Posts)
+            foreach (Post post in r_LoggedInUser.Posts)
             {
                 if(counter == 15)
                 {
@@ -91,7 +77,7 @@ namespace FaceBook_Application_WForms
                 counter++;
             }
 
-            if (m_LoggedInUser.Posts.Count == 0)
+            if (r_LoggedInUser.Posts.Count == 0)
             {
                 MessageBox.Show("No posts to retrieve!");
             }
@@ -102,7 +88,7 @@ namespace FaceBook_Application_WForms
             comboBoxDecisionData.Items.Clear();
             comboBoxDecisionData.DisplayMember = "Name";
             int counter = 0;
-            foreach (User friend in m_LoggedInUser.Friends)
+            foreach (User friend in r_LoggedInUser.Friends)
             {
                 if(counter == 10)
                 {
@@ -114,7 +100,7 @@ namespace FaceBook_Application_WForms
                 counter++;
             }
 
-            if (m_LoggedInUser.Friends.Count == 0)
+            if (r_LoggedInUser.Friends.Count == 0)
             {
                 MessageBox.Show("No Friends to retrieve!");
             }
@@ -122,29 +108,49 @@ namespace FaceBook_Application_WForms
 
         private void postButton_Click(object sender, EventArgs e)
         {
-            Status postNewStatus = m_LoggedInUser.PostStatus(postTextBox.Text);
+            Status postNewStatus = r_LoggedInUser.PostStatus(postTextBox.Text);
             MessageBox.Show(string.Format("Status Posted! {0}{1}", Environment.NewLine, postTextBox.Text));
         }
 
         private void showEventsButton_Click(object sender, EventArgs e)
         {
             cleanDataSelcetedComboBoxAndAnalyst();
-            ButtonClicked = LastButtonClicked.Events;
+            DataAnalyst.ButtonClicked = DataAnalyst.LastButtonClicked.Events;
             fetchEvents();
         }
 
         private void showPostsButton_Click(object sender, EventArgs e)
         {
             cleanDataSelcetedComboBoxAndAnalyst();
-            ButtonClicked = LastButtonClicked.Posts;
+            DataAnalyst.ButtonClicked = DataAnalyst.LastButtonClicked.Posts;
             fetchPosts();
         }
 
         private void showFriendsButton_Click(object sender, EventArgs e)
         {
             cleanDataSelcetedComboBoxAndAnalyst();
-            ButtonClicked = LastButtonClicked.Friends;
+            DataAnalyst.ButtonClicked = DataAnalyst.LastButtonClicked.Friends;
             fetchFriends();
+        }
+
+        private void GetMatchesButton_Click(object sender, EventArgs e)
+        {
+            cleanDataSelcetedComboBoxAndAnalyst();
+            DataAnalyst.ButtonClicked = DataAnalyst.LastButtonClicked.Friends;
+
+            List<User> friendsToMatchWith = AvailableFriends.GetAvailabeFriends(r_LoggedInUser);
+            int counter = 0;
+            foreach (User friend in friendsToMatchWith)
+            {
+                if (counter == 10)
+                {
+                    break;
+                }
+
+                comboBoxDecisionData.Items.Add(friend);
+                friend.ReFetch(DynamicWrapper.eLoadOptions.Full);
+                counter++;
+            }
         }
 
         private void cleanDataSelcetedComboBoxAndAnalyst()
@@ -159,21 +165,7 @@ namespace FaceBook_Application_WForms
         private void comboBoxDecisionData_SelectedIndexChanged(object sender, EventArgs e)
         {
             resetDataAnalyst();
-            if (comboBoxDecisionData.SelectedItems.Count == 1)
-            {
-                if (ButtonClicked == LastButtonClicked.Posts)
-                {
-                    analyzePost();
-                }
-                else if (ButtonClicked == LastButtonClicked.Events)
-                {
-                    analyzeEvent();
-                }
-                else
-                {
-                    analyzeFriend();
-                }
-            }
+            showAnalayzeResults(DataAnalyst.AnalyzeData(comboBoxDecisionData.SelectedIndex, r_LoggedInUser));
         }
 
         private void resetDataAnalyst()
@@ -185,47 +177,19 @@ namespace FaceBook_Application_WForms
             dataSelectedPictureBox.Visible = false;
         }
 
-        private void analyzeFriend()
+        private void showAnalayzeResults(List<string> i_Data)
         {
-            User friend = m_LoggedInUser.Friends[comboBoxDecisionData.SelectedIndex];
-            StringBuilder friendInfo = new StringBuilder();
-            friendInfo.AppendLine(string.Format("Your friend {0} has some intresting facts:", friend.FirstName));
-            friendInfo.AppendLine(string.Format("{0} Is {1}", friend.FirstName, friend.Gender.ToString()));
-            friendInfo.AppendLine(string.Format("{0} Is {1}", friend.FirstName, friend.RelationshipStatus.ToString()));
-            friendInfo.AppendLine(string.Format("Has {0} wallposts.", friend.WallPosts.Count.ToString()));
-            friendInfo.AppendLine(string.Format("Has {0} Subscribers.", friend.Subscribers.Count.ToString()));
-            showAnalayzeResults(friendInfo, friend.PictureLargeURL);
-        }
+            string imageUrl = i_Data[1];
+            string dataAnalyzed = i_Data[0];
 
-        private void analyzeEvent()
-        {
-            Event eventFSB = m_LoggedInUser.Events[comboBoxDecisionData.SelectedIndex];
-            StringBuilder eventInfo = new StringBuilder();
-            eventInfo.AppendLine(string.Format("Event {0}{1} Starts in: {2}{1} Ends in: {3}", 
-                eventFSB.Name, Environment.NewLine, eventFSB.StartTime.ToString(), eventFSB.EndTime.ToString()));
-            eventInfo.AppendLine(string.Format("Description:{0}{1}", Environment.NewLine, eventFSB.Description));
-            showAnalayzeResults(eventInfo, eventFSB.PictureLargeURL);
-        }
-
-        private void analyzePost()
-        {
-            Post post = m_LoggedInUser.Posts[comboBoxDecisionData.SelectedIndex];
-            StringBuilder postInfo = new StringBuilder();
-            postInfo.AppendLine(string.Format("Post: {0}.{1} Has {2} comments.{1} Was posted on {3}.",
-                post.Message, Environment.NewLine, post.Comments.Count, post.CreatedTime));
-            showAnalayzeResults(postInfo, post.PictureURL);
-        }
-
-        private void showAnalayzeResults(StringBuilder dataInfo, string imageURL = "")
-        {
             dataAnalystRichBox.Visible = true;
-            if (string.IsNullOrEmpty(imageURL) == false)
+            if (string.IsNullOrEmpty(imageUrl) == false)
             {
                 dataSelectedPictureBox.Visible = true;
-                dataSelectedPictureBox.LoadAsync(imageURL);
+                dataSelectedPictureBox.LoadAsync(imageUrl);
             }
 
-            dataAnalystRichBox.Text = dataInfo.ToString();
+            dataAnalystRichBox.Text = dataAnalyzed;
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -233,26 +197,6 @@ namespace FaceBook_Application_WForms
             if (ProfileLinkOperation != null)
             {
                 ProfileLinkOperation.Invoke();
-            }
-        }
-
-        private void GetMatchesButton_Click(object sender, EventArgs e)
-        {
-            cleanDataSelcetedComboBoxAndAnalyst();
-            ButtonClicked = LastButtonClicked.Friends;
-
-            List<User> friendsToMatchWith = AvailableFriends.GetAvailabeFriends(m_LoggedInUser);
-            int counter = 0;
-            foreach (User friend in friendsToMatchWith)
-            {
-                if (counter == 10)
-                {
-                    break;
-                }
-
-                comboBoxDecisionData.Items.Add(friend);
-                friend.ReFetch(DynamicWrapper.eLoadOptions.Full);
-                counter++;
             }
         }
     }
