@@ -9,6 +9,12 @@ namespace FaceBook_Application_WForms
     {
         public eSign Sign { get; private set; }
 
+        public eSign SignBestMatchedWith { get; private set; }
+
+        public string PictureUrl { get; private set; }
+
+
+
         public enum eSign
         {
             Aquarius,
@@ -80,58 +86,59 @@ namespace FaceBook_Application_WForms
                 Sign = day >= 22 ? eSign.Capricorn : eSign.Sagittarius;
             }
 
+            setMatchedSign();
+            setPictureUrl();
+
         }
 
         public ZodiakSign(eSign i_Sign)
         {
             Sign = i_Sign;
+            setMatchedSign();
+            setPictureUrl();
         }
 
-        public ZodiakSign SignBestMatchedWith()
+        private void setMatchedSign()
         {
-            eSign sign;
-            
             switch(Sign)
             {
                 case eSign.Aquarius:
-                    sign = eSign.Pisces;
+                    SignBestMatchedWith = eSign.Pisces;
                     break;
                 case eSign.Pisces:
-                    sign = eSign.Aries;
+                    SignBestMatchedWith = eSign.Aries;
                     break;
                 case eSign.Aries:
-                    sign = eSign.Taurus;
+                    SignBestMatchedWith = eSign.Taurus;
                     break;
                 case eSign.Taurus:
-                    sign = eSign.Gemini;
+                    SignBestMatchedWith = eSign.Gemini;
                     break;
                 case eSign.Gemini:
-                    sign = eSign.Cancer;
+                    SignBestMatchedWith = eSign.Cancer;
                     break;
                 case eSign.Cancer:
-                    sign = eSign.Leo;
+                    SignBestMatchedWith = eSign.Leo;
                     break;
                 case eSign.Leo:
-                    sign = eSign.Virgo;
+                    SignBestMatchedWith = eSign.Virgo;
                     break;
                 case eSign.Virgo:
-                    sign = eSign.Libra;
+                    SignBestMatchedWith = eSign.Libra;
                     break;
                 case eSign.Libra:
-                    sign = eSign.Scorpio;
+                    SignBestMatchedWith = eSign.Scorpio;
                     break;
                 case eSign.Scorpio:
-                    sign = eSign.Sagittarius;
+                    SignBestMatchedWith = eSign.Sagittarius;
                     break;
                 case eSign.Sagittarius:
-                    sign = eSign.Capricorn;
+                    SignBestMatchedWith = eSign.Capricorn;
                     break;
                 default:
-                    sign = eSign.Aquarius;
+                    SignBestMatchedWith = eSign.Aquarius;
                     break;
             }
-
-            return new ZodiakSign(sign);
         }
 
         public string PictureUrl()

@@ -76,6 +76,12 @@
       <DependentUpon>UserInformation.cs</DependentUpon>
     </Compile>
     <Compile Include="ZodiakSign.cs" />
+    <Compile Include="ZodiakSignForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ZodiakSignForm.Designer.cs">
+      <DependentUpon>ZodiakSignForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FormsManager.resx">
       <DependentUpon>FormsManager.cs</DependentUpon>
     </EmbeddedResource>
@@ -97,6 +103,9 @@
     </Compile>
     <EmbeddedResource Include="UserInformation.resx">
       <DependentUpon>UserInformation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ZodiakSignForm.resx">
+      <DependentUpon>ZodiakSignForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
