@@ -28,6 +28,7 @@ namespace FaceBook_Application_WForms
             pictureBox2.Visible = true;
             matchSignNameLabel.Visible = true;
             fateQuotePicture.Visible = true;
+            MessageBox.Show("Congratulations! A match was found!");
         }
 
         private void button1_Click(object sender, EventArgs e)
