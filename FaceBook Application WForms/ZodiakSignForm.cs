@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FacebookWrapper.ObjectModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,16 +12,22 @@ namespace FaceBook_Application_WForms
 {
     public partial class ZodiakSignForm : Form
     {
-        public ZodiakSignForm(ZodiakSign i_ZodiakSIgn)
+        public ZodiakSignForm(User i_LoggedInUser)
         {
-            ZodiakSign matchedSign = i_ZodiakSIgn.SignBestMatchedWith;
+            ZodiacSign userFate = new ZodiacSign(i_LoggedInUser.Birthday);
             InitializeComponent();
-           // pictureBox1.LoadAsync(i_ZodiakSIgn.PictureUrl);
-           // pictureBox2.LoadAsync(התמונה של מה שמתאים לו);
-           //ZodiakLabel1.Text = ....
-           //ZodiakLabel2.Text =...
+            pictureBox1.LoadAsync(userFate.MatchPictureUrl);
+            pictureBox2.LoadAsync(userFate.UserPictureUrl);
+            userSignNameLabel.Text = Enum.GetName(typeof(ZodiacSign.eZodiacSign), userFate.UserSign);
+            matchSignNameLabel.Text = Enum.GetName(typeof(ZodiacSign.eZodiacSign), userFate.BestMatchedWithSign);
         }
 
-
+        private void findButton_Click(object sender, EventArgs e)
+        {
+            findButton.Visible = false;
+            pictureBox2.Visible = true;
+            matchSignNameLabel.Visible = true;
+            fateQuotePicture.Visible = true;
+        }
     }
 }
