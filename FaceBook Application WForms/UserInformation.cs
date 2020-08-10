@@ -20,8 +20,16 @@ namespace FaceBook_Application_WForms
         {
             InitializeComponent();
             r_User = i_User;
-            fetchUserInfo();
-            fetchPhotos();
+
+            try
+            {
+                fetchUserInfo();
+                fetchPhotos();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void fetchUserInfo()
