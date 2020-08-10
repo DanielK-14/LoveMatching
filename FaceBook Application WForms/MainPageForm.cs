@@ -194,7 +194,7 @@ namespace FaceBook_Application_WForms
             friendInfo.AppendLine(string.Format("{0} Is {1}", friend.FirstName, friend.RelationshipStatus.ToString()));
             friendInfo.AppendLine(string.Format("Has {0} wallposts.", friend.WallPosts.Count.ToString()));
             friendInfo.AppendLine(string.Format("Has {0} Subscribers.", friend.Subscribers.Count.ToString()));
-            showAnalayzeResults(friendInfo, friend.PictureNormalURL);
+            showAnalayzeResults(friendInfo, friend.PictureLargeURL);
         }
 
         private void analyzeEvent()
@@ -204,7 +204,7 @@ namespace FaceBook_Application_WForms
             eventInfo.AppendLine(string.Format("Event {0}{1} Starts in: {2}{1} Ends in: {3}", 
                 eventFSB.Name, Environment.NewLine, eventFSB.StartTime.ToString(), eventFSB.EndTime.ToString()));
             eventInfo.AppendLine(string.Format("Description:{0}{1}", Environment.NewLine, eventFSB.Description));
-            showAnalayzeResults(eventInfo, eventFSB.PictureNormalURL);
+            showAnalayzeResults(eventInfo, eventFSB.PictureLargeURL);
         }
 
         private void analyzePost()
