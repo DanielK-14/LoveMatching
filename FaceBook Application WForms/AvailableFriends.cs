@@ -7,10 +7,10 @@ using System.Text;
 namespace FaceBook_Application_WForms
 {
 
-    class AvailableFriends
+    static public class AvailableFriends
     {
 
-        static public List<User> getAvailabeFriends(User i_User)
+        static public List<User> GetAvailabeFriends(User i_User)
         {
             List<User> availableFriends = new List<User>();
             foreach(User friend in i_User.Friends)

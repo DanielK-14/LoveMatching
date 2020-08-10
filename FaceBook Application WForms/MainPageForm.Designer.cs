@@ -45,6 +45,7 @@
             this.showFriendsButton = new System.Windows.Forms.Button();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.GetMatchesButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSelectedPictureBox)).BeginInit();
             this.SuspendLayout();
@@ -211,7 +212,7 @@
             // 
             this.showFriendsButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.showFriendsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.showFriendsButton.Location = new System.Drawing.Point(1000, 362);
+            this.showFriendsButton.Location = new System.Drawing.Point(897, 363);
             this.showFriendsButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.showFriendsButton.Name = "showFriendsButton";
             this.showFriendsButton.Size = new System.Drawing.Size(198, 51);
@@ -244,11 +245,25 @@
             this.linkLabel2.Text = "Profile";
             this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
+            // GetMatchesButton
+            // 
+            this.GetMatchesButton.BackColor = System.Drawing.Color.Purple;
+            this.GetMatchesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GetMatchesButton.Location = new System.Drawing.Point(1103, 363);
+            this.GetMatchesButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.GetMatchesButton.Name = "GetMatchesButton";
+            this.GetMatchesButton.Size = new System.Drawing.Size(198, 51);
+            this.GetMatchesButton.TabIndex = 33;
+            this.GetMatchesButton.Text = "Get Matches";
+            this.GetMatchesButton.UseVisualStyleBackColor = false;
+            this.GetMatchesButton.Click += new System.EventHandler(this.GetMatchesButton_Click);
+            // 
             // MainPageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1326, 1017);
+            this.Controls.Add(this.GetMatchesButton);
             this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.showFriendsButton);
@@ -295,5 +310,6 @@
         private System.Windows.Forms.Button showFriendsButton;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.Button GetMatchesButton;
     }
 }
