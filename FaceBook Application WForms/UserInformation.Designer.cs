@@ -138,10 +138,11 @@
             // 
             // ProfilePictureBox
             // 
-            this.ProfilePictureBox.Location = new System.Drawing.Point(13, 88);
+            this.ProfilePictureBox.Location = new System.Drawing.Point(12, 23);
             this.ProfilePictureBox.Margin = new System.Windows.Forms.Padding(2);
             this.ProfilePictureBox.Name = "ProfilePictureBox";
-            this.ProfilePictureBox.Size = new System.Drawing.Size(171, 118);
+            this.ProfilePictureBox.Size = new System.Drawing.Size(171, 171);
+            this.ProfilePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.ProfilePictureBox.TabIndex = 1;
             this.ProfilePictureBox.TabStop = false;
             // 

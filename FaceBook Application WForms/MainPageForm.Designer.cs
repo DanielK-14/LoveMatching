@@ -166,6 +166,7 @@
             // 
             this.dataSelectedPictureBox.Location = new System.Drawing.Point(534, 290);
             this.dataSelectedPictureBox.Name = "dataSelectedPictureBox";
+            this.dataSelectedPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.dataSelectedPictureBox.Size = new System.Drawing.Size(231, 200);
             this.dataSelectedPictureBox.TabIndex = 27;
             this.dataSelectedPictureBox.TabStop = false;
