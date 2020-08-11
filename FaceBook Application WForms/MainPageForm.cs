@@ -14,8 +14,10 @@ namespace FaceBook_Application_WForms
 
     public partial class MainPageForm : Form
     {
-        internal delegate void ProfileLinkDelegate();
-        internal event ProfileLinkDelegate ProfileLinkOperation;
+        internal delegate void LinkDelegate();
+        internal event LinkDelegate ProfileLinkOperation;
+        internal event LinkDelegate ZodiacLinkOperation;
+        internal event LinkDelegate LogoutButtonOperation;
         internal readonly User r_LoggedInUser;
 
         public MainPageForm(User i_User)
@@ -26,7 +28,7 @@ namespace FaceBook_Application_WForms
 
             r_LoggedInUser = i_User;
             profilePictureBox.LoadAsync(r_LoggedInUser.PictureLargeURL);
-            fullNameUser.Text = r_LoggedInUser.Name;;
+            fullNameUser.Text = r_LoggedInUser.Name;
         }
 
         private void fetchEvents()
@@ -197,6 +199,22 @@ namespace FaceBook_Application_WForms
             if (ProfileLinkOperation != null)
             {
                 ProfileLinkOperation.Invoke();
+            }
+        }
+
+        private void ZodiakSignLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (ZodiacLinkOperation != null)
+            {
+                ZodiacLinkOperation.Invoke();
+            }
+        }
+
+        private void logoutButton_Click(object sender, EventArgs e)
+        {
+            if (LogoutButtonOperation != null)
+            {
+                LogoutButtonOperation.Invoke();
             }
         }
     }

@@ -7,15 +7,19 @@ namespace FaceBook_Application_WForms
 {
     public class ZodiacSign
     {
-        private List<string> m_ImagesUrl;
+        private static Dictionary<eZodiacSign, string> sr_ImagesUrl;
 
-        public eZodiacSign UserSign { get; private set; }
+        public eZodiacSign Sign { get; private set; }
 
-        public eZodiacSign BestMatchedWithSign { get; private set; }
+        public string PictureUrl { get; private set; }
 
-        public string UserPictureUrl { get; private set; }
-
-        public string MatchPictureUrl { get; private set; }
+        public ZodiacSign BestMatchedWithSign {
+            get
+            {
+                eZodiacSign matchedSign = pickMatchedSign();
+                return new ZodiacSign(matchedSign);
+            }
+        }
 
         public enum eZodiacSign
         {
@@ -33,11 +37,22 @@ namespace FaceBook_Application_WForms
             Capricorn
         }
 
-        public ZodiacSign(string i_Birthday)
+        static ZodiacSign()
         {
             initZodiacSignsImagesUrlList();
+        }
+
+        public ZodiacSign(string i_Birthday)
+        {
             initUserZodiacSign(i_Birthday);
-            setMatchedSign();
+            PictureUrl = sr_ImagesUrl[Sign];
+            //setMatchedSign();
+        }
+
+        private ZodiacSign(eZodiacSign i_Sign)
+        {
+            Sign = i_Sign;
+            PictureUrl = sr_ImagesUrl[Sign];
         }
 
         private void initUserZodiacSign(string i_Birthday)
@@ -49,102 +64,67 @@ namespace FaceBook_Application_WForms
             switch (month)
             {
                 case 1:
-                    UserSign = day >= 20 ? eZodiacSign.Aquarius : eZodiacSign.Capricorn;
+                    Sign = day >= 20 ? eZodiacSign.Aquarius : eZodiacSign.Capricorn;
                     break;
                 case 2:
-                    UserSign = day >= 19 ? eZodiacSign.Pisces : eZodiacSign.Capricorn;
+                    Sign = day >= 19 ? eZodiacSign.Pisces : eZodiacSign.Capricorn;
                     break;
                 case 3:
-                    UserSign = day >= 21 ? eZodiacSign.Aries : eZodiacSign.Pisces;
+                    Sign = day >= 21 ? eZodiacSign.Aries : eZodiacSign.Pisces;
                     break;
                 case 4:
-                    UserSign = day >= 20 ? eZodiacSign.Taurus : eZodiacSign.Aries;
+                    Sign = day >= 20 ? eZodiacSign.Taurus : eZodiacSign.Aries;
                     break;
                 case 5:
-                    UserSign = day >= 21 ? eZodiacSign.Gemini : eZodiacSign.Taurus;
+                    Sign = day >= 21 ? eZodiacSign.Gemini : eZodiacSign.Taurus;
                     break;
                 case 6:
-                    UserSign = day >= 21 ? eZodiacSign.Cancer : eZodiacSign.Gemini;
+                    Sign = day >= 21 ? eZodiacSign.Cancer : eZodiacSign.Gemini;
                     break;
                 case 7:
-                    UserSign = day >= 23 ? eZodiacSign.Leo : eZodiacSign.Cancer;
+                    Sign = day >= 23 ? eZodiacSign.Leo : eZodiacSign.Cancer;
                     break;
                 case 8:
-                    UserSign = day >= 23 ? eZodiacSign.Virgo : eZodiacSign.Leo;
+                    Sign = day >= 23 ? eZodiacSign.Virgo : eZodiacSign.Leo;
                     break;
                 case 9:
-                    UserSign = day >= 23 ? eZodiacSign.Libra : eZodiacSign.Virgo;
+                    Sign = day >= 23 ? eZodiacSign.Libra : eZodiacSign.Virgo;
                     break;
                 case 10:
-                    UserSign = day >= 23 ? eZodiacSign.Scorpio : eZodiacSign.Libra;
+                    Sign = day >= 23 ? eZodiacSign.Scorpio : eZodiacSign.Libra;
                     break;
                 case 11:
-                    UserSign = day >= 22 ? eZodiacSign.Sagittarius : eZodiacSign.Scorpio;
+                    Sign = day >= 22 ? eZodiacSign.Sagittarius : eZodiacSign.Scorpio;
                     break;
                 case 12:
-                    UserSign = day >= 22 ? eZodiacSign.Capricorn : eZodiacSign.Sagittarius;
+                    Sign = day >= 22 ? eZodiacSign.Capricorn : eZodiacSign.Sagittarius;
                     break;
             }
-
-            UserPictureUrl = m_ImagesUrl[(int)UserSign];
         }
 
-        private void initZodiacSignsImagesUrlList()
+        static private void initZodiacSignsImagesUrlList()
         {
-            m_ImagesUrl = new List<string>();
-            string url;
-            for (int i = 0; i < Enum.GetNames(typeof(eZodiacSign)).Length; i++)
-            {
-                switch (UserSign)
-                {
-                    case eZodiacSign.Aquarius:
-                        url = "https://www.astrology-zodiac-signs.com/images/aquarius.jpg";
-                        break;
-                    case eZodiacSign.Pisces:
-                        url = "https://www.astrology-zodiac-signs.com/images/pisces.jpg";
-                        break;
-                    case eZodiacSign.Aries:
-                        url = "https://www.astrology-zodiac-signs.com/images/aries.jpg";
-                        break;
-                    case eZodiacSign.Taurus:
-                        url = "https://www.astrology-zodiac-signs.com/images/taurus.jpg";
-                        break;
-                    case eZodiacSign.Gemini:
-                        url = "https://www.astrology-zodiac-signs.com/images/gemini.jpg";
-                        break;
-                    case eZodiacSign.Cancer:
-                        url = "https://www.astrology-zodiac-signs.com/images/cancer.jpg";
-                        break;
-                    case eZodiacSign.Leo:
-                        url = "https://www.astrology-zodiac-signs.com/images/leo.jpg";
-                        break;
-                    case eZodiacSign.Virgo:
-                        url = "https://www.astrology-zodiac-signs.com/images/virgo.jpg";
-                        break;
-                    case eZodiacSign.Libra:
-                        url = "https://www.astrology-zodiac-signs.com/images/libra.jpg";
-                        break;
-                    case eZodiacSign.Scorpio:
-                        url = "https://www.astrology-zodiac-signs.com/images/scorpio.jpg";
-                        break;
-                    case eZodiacSign.Sagittarius:
-                        url = "https://www.astrology-zodiac-signs.com/images/sagittarius.jpg";
-                        break;
-                    default:
-                        url = "https://www.astrology-zodiac-signs.com/images/capricorn.jpg";
-                        break;
-                }
+            sr_ImagesUrl = new Dictionary<eZodiacSign, string>();
 
-                m_ImagesUrl[i] = url;
-            }
+            sr_ImagesUrl[eZodiacSign.Aquarius] = "https://www.astrology-zodiac-signs.com/images/aquarius.jpg";
+            sr_ImagesUrl[eZodiacSign.Pisces] = "https://www.astrology-zodiac-signs.com/images/pisces.jpg";
+            sr_ImagesUrl[eZodiacSign.Aries] = "https://www.astrology-zodiac-signs.com/images/aries.jpg";
+            sr_ImagesUrl[eZodiacSign.Taurus] = "https://www.astrology-zodiac-signs.com/images/taurus.jpg";
+            sr_ImagesUrl[eZodiacSign.Gemini] = "https://www.astrology-zodiac-signs.com/images/gemini.jpg";
+            sr_ImagesUrl[eZodiacSign.Cancer] = "https://www.astrology-zodiac-signs.com/images/cancer.jpg";
+            sr_ImagesUrl[eZodiacSign.Leo] = "https://www.astrology-zodiac-signs.com/images/leo.jpg";
+            sr_ImagesUrl[eZodiacSign.Virgo] = "https://www.astrology-zodiac-signs.com/images/virgo.jpg";
+            sr_ImagesUrl[eZodiacSign.Libra] = "https://www.astrology-zodiac-signs.com/images/libra.jpg";
+            sr_ImagesUrl[eZodiacSign.Scorpio] = "https://www.astrology-zodiac-signs.com/images/scorpio.jpg";
+            sr_ImagesUrl[eZodiacSign.Sagittarius] = "https://www.astrology-zodiac-signs.com/images/sagittarius.jpg";
+            sr_ImagesUrl[eZodiacSign.Capricorn] = "https://www.astrology-zodiac-signs.com/images/capricorn.jpg";
         }
 
-        private void setMatchedSign()
+        private eZodiacSign pickMatchedSign()
         {
             Random random = new Random();
             int fateSelection = random.Next(0, Enum.GetNames(typeof(eZodiacSign)).Length);
-            BestMatchedWithSign = (eZodiacSign)fateSelection;
-            MatchPictureUrl = m_ImagesUrl[fateSelection];
+            return (eZodiacSign)fateSelection;
         }
     }
 }

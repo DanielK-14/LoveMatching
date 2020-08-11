@@ -31,6 +31,7 @@ namespace FaceBook_Application_WForms
             m_pictureBoxes.Add(PictureBox2);
             m_pictureBoxes.Add(PictureBox3);
             m_pictureBoxes.Add(PictureBox4);
+            hidePhotos();
         }
 
         internal void fetchOnLoad()
@@ -62,6 +63,7 @@ namespace FaceBook_Application_WForms
                     if (PhotosEnumerator.MoveNext())
                     {
                         pictureBox.LoadAsync(PhotosEnumerator.Current.PictureNormalURL);
+                        pictureBox.Visible = true;
                     }
                     else
                     {

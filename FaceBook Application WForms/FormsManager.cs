@@ -14,78 +14,117 @@ namespace FaceBook_Application_WForms
 {
     public partial class FormsManager : Form
     {
-        private readonly MainPageForm r_MainForm;
-        private readonly UserInformation r_UserInformation;
-        private readonly User r_LoggedInUser;
-        private readonly string r_AccessTokenFilePath;
+        private MainPageForm m_MainForm;
+        private UserInformation m_UserInformation;
+        private User m_LoggedInUser;
+        private ZodiakSignForm m_ZodiacSignForm;
+        private string m_AccessTokenFilePath;
         private const string k_FileName = @"\AccessToken.txt";
+        private Form m_CurrentShownForm;
+        private Form CurrentShownForm
+        {
+            set
+            {
+                if (m_CurrentShownForm != null)
+                {
+                    Point location = m_CurrentShownForm.Location;
+
+                    m_CurrentShownForm.Hide();
+                    if (value != null)
+                    {
+                        value.Location = location;
+                    }
+                }
+
+                m_CurrentShownForm = value;
+                if(m_CurrentShownForm != null)
+                {
+                    m_CurrentShownForm.Show();
+                }
+            }
+        }
 
         public FormsManager()
         {
-            r_AccessTokenFilePath = AppDomain.CurrentDomain.BaseDirectory + k_FileName;
+            m_AccessTokenFilePath = AppDomain.CurrentDomain.BaseDirectory + k_FileName;
             InitializeComponent();
             FacebookService.s_CollectionLimit = 200;
             FacebookService.s_FbApiVersion = 2.8f;
-            r_LoggedInUser = getLoggedInUser();
-
-            try
-            {
-                r_MainForm = new MainPageForm(r_LoggedInUser);
-                r_UserInformation = new UserInformation(r_LoggedInUser);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
+            login();
             initAllFormsAndStart();
         }
 
         private void initAllFormsAndStart()
         {
-            r_MainForm.FormClosing += endApplication;
-            r_MainForm.ProfileLinkOperation += switchToUserInformation;
-            r_UserInformation.FormClosing += endApplication;
-            r_UserInformation.BackButtonOperation += switchToMainForm;
-            r_MainForm.Show();
+            m_CurrentShownForm = null;
+            try
+            {
+                m_MainForm = new MainPageForm(m_LoggedInUser);
+                m_UserInformation = new UserInformation(m_LoggedInUser);
+                m_ZodiacSignForm = new ZodiakSignForm(m_LoggedInUser);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            m_MainForm.StartPosition = FormStartPosition.Manual;
+            m_UserInformation.StartPosition = FormStartPosition.Manual;
+            m_ZodiacSignForm.StartPosition = FormStartPosition.Manual;
+            m_MainForm.FormClosing += endApplication;
+            m_MainForm.ProfileLinkOperation += switchToUserInformation;
+            m_MainForm.ZodiacLinkOperation += switchToZodiacForm;
+            m_MainForm.LogoutButtonOperation += logout;
+            m_UserInformation.FormClosing += endApplication;
+            m_UserInformation.BackButtonOperation += switchToMainForm;
+            m_ZodiacSignForm.FormClosing += endApplication;
+            m_ZodiacSignForm.BackButtonOperation += switchToMainForm;
+            CurrentShownForm = m_MainForm;
         }
 
-        private User getLoggedInUser()
+        private void login()
         {
-            User loggedInUser;
-
-            if (File.Exists(r_AccessTokenFilePath) &&
-                new FileInfo(r_AccessTokenFilePath).Length != 0)
+            if (File.Exists(m_AccessTokenFilePath) &&
+                new FileInfo(m_AccessTokenFilePath).Length != 0)
             {
-                string accessToken = File.ReadAllText(r_AccessTokenFilePath);
-                loggedInUser = FacebookService.Connect(accessToken).LoggedInUser;
+                string accessToken = File.ReadAllText(m_AccessTokenFilePath);
+                m_LoggedInUser = FacebookService.Connect(accessToken).LoggedInUser;
             }
             else
             {
                 LoginForm loginForm = new LoginForm();
                 if (loginForm.ShowDialog() != DialogResult.OK)
                 {
-                    Application.Exit();
+                    Environment.Exit(0);
                 }
-
-                loggedInUser = loginForm.LogInInfo.LoggedInUser;
-                File.WriteAllText(r_AccessTokenFilePath, loginForm.LogInInfo.AccessToken);
+                m_LoggedInUser = loginForm.LogInInfo.LoggedInUser;    
+                File.WriteAllText(m_AccessTokenFilePath, loginForm.LogInInfo.AccessToken);
             }
+        }
 
-            return loggedInUser;
+        private void logout()
+        {
+            m_MainForm.Dispose();
+            m_UserInformation.Dispose();
+            m_ZodiacSignForm.Dispose();
+            File.Delete(m_AccessTokenFilePath);
+            login();
+            initAllFormsAndStart();
         }
 
         private void switchToUserInformation()
         {
-            r_MainForm.Hide();
-            r_UserInformation.Show();
-            r_UserInformation.fetchOnLoad();
+            CurrentShownForm = m_UserInformation;
+            m_UserInformation.fetchOnLoad();
         }
 
         private void switchToMainForm()
         {
-            r_UserInformation.Hide();
-            r_MainForm.Show();
+            CurrentShownForm = m_MainForm;
+        }
+
+        private void switchToZodiacForm()
+        {
+            CurrentShownForm = m_ZodiacSignForm;
         }
 
         private void FormsManager_Show(object sender, EventArgs e)
@@ -96,7 +135,7 @@ namespace FaceBook_Application_WForms
 
         private void endApplication(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            Application.Exit();
+            Environment.Exit(0);
         }
 
     }
