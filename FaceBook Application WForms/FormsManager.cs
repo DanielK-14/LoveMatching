@@ -43,6 +43,8 @@ namespace FaceBook_Application_WForms
                     m_CurrentShownForm.Show();
                 }
             }
+
+            get { return m_CurrentShownForm; }
         }
 
         public FormsManager()
@@ -107,7 +109,6 @@ namespace FaceBook_Application_WForms
             File.Delete(m_AccessTokenFilePath);
             login();
             initAllFormsAndStart();
-            
         }
 
         private void switchToUserInformation()
