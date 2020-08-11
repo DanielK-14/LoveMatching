@@ -21,6 +21,7 @@ namespace FaceBook_Application_WForms
         private string m_AccessTokenFilePath;
         private const string k_FileName = @"\AccessToken.txt";
         private Form m_CurrentShownForm;
+
         private Form CurrentShownForm
         {
             set
