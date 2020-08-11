@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
@@ -22,7 +18,7 @@ namespace FaceBook_Application_WForms
         private const string k_FileName = @"\AccessToken.txt";
         private Form m_CurrentShownForm;
 
-        private Form CurrentShownForm
+        public Form CurrentShownForm
         {
             set
             {
@@ -53,7 +49,7 @@ namespace FaceBook_Application_WForms
             InitializeComponent();
             FacebookService.s_CollectionLimit = 200;
             FacebookService.s_FbApiVersion = 2.8f;
-            login();
+            logIn();
             initAllFormsAndStart();
         }
 
@@ -75,7 +71,7 @@ namespace FaceBook_Application_WForms
             m_MainForm.FormClosing += endApplication;
             m_MainForm.ProfileLinkOperation += switchToUserInformation;
             m_MainForm.ZodiacLinkOperation += switchToZodiacForm;
-            m_MainForm.LogoutButtonOperation += logout;
+            m_MainForm.LogoutButtonOperation += logOut;
             m_UserInformation.FormClosing += endApplication;
             m_UserInformation.BackButtonOperation += switchToMainForm;
             m_ZodiacSignForm.FormClosing += endApplication;
@@ -83,7 +79,7 @@ namespace FaceBook_Application_WForms
             CurrentShownForm = m_MainForm;
         }
 
-        private void login()
+        private void logIn()
         {
             if (File.Exists(m_AccessTokenFilePath) &&
                 new FileInfo(m_AccessTokenFilePath).Length != 0)
@@ -103,11 +99,11 @@ namespace FaceBook_Application_WForms
             }
         }
 
-        private void logout()
+        private void logOut()
         {
             CurrentShownForm = null;
             File.Delete(m_AccessTokenFilePath);
-            login();
+            logIn();
             initAllFormsAndStart();
         }
 
@@ -133,10 +129,9 @@ namespace FaceBook_Application_WForms
             Visible = false;
         }
 
-        private void endApplication(object sender, System.ComponentModel.CancelEventArgs e)
+        private void endApplication(object sender, CancelEventArgs e)
         {
             Environment.Exit(0);
         }
-
     }
 }

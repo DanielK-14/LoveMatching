@@ -37,7 +37,8 @@
             this.matchSignNameLabel = new System.Windows.Forms.Label();
             this.fateQuotePicture = new System.Windows.Forms.PictureBox();
             this.findButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.goBackButton = new System.Windows.Forms.Button();
+            this.shareButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fateQuotePicture)).BeginInit();
@@ -71,7 +72,7 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Location = new System.Drawing.Point(123, 95);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(250, 250);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -82,7 +83,7 @@
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox2.Location = new System.Drawing.Point(492, 95);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(250, 250);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -121,7 +122,7 @@
             this.fateQuotePicture.ImageLocation = "https://i.pinimg.com/originals/b3/c4/c3/b3c4c3432cbb3735315a329352afe63a.jpg";
             this.fateQuotePicture.Location = new System.Drawing.Point(84, 367);
             this.fateQuotePicture.Name = "fateQuotePicture";
-            this.fateQuotePicture.Size = new System.Drawing.Size(708, 267);
+            this.fateQuotePicture.Size = new System.Drawing.Size(708, 235);
             this.fateQuotePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.fateQuotePicture.TabIndex = 6;
             this.fateQuotePicture.TabStop = false;
@@ -138,16 +139,29 @@
             this.findButton.UseVisualStyleBackColor = true;
             this.findButton.Click += new System.EventHandler(this.findButton_Click);
             // 
-            // button1
+            // goBackButton
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(13, 13);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Go back";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.goBackButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.goBackButton.Location = new System.Drawing.Point(13, 13);
+            this.goBackButton.Name = "goBackButton";
+            this.goBackButton.Size = new System.Drawing.Size(75, 23);
+            this.goBackButton.TabIndex = 8;
+            this.goBackButton.Text = "Go back";
+            this.goBackButton.UseVisualStyleBackColor = true;
+            this.goBackButton.Click += new System.EventHandler(this.goBackButton_Click);
+            // 
+            // shareButton
+            // 
+            this.shareButton.BackColor = System.Drawing.Color.Gold;
+            this.shareButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.shareButton.Location = new System.Drawing.Point(380, 247);
+            this.shareButton.Name = "shareButton";
+            this.shareButton.Size = new System.Drawing.Size(104, 40);
+            this.shareButton.TabIndex = 9;
+            this.shareButton.Text = "Share";
+            this.shareButton.UseVisualStyleBackColor = false;
+            this.shareButton.Visible = false;
+            this.shareButton.Click += new System.EventHandler(this.shareButton_Click);
             // 
             // ZodiakSignForm
             // 
@@ -156,7 +170,8 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(884, 661);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.shareButton);
+            this.Controls.Add(this.goBackButton);
             this.Controls.Add(this.findButton);
             this.Controls.Add(this.fateQuotePicture);
             this.Controls.Add(this.matchSignNameLabel);
@@ -165,8 +180,9 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.AndYouMachBestLabel);
             this.Controls.Add(this.YouAreLabel);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(900, 700);
             this.MinimumSize = new System.Drawing.Size(900, 700);
@@ -191,6 +207,7 @@
         private System.Windows.Forms.Label matchSignNameLabel;
         private System.Windows.Forms.PictureBox fateQuotePicture;
         private System.Windows.Forms.Button findButton;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button goBackButton;
+        private System.Windows.Forms.Button shareButton;
     }
 }
