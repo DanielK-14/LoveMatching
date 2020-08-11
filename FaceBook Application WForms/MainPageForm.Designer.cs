@@ -253,13 +253,14 @@
             this.ZodiakSignLink.AutoSize = true;
             this.ZodiakSignLink.BackColor = System.Drawing.Color.Transparent;
             this.ZodiakSignLink.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.ZodiakSignLink.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.ZodiakSignLink.Location = new System.Drawing.Point(172, 120);
             this.ZodiakSignLink.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.ZodiakSignLink.Name = "ZodiakSignLink";
-            this.ZodiakSignLink.Size = new System.Drawing.Size(235, 24);
+            this.ZodiakSignLink.Size = new System.Drawing.Size(114, 24);
             this.ZodiakSignLink.TabIndex = 34;
             this.ZodiakSignLink.TabStop = true;
-            this.ZodiakSignLink.Text = "View Zodiak Sign Match";
+            this.ZodiakSignLink.Text = "Find Match";
             this.ZodiakSignLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ZodiakSignLink_LinkClicked);
             // 
             // logoutButton
