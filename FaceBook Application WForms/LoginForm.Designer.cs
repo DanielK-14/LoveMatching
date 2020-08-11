@@ -44,7 +44,7 @@
             Login.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             Login.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             Login.Image = ((System.Drawing.Image)(resources.GetObject("Login.Image")));
-            Login.Location = new System.Drawing.Point(290, 343);
+            Login.Location = new System.Drawing.Point(290, 337);
             Login.Margin = new System.Windows.Forms.Padding(0);
             Login.Name = "Login";
             Login.Size = new System.Drawing.Size(306, 52);
@@ -60,7 +60,11 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(884, 661);
             this.Controls.Add(Login);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(900, 700);
+            this.MinimumSize = new System.Drawing.Size(900, 700);
             this.Name = "LoginForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();

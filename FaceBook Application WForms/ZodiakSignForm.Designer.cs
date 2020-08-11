@@ -48,9 +48,10 @@
             this.YouAreLabel.AutoSize = true;
             this.YouAreLabel.BackColor = System.Drawing.Color.Transparent;
             this.YouAreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.YouAreLabel.Location = new System.Drawing.Point(183, 51);
+            this.YouAreLabel.Location = new System.Drawing.Point(122, 33);
+            this.YouAreLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.YouAreLabel.Name = "YouAreLabel";
-            this.YouAreLabel.Size = new System.Drawing.Size(370, 69);
+            this.YouAreLabel.Size = new System.Drawing.Size(252, 46);
             this.YouAreLabel.TabIndex = 0;
             this.YouAreLabel.Text = "Your sign is:";
             // 
@@ -59,18 +60,20 @@
             this.AndYouMachBestLabel.AutoSize = true;
             this.AndYouMachBestLabel.BackColor = System.Drawing.Color.Transparent;
             this.AndYouMachBestLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.AndYouMachBestLabel.Location = new System.Drawing.Point(682, 51);
+            this.AndYouMachBestLabel.Location = new System.Drawing.Point(455, 33);
+            this.AndYouMachBestLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.AndYouMachBestLabel.Name = "AndYouMachBestLabel";
-            this.AndYouMachBestLabel.Size = new System.Drawing.Size(497, 69);
+            this.AndYouMachBestLabel.Size = new System.Drawing.Size(337, 46);
             this.AndYouMachBestLabel.TabIndex = 0;
             this.AndYouMachBestLabel.Text = "Your best match:";
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Location = new System.Drawing.Point(184, 146);
+            this.pictureBox1.Location = new System.Drawing.Point(123, 95);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(375, 385);
+            this.pictureBox1.Size = new System.Drawing.Size(250, 250);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
@@ -78,9 +81,10 @@
             // pictureBox2
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox2.Location = new System.Drawing.Point(738, 146);
+            this.pictureBox2.Location = new System.Drawing.Point(492, 95);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(375, 385);
+            this.pictureBox2.Size = new System.Drawing.Size(250, 250);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 3;
             this.pictureBox2.TabStop = false;
@@ -91,9 +95,10 @@
             this.userSignNameLabel.AutoSize = true;
             this.userSignNameLabel.BackColor = System.Drawing.SystemColors.Control;
             this.userSignNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.userSignNameLabel.Location = new System.Drawing.Point(202, 483);
+            this.userSignNameLabel.Location = new System.Drawing.Point(135, 314);
+            this.userSignNameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.userSignNameLabel.Name = "userSignNameLabel";
-            this.userSignNameLabel.Size = new System.Drawing.Size(139, 32);
+            this.userSignNameLabel.Size = new System.Drawing.Size(92, 24);
             this.userSignNameLabel.TabIndex = 4;
             this.userSignNameLabel.Text = "User Sign";
             // 
@@ -102,9 +107,10 @@
             this.matchSignNameLabel.AutoSize = true;
             this.matchSignNameLabel.BackColor = System.Drawing.SystemColors.Control;
             this.matchSignNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.matchSignNameLabel.Location = new System.Drawing.Point(756, 483);
+            this.matchSignNameLabel.Location = new System.Drawing.Point(504, 314);
+            this.matchSignNameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.matchSignNameLabel.Name = "matchSignNameLabel";
-            this.matchSignNameLabel.Size = new System.Drawing.Size(157, 32);
+            this.matchSignNameLabel.Size = new System.Drawing.Size(104, 24);
             this.matchSignNameLabel.TabIndex = 5;
             this.matchSignNameLabel.Text = "Match Sign";
             this.matchSignNameLabel.Visible = false;
@@ -113,10 +119,9 @@
             // 
             this.fateQuotePicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.fateQuotePicture.ImageLocation = "https://i.pinimg.com/originals/b3/c4/c3/b3c4c3432cbb3735315a329352afe63a.jpg";
-            this.fateQuotePicture.Location = new System.Drawing.Point(126, 565);
-            this.fateQuotePicture.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.fateQuotePicture.Location = new System.Drawing.Point(84, 367);
             this.fateQuotePicture.Name = "fateQuotePicture";
-            this.fateQuotePicture.Size = new System.Drawing.Size(1062, 411);
+            this.fateQuotePicture.Size = new System.Drawing.Size(708, 267);
             this.fateQuotePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.fateQuotePicture.TabIndex = 6;
             this.fateQuotePicture.TabStop = false;
@@ -125,10 +130,9 @@
             // findButton
             // 
             this.findButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.findButton.Location = new System.Drawing.Point(570, 300);
-            this.findButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.findButton.Location = new System.Drawing.Point(380, 195);
             this.findButton.Name = "findButton";
-            this.findButton.Size = new System.Drawing.Size(156, 69);
+            this.findButton.Size = new System.Drawing.Size(104, 45);
             this.findButton.TabIndex = 7;
             this.findButton.Text = "Find";
             this.findButton.UseVisualStyleBackColor = true;
@@ -137,10 +141,9 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(20, 20);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button1.Location = new System.Drawing.Point(13, 13);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(112, 35);
+            this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 8;
             this.button1.Text = "Go back";
             this.button1.UseVisualStyleBackColor = true;
@@ -148,11 +151,11 @@
             // 
             // ZodiakSignForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1326, 1017);
+            this.ClientSize = new System.Drawing.Size(884, 661);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.findButton);
             this.Controls.Add(this.fateQuotePicture);
@@ -163,7 +166,12 @@
             this.Controls.Add(this.AndYouMachBestLabel);
             this.Controls.Add(this.YouAreLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(900, 700);
+            this.MinimumSize = new System.Drawing.Size(900, 700);
             this.Name = "ZodiakSignForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "ZodiakSignForm";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
