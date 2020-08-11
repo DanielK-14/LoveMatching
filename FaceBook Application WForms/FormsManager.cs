@@ -56,7 +56,6 @@ namespace FaceBook_Application_WForms
 
         private void initAllFormsAndStart()
         {
-            m_CurrentShownForm = null;
             try
             {
                 m_MainForm = new MainPageForm(m_LoggedInUser);
@@ -103,12 +102,11 @@ namespace FaceBook_Application_WForms
 
         private void logout()
         {
-            m_MainForm.Dispose();
-            m_UserInformation.Dispose();
-            m_ZodiacSignForm.Dispose();
+            CurrentShownForm = null;
             File.Delete(m_AccessTokenFilePath);
             login();
             initAllFormsAndStart();
+            
         }
 
         private void switchToUserInformation()
