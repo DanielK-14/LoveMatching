@@ -286,6 +286,7 @@
             // 
             // MainPageForm
             // 
+            this.Size = new System.Drawing.Size(900, 700);
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
