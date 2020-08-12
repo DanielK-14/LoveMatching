@@ -6,8 +6,11 @@ namespace FaceBook_Application_WForms
     internal class ZodiacSignMatch
     {
         private static Dictionary<eZodiacSign, string> sr_ImagesUrl;
+
         internal eZodiacSign Sign { get; private set; }
+
         internal string PictureUrl { get; private set; }
+
         internal string MatchSignName { get; private set; }
 
         internal ZodiacSignMatch BestMatchedWithSign
@@ -51,6 +54,24 @@ namespace FaceBook_Application_WForms
         {
             Sign = i_Sign;
             PictureUrl = sr_ImagesUrl[Sign];
+        }
+
+        private static void initZodiacSignsImagesUrlList()
+        {
+            sr_ImagesUrl = new Dictionary<eZodiacSign, string>();
+
+            sr_ImagesUrl[eZodiacSign.Aquarius] = "https://www.astrology-zodiac-signs.com/images/aquarius.jpg";
+            sr_ImagesUrl[eZodiacSign.Pisces] = "https://www.astrology-zodiac-signs.com/images/pisces.jpg";
+            sr_ImagesUrl[eZodiacSign.Aries] = "https://www.astrology-zodiac-signs.com/images/aries.jpg";
+            sr_ImagesUrl[eZodiacSign.Taurus] = "https://www.astrology-zodiac-signs.com/images/taurus.jpg";
+            sr_ImagesUrl[eZodiacSign.Gemini] = "https://www.astrology-zodiac-signs.com/images/gemini.jpg";
+            sr_ImagesUrl[eZodiacSign.Cancer] = "https://www.astrology-zodiac-signs.com/images/cancer.jpg";
+            sr_ImagesUrl[eZodiacSign.Leo] = "https://www.astrology-zodiac-signs.com/images/leo.jpg";
+            sr_ImagesUrl[eZodiacSign.Virgo] = "https://www.astrology-zodiac-signs.com/images/virgo.jpg";
+            sr_ImagesUrl[eZodiacSign.Libra] = "https://www.astrology-zodiac-signs.com/images/libra.jpg";
+            sr_ImagesUrl[eZodiacSign.Scorpio] = "https://www.astrology-zodiac-signs.com/images/scorpio.jpg";
+            sr_ImagesUrl[eZodiacSign.Sagittarius] = "https://www.astrology-zodiac-signs.com/images/sagittarius.jpg";
+            sr_ImagesUrl[eZodiacSign.Capricorn] = "https://www.astrology-zodiac-signs.com/images/capricorn.jpg";
         }
 
         private void initUserZodiacSign(string i_Birthday)
@@ -98,24 +119,6 @@ namespace FaceBook_Application_WForms
                     Sign = day >= 22 ? eZodiacSign.Capricorn : eZodiacSign.Sagittarius;
                     break;
             }
-        }
-
-        static private void initZodiacSignsImagesUrlList()
-        {
-            sr_ImagesUrl = new Dictionary<eZodiacSign, string>();
-
-            sr_ImagesUrl[eZodiacSign.Aquarius] = "https://www.astrology-zodiac-signs.com/images/aquarius.jpg";
-            sr_ImagesUrl[eZodiacSign.Pisces] = "https://www.astrology-zodiac-signs.com/images/pisces.jpg";
-            sr_ImagesUrl[eZodiacSign.Aries] = "https://www.astrology-zodiac-signs.com/images/aries.jpg";
-            sr_ImagesUrl[eZodiacSign.Taurus] = "https://www.astrology-zodiac-signs.com/images/taurus.jpg";
-            sr_ImagesUrl[eZodiacSign.Gemini] = "https://www.astrology-zodiac-signs.com/images/gemini.jpg";
-            sr_ImagesUrl[eZodiacSign.Cancer] = "https://www.astrology-zodiac-signs.com/images/cancer.jpg";
-            sr_ImagesUrl[eZodiacSign.Leo] = "https://www.astrology-zodiac-signs.com/images/leo.jpg";
-            sr_ImagesUrl[eZodiacSign.Virgo] = "https://www.astrology-zodiac-signs.com/images/virgo.jpg";
-            sr_ImagesUrl[eZodiacSign.Libra] = "https://www.astrology-zodiac-signs.com/images/libra.jpg";
-            sr_ImagesUrl[eZodiacSign.Scorpio] = "https://www.astrology-zodiac-signs.com/images/scorpio.jpg";
-            sr_ImagesUrl[eZodiacSign.Sagittarius] = "https://www.astrology-zodiac-signs.com/images/sagittarius.jpg";
-            sr_ImagesUrl[eZodiacSign.Capricorn] = "https://www.astrology-zodiac-signs.com/images/capricorn.jpg";
         }
 
         private eZodiacSign pickMatchedSign()

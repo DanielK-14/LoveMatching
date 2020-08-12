@@ -1,7 +1,7 @@
-﻿using FacebookWrapper.ObjectModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using FacebookWrapper.ObjectModel;
 
 namespace FaceBook_Application_WForms
 {
@@ -48,8 +48,13 @@ namespace FaceBook_Application_WForms
         private static void analyzeEvent(Event i_Event, out string o_Data, out string o_PicUrl)
         {
             StringBuilder eventInfo = new StringBuilder();
-            eventInfo.AppendLine(string.Format("Event {0}{1} Starts in: {2}{1} Ends in: {3}",
-                i_Event.Name, Environment.NewLine, i_Event.StartTime.ToString(), i_Event.EndTime.ToString()));
+            eventInfo.AppendLine(string.Format(
+                "Event {0}{1} Starts in: {2}{1} Ends in: {3}",
+                i_Event.Name,
+                Environment.NewLine,
+                i_Event.StartTime.ToString(),
+                i_Event.EndTime.ToString()));
+
             eventInfo.AppendLine(string.Format("Description:{0}{1}", Environment.NewLine, i_Event.Description));
 
             o_Data = eventInfo.ToString();
@@ -72,8 +77,12 @@ namespace FaceBook_Application_WForms
         private static void analyzePost(Post i_Post, out string o_Data, out string o_PicUrl)
         {
             StringBuilder postInfo = new StringBuilder();
-            postInfo.AppendLine(string.Format("Post: {0}.{1} Has {2} comments.{1} Was posted on {3}.",
-                i_Post.Message, Environment.NewLine, i_Post.Comments.Count, i_Post.CreatedTime));
+            postInfo.AppendLine(string.Format(
+                "Post: {0}.{1} Has {2} comments.{1} Was posted on {3}.",
+                i_Post.Message,
+                Environment.NewLine,
+                i_Post.Comments.Count,
+                i_Post.CreatedTime));
 
             o_Data = postInfo.ToString();
             o_PicUrl = i_Post.PictureURL;

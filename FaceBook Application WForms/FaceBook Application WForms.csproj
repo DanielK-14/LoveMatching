@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppManager.cs" />
     <Compile Include="AvailableFriends.cs" />
     <Compile Include="DataAnalyst.cs" />
     <Compile Include="FormsManager.cs">

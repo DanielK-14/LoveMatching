@@ -1,14 +1,17 @@
-﻿using FacebookWrapper.ObjectModel;
-using System;
+﻿using System;
 using System.Windows.Forms;
+using FacebookWrapper.ObjectModel;
 
 namespace FaceBook_Application_WForms
 {
     internal partial class ZodiakSignForm : Form
     {
         internal delegate void BackButtonDelegate();
+
         internal event BackButtonDelegate BackButtonOperation;
+
         private readonly ZodiacSignMatch r_ZodiacMatch;
+
         private readonly User r_LoggedInUser;
 
         internal ZodiakSignForm(User i_LoggedInUser)
@@ -49,8 +52,11 @@ namespace FaceBook_Application_WForms
 
         private void shareButton_Click(object sender, EventArgs e)
         {
-            string textForPost = string.Format("Looking for {0} {1} {2} Anyone?",
-                r_ZodiacMatch.MatchSignName, r_LoggedInUser.InterestedIn, Environment.NewLine);
+            string textForPost = string.Format(
+                "Looking for {0} {1} {2} Anyone?",
+                r_ZodiacMatch.MatchSignName,
+                r_LoggedInUser.InterestedIn,
+                Environment.NewLine);
             r_LoggedInUser.PostStatus(textForPost);
             MessageBox.Show(string.Format("Status Posted! {0}{1}", Environment.NewLine, textForPost));
         }

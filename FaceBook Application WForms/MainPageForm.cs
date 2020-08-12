@@ -6,12 +6,16 @@ using FacebookWrapper;
 
 namespace FaceBook_Application_WForms
 {
-    public partial class MainPageForm : Form
+    internal partial class MainPageForm : Form
     {
         internal delegate void LinkDelegate();
+
         internal event LinkDelegate ProfileLinkOperation;
+
         internal event LinkDelegate ZodiacLinkOperation;
+
         internal event LinkDelegate LogoutButtonOperation;
+
         internal readonly User r_LoggedInUser;
 
         public MainPageForm(User i_User)
@@ -38,6 +42,7 @@ namespace FaceBook_Application_WForms
                 {
                     comboBoxDecisionData.Items.Add(eventFSB.Name);
                 }
+
                 counter++;
             }
 

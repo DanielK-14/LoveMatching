@@ -1,7 +1,7 @@
-﻿using FacebookWrapper.ObjectModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using FacebookWrapper.ObjectModel;
 
 namespace FaceBook_Application_WForms
 {
@@ -9,7 +9,9 @@ namespace FaceBook_Application_WForms
     {
         private readonly User r_User;
         private List<PictureBox> m_pictureBoxes;
+
         internal delegate void BackButtonDelegate();
+
         internal event BackButtonDelegate BackButtonOperation;
 
         internal UserInformation(User i_User)
@@ -50,26 +52,18 @@ namespace FaceBook_Application_WForms
 
         private void fetchPhotos()
         {
-            try 
+            IEnumerator<Photo> PhotosEnumerator = r_User.PhotosTaggedIn.GetEnumerator();
+            foreach (PictureBox pictureBox in m_pictureBoxes)
             {
-                IEnumerator<Photo> PhotosEnumerator = r_User.PhotosTaggedIn.GetEnumerator();
-                foreach (PictureBox pictureBox in m_pictureBoxes)
+                if (PhotosEnumerator.MoveNext())
                 {
-                    if (PhotosEnumerator.MoveNext())
-                    {
-                        pictureBox.LoadAsync(PhotosEnumerator.Current.PictureNormalURL);
-                        pictureBox.Visible = true;
-                    }
-                    else
-                    {
-                        break;
-                    }
+                    pictureBox.LoadAsync(PhotosEnumerator.Current.PictureNormalURL);
+                    pictureBox.Visible = true;
                 }
-            }
-            catch(Exception ex)
-            {
-                hidePhotos();
-                MessageBox.Show(string.Format("{0}{1}PHOTOS NOT LOADED!", ex.Message, Environment.NewLine));
+                else
+                {
+                    break;
+                }
             }
         }
 

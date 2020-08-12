@@ -1,13 +1,11 @@
-﻿using FacebookWrapper.ObjectModel;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using FacebookWrapper.ObjectModel;
 
 namespace FaceBook_Application_WForms
 {
-
-    static internal class AvailableFriends
+    internal static class AvailableFriends
     {
-
-        static internal List<User> GetAvailabeFriends(User i_User)
+        internal static List<User> GetAvailabeFriends(User i_User)
         {
             List<User> availableFriends = new List<User>();
             foreach(User friend in i_User.Friends)
@@ -21,7 +19,7 @@ namespace FaceBook_Application_WForms
             return availableFriends;
         }
 
-        static private bool usersCanBeMatched(User i_Friend, User i_MainUser)
+        private static bool usersCanBeMatched(User i_Friend, User i_MainUser)
         {
             bool isAvailable = false;
             if (i_MainUser.InterestedIn != null && i_MainUser.Gender != null && i_Friend.InterestedIn != null && i_Friend.Gender != null)
@@ -36,7 +34,7 @@ namespace FaceBook_Application_WForms
             return isAvailable;
         }
 
-        static private bool userIsInterestedIn(User.eGender i_Gender, User i_User)
+        private static bool userIsInterestedIn(User.eGender i_Gender, User i_User)
         {
             bool userMightBeInterested = false;
 
