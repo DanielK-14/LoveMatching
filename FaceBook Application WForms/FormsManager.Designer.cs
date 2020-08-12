@@ -1,6 +1,6 @@
 ﻿namespace FaceBook_Application_WForms
 {
-
+    /*
     partial class FormsManager
     {
         /// <summary>
@@ -47,4 +47,5 @@
 
         #endregion
     }
+    */
 }

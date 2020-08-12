@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
 
 namespace FaceBook_Application_WForms
 {
-    public partial class FormsManager : Form
+    public class FormsManager
     {
         private MainPageForm m_MainForm;
         private UserInformation m_UserInformation;
@@ -18,17 +22,7 @@ namespace FaceBook_Application_WForms
         private const string k_FileName = @"\AccessToken.txt";
         private Form m_CurrentShownForm;
 
-        public FormsManager()
-        {
-            m_AccessTokenFilePath = AppDomain.CurrentDomain.BaseDirectory + k_FileName;
-            InitializeComponent();
-            FacebookService.s_CollectionLimit = 200;
-            FacebookService.s_FbApiVersion = 2.8f;
-            logIn();
-            initAllFormsAndStart();
-        }
-
-        public Form CurrentShownForm
+        private Form CurrentShownForm
         {
             set
             {
@@ -44,13 +38,29 @@ namespace FaceBook_Application_WForms
                 }
 
                 m_CurrentShownForm = value;
-                if (m_CurrentShownForm != null)
+                if(m_CurrentShownForm != null)
                 {
                     m_CurrentShownForm.Show();
                 }
             }
 
             get { return m_CurrentShownForm; }
+        }
+
+        public FormsManager()
+        {
+            m_AccessTokenFilePath = AppDomain.CurrentDomain.BaseDirectory + k_FileName;
+            FacebookService.s_CollectionLimit = 200;
+            FacebookService.s_FbApiVersion = 2.8f;
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+        }
+
+        public void Run()
+        {
+            login();
+            initAllFormsAndStart();
+            Application.Run();
         }
 
         private void initAllFormsAndStart()
@@ -71,7 +81,7 @@ namespace FaceBook_Application_WForms
             m_MainForm.FormClosing += endApplication;
             m_MainForm.ProfileLinkOperation += switchToUserInformation;
             m_MainForm.ZodiacLinkOperation += switchToZodiacForm;
-            m_MainForm.LogoutButtonOperation += logOut;
+            m_MainForm.LogoutButtonOperation += logout;
             m_UserInformation.FormClosing += endApplication;
             m_UserInformation.BackButtonOperation += switchToMainForm;
             m_ZodiacSignForm.FormClosing += endApplication;
@@ -79,7 +89,7 @@ namespace FaceBook_Application_WForms
             CurrentShownForm = m_MainForm;
         }
 
-        private void logIn()
+        private void login()
         {
             if (File.Exists(m_AccessTokenFilePath) &&
                 new FileInfo(m_AccessTokenFilePath).Length != 0)
@@ -99,11 +109,11 @@ namespace FaceBook_Application_WForms
             }
         }
 
-        private void logOut()
+        private void logout()
         {
             CurrentShownForm = null;
             File.Delete(m_AccessTokenFilePath);
-            logIn();
+            login();
             initAllFormsAndStart();
         }
 
@@ -123,13 +133,8 @@ namespace FaceBook_Application_WForms
             CurrentShownForm = m_ZodiacSignForm;
         }
 
-        private void FormsManager_Show(object sender, EventArgs e)
-        {
-            Hide();
-            Visible = false;
-        }
 
-        private void endApplication(object sender, CancelEventArgs e)
+        private void endApplication(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Environment.Exit(0);
         }
