@@ -12,7 +12,7 @@ using FacebookWrapper.ObjectModel;
 
 namespace FaceBook_Application_WForms
 {
-    public partial class FormsManager : Form
+    public class FormsManager
     {
         private MainPageForm m_MainForm;
         private UserInformation m_UserInformation;
@@ -50,11 +50,17 @@ namespace FaceBook_Application_WForms
         public FormsManager()
         {
             m_AccessTokenFilePath = AppDomain.CurrentDomain.BaseDirectory + k_FileName;
-            InitializeComponent();
             FacebookService.s_CollectionLimit = 200;
             FacebookService.s_FbApiVersion = 2.8f;
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+        }
+
+        public void Run()
+        {
             login();
             initAllFormsAndStart();
+            Application.Run();
         }
 
         private void initAllFormsAndStart()
@@ -127,11 +133,6 @@ namespace FaceBook_Application_WForms
             CurrentShownForm = m_ZodiacSignForm;
         }
 
-        private void FormsManager_Show(object sender, EventArgs e)
-        {
-            Hide();
-            Visible = false;
-        }
 
         private void endApplication(object sender, System.ComponentModel.CancelEventArgs e)
         {
