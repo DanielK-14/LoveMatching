@@ -18,6 +18,16 @@ namespace FaceBook_Application_WForms
         private const string k_FileName = @"\AccessToken.txt";
         private Form m_CurrentShownForm;
 
+        public FormsManager()
+        {
+            m_AccessTokenFilePath = AppDomain.CurrentDomain.BaseDirectory + k_FileName;
+            InitializeComponent();
+            FacebookService.s_CollectionLimit = 200;
+            FacebookService.s_FbApiVersion = 2.8f;
+            logIn();
+            initAllFormsAndStart();
+        }
+
         public Form CurrentShownForm
         {
             set
@@ -34,23 +44,13 @@ namespace FaceBook_Application_WForms
                 }
 
                 m_CurrentShownForm = value;
-                if(m_CurrentShownForm != null)
+                if (m_CurrentShownForm != null)
                 {
                     m_CurrentShownForm.Show();
                 }
             }
 
             get { return m_CurrentShownForm; }
-        }
-
-        public FormsManager()
-        {
-            m_AccessTokenFilePath = AppDomain.CurrentDomain.BaseDirectory + k_FileName;
-            InitializeComponent();
-            FacebookService.s_CollectionLimit = 200;
-            FacebookService.s_FbApiVersion = 2.8f;
-            logIn();
-            initAllFormsAndStart();
         }
 
         private void initAllFormsAndStart()
