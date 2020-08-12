@@ -1,33 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
-using System.IO;
 
 namespace FaceBook_Application_WForms
 {
-    public partial class LoginForm : Form
+    internal partial class LoginForm : Form
     {
-        private LoginResult m_Result;
-
-        public LoginForm()
+        internal LoginForm()
         {
             InitializeComponent();
         }
 
-        public LoginResult LogInInfo
-        {
-            get { return m_Result; }
-        }
+        internal LoginResult LogInInfo { get; private set; }
 
         private void loginAndInit(object sender, EventArgs e)
         {
-            m_Result = FacebookService.Login("1206785753020262",
+            LogInInfo = FacebookService.Login("1206785753020262",
             "public_profile",
             "email",
             "publish_to_groups",
@@ -43,9 +31,9 @@ namespace FaceBook_Application_WForms
             "user_photos",
             "user_posts");
 
-            if (string.IsNullOrEmpty(m_Result.AccessToken) == true)
+            if (string.IsNullOrEmpty(LogInInfo.AccessToken) == true)
             {
-                MessageBox.Show(m_Result.ErrorMessage);
+                MessageBox.Show(LogInInfo.ErrorMessage);
                 DialogResult = DialogResult.Abort;
             }
             else

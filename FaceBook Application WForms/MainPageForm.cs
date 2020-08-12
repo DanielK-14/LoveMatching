@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
 
 namespace FaceBook_Application_WForms
 {
-
     public partial class MainPageForm : Form
     {
         internal delegate void LinkDelegate();
@@ -33,7 +27,6 @@ namespace FaceBook_Application_WForms
 
         private void fetchEvents()
         {
-
             int counter = 0;
             foreach(Event eventFSB in r_LoggedInUser.Events)
             {
@@ -90,6 +83,7 @@ namespace FaceBook_Application_WForms
             comboBoxDecisionData.Items.Clear();
             comboBoxDecisionData.DisplayMember = "Name";
             int counter = 0;
+
             foreach (User friend in r_LoggedInUser.Friends)
             {
                 if(counter == 10)
@@ -183,8 +177,8 @@ namespace FaceBook_Application_WForms
         {
             string imageUrl = i_Data[1];
             string dataAnalyzed = i_Data[0];
-
             dataAnalystRichBox.Visible = true;
+
             if (string.IsNullOrEmpty(imageUrl) == false)
             {
                 dataSelectedPictureBox.Visible = true;

@@ -1,16 +1,13 @@
 ﻿using FacebookWrapper.ObjectModel;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace FaceBook_Application_WForms
 {
 
-    static public class AvailableFriends
+    static internal class AvailableFriends
     {
 
-        static public List<User> GetAvailabeFriends(User i_User)
+        static internal List<User> GetAvailabeFriends(User i_User)
         {
             List<User> availableFriends = new List<User>();
             foreach(User friend in i_User.Friends)

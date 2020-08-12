@@ -1,30 +1,28 @@
 ﻿using FacebookWrapper.ObjectModel;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Windows.Forms;
 
 namespace FaceBook_Application_WForms
 {
     internal static class DataAnalyst
     {
-        public static LastButtonClicked s_ButtonClicked;
+        internal static LastButtonClicked s_ButtonClicked;
 
-        public enum LastButtonClicked
+        internal enum LastButtonClicked
         {
             Posts,
             Events,
             Friends
         }
 
-        public static LastButtonClicked ButtonClicked
+        internal static LastButtonClicked ButtonClicked
         {
             get { return s_ButtonClicked; }
             set { s_ButtonClicked = value; }
         }
 
-        public static List<string> AnalyzeData(int i_Index, User i_User)
+        internal static List<string> AnalyzeData(int i_Index, User i_User)
         {
             List<string> analayzedData = new List<string>();
             string pictureUrl, infoString;

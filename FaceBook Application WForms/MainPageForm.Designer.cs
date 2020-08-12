@@ -68,19 +68,22 @@
             this.ChooseDataTypeLabel.AutoSize = true;
             this.ChooseDataTypeLabel.BackColor = System.Drawing.Color.Transparent;
             this.ChooseDataTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ChooseDataTypeLabel.Location = new System.Drawing.Point(20, 209);
+            this.ChooseDataTypeLabel.Location = new System.Drawing.Point(274, 192);
             this.ChooseDataTypeLabel.Name = "ChooseDataTypeLabel";
             this.ChooseDataTypeLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.ChooseDataTypeLabel.Size = new System.Drawing.Size(577, 29);
+            this.ChooseDataTypeLabel.Size = new System.Drawing.Size(331, 29);
             this.ChooseDataTypeLabel.TabIndex = 20;
-            this.ChooseDataTypeLabel.Text = "Please choose which data would you like to see:";
+            this.ChooseDataTypeLabel.Text = "What would you like to see:";
             // 
             // comboBoxDecisionData
             // 
+            this.comboBoxDecisionData.BackColor = System.Drawing.Color.DarkSalmon;
+            this.comboBoxDecisionData.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxDecisionData.FormattingEnabled = true;
-            this.comboBoxDecisionData.Location = new System.Drawing.Point(23, 290);
+            this.comboBoxDecisionData.ItemHeight = 16;
+            this.comboBoxDecisionData.Location = new System.Drawing.Point(67, 311);
             this.comboBoxDecisionData.Name = "comboBoxDecisionData";
-            this.comboBoxDecisionData.Size = new System.Drawing.Size(169, 277);
+            this.comboBoxDecisionData.Size = new System.Drawing.Size(169, 276);
             this.comboBoxDecisionData.TabIndex = 19;
             this.comboBoxDecisionData.SelectedIndexChanged += new System.EventHandler(this.comboBoxDecisionData_SelectedIndexChanged);
             // 
@@ -89,7 +92,7 @@
             this.SelectedOptionDataLable.AutoSize = true;
             this.SelectedOptionDataLable.BackColor = System.Drawing.Color.Transparent;
             this.SelectedOptionDataLable.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SelectedOptionDataLable.Location = new System.Drawing.Point(19, 267);
+            this.SelectedOptionDataLable.Location = new System.Drawing.Point(63, 288);
             this.SelectedOptionDataLable.Name = "SelectedOptionDataLable";
             this.SelectedOptionDataLable.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.SelectedOptionDataLable.Size = new System.Drawing.Size(93, 20);
@@ -138,7 +141,9 @@
             // 
             // dataAnalystRichBox
             // 
-            this.dataAnalystRichBox.Location = new System.Drawing.Point(225, 290);
+            this.dataAnalystRichBox.BackColor = System.Drawing.Color.DarkSalmon;
+            this.dataAnalystRichBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataAnalystRichBox.Location = new System.Drawing.Point(269, 311);
             this.dataAnalystRichBox.Name = "dataAnalystRichBox";
             this.dataAnalystRichBox.ReadOnly = true;
             this.dataAnalystRichBox.Size = new System.Drawing.Size(303, 277);
@@ -151,9 +156,10 @@
             this.showPostsButton.BackColor = System.Drawing.Color.CornflowerBlue;
             this.showPostsButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.showPostsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.showPostsButton.Location = new System.Drawing.Point(598, 196);
+            this.showPostsButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.showPostsButton.Location = new System.Drawing.Point(23, 225);
             this.showPostsButton.Name = "showPostsButton";
-            this.showPostsButton.Size = new System.Drawing.Size(132, 33);
+            this.showPostsButton.Size = new System.Drawing.Size(209, 43);
             this.showPostsButton.TabIndex = 25;
             this.showPostsButton.Text = "Show Posts";
             this.showPostsButton.UseVisualStyleBackColor = false;
@@ -163,9 +169,9 @@
             // 
             this.showEventsButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.showEventsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.showEventsButton.Location = new System.Drawing.Point(736, 196);
+            this.showEventsButton.Location = new System.Drawing.Point(438, 225);
             this.showEventsButton.Name = "showEventsButton";
-            this.showEventsButton.Size = new System.Drawing.Size(132, 33);
+            this.showEventsButton.Size = new System.Drawing.Size(209, 43);
             this.showEventsButton.TabIndex = 26;
             this.showEventsButton.Text = "Show Events";
             this.showEventsButton.UseVisualStyleBackColor = false;
@@ -173,7 +179,8 @@
             // 
             // dataSelectedPictureBox
             // 
-            this.dataSelectedPictureBox.Location = new System.Drawing.Point(534, 290);
+            this.dataSelectedPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.dataSelectedPictureBox.Location = new System.Drawing.Point(578, 311);
             this.dataSelectedPictureBox.Name = "dataSelectedPictureBox";
             this.dataSelectedPictureBox.Size = new System.Drawing.Size(231, 200);
             this.dataSelectedPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -186,7 +193,7 @@
             this.friendFirstNameLabel.AutoSize = true;
             this.friendFirstNameLabel.BackColor = System.Drawing.Color.Transparent;
             this.friendFirstNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.friendFirstNameLabel.Location = new System.Drawing.Point(535, 497);
+            this.friendFirstNameLabel.Location = new System.Drawing.Point(579, 518);
             this.friendFirstNameLabel.Name = "friendFirstNameLabel";
             this.friendFirstNameLabel.Size = new System.Drawing.Size(141, 29);
             this.friendFirstNameLabel.TabIndex = 28;
@@ -198,7 +205,7 @@
             this.friendLastNameLabel.AutoSize = true;
             this.friendLastNameLabel.BackColor = System.Drawing.Color.Transparent;
             this.friendLastNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.friendLastNameLabel.Location = new System.Drawing.Point(535, 526);
+            this.friendLastNameLabel.Location = new System.Drawing.Point(579, 547);
             this.friendLastNameLabel.Name = "friendLastNameLabel";
             this.friendLastNameLabel.Size = new System.Drawing.Size(128, 29);
             this.friendLastNameLabel.TabIndex = 29;
@@ -209,9 +216,9 @@
             // 
             this.showFriendsButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.showFriendsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.showFriendsButton.Location = new System.Drawing.Point(598, 236);
+            this.showFriendsButton.Location = new System.Drawing.Point(230, 225);
             this.showFriendsButton.Name = "showFriendsButton";
-            this.showFriendsButton.Size = new System.Drawing.Size(132, 33);
+            this.showFriendsButton.Size = new System.Drawing.Size(209, 43);
             this.showFriendsButton.TabIndex = 30;
             this.showFriendsButton.Text = "Show Friends";
             this.showFriendsButton.UseVisualStyleBackColor = false;
@@ -234,9 +241,9 @@
             // 
             this.GetMatchesButton.BackColor = System.Drawing.Color.Purple;
             this.GetMatchesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GetMatchesButton.Location = new System.Drawing.Point(735, 236);
+            this.GetMatchesButton.Location = new System.Drawing.Point(645, 225);
             this.GetMatchesButton.Name = "GetMatchesButton";
-            this.GetMatchesButton.Size = new System.Drawing.Size(132, 33);
+            this.GetMatchesButton.Size = new System.Drawing.Size(209, 43);
             this.GetMatchesButton.TabIndex = 33;
             this.GetMatchesButton.Text = "Get Matches";
             this.GetMatchesButton.UseVisualStyleBackColor = false;
@@ -247,13 +254,14 @@
             this.ZodiakSignLink.AutoSize = true;
             this.ZodiakSignLink.BackColor = System.Drawing.Color.Transparent;
             this.ZodiakSignLink.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.ZodiakSignLink.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.ZodiakSignLink.Location = new System.Drawing.Point(172, 120);
             this.ZodiakSignLink.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.ZodiakSignLink.Name = "ZodiakSignLink";
-            this.ZodiakSignLink.Size = new System.Drawing.Size(235, 24);
+            this.ZodiakSignLink.Size = new System.Drawing.Size(114, 24);
             this.ZodiakSignLink.TabIndex = 34;
             this.ZodiakSignLink.TabStop = true;
-            this.ZodiakSignLink.Text = "View Zodiak Sign Match";
+            this.ZodiakSignLink.Text = "Find Match";
             this.ZodiakSignLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ZodiakSignLink_LinkClicked);
             // 
             // logoutButton
@@ -294,6 +302,7 @@
             this.Controls.Add(this.postLabel);
             this.Controls.Add(this.fullNameUser);
             this.Controls.Add(this.profilePictureBox);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "MainPageForm";

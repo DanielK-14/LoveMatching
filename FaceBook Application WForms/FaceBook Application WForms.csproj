@@ -75,7 +75,7 @@
     <Compile Include="UserInformation.Designer.cs">
       <DependentUpon>UserInformation.cs</DependentUpon>
     </Compile>
-    <Compile Include="ZodiacSign.cs" />
+    <Compile Include="ZodiacSignMatch.cs" />
     <Compile Include="ZodiakSignForm.cs">
       <SubType>Form</SubType>
     </Compile>

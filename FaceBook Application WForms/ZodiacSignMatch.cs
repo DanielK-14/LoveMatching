@@ -1,27 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace FaceBook_Application_WForms
 {
-    public class ZodiacSign
+    internal class ZodiacSignMatch
     {
         private static Dictionary<eZodiacSign, string> sr_ImagesUrl;
+        internal eZodiacSign Sign { get; private set; }
+        internal string PictureUrl { get; private set; }
+        internal string MatchSignName { get; private set; }
 
-        public eZodiacSign Sign { get; private set; }
-
-        public string PictureUrl { get; private set; }
-
-        public ZodiacSign BestMatchedWithSign {
+        internal ZodiacSignMatch BestMatchedWithSign
+        {
             get
             {
                 eZodiacSign matchedSign = pickMatchedSign();
-                return new ZodiacSign(matchedSign);
+                MatchSignName = Enum.GetName(typeof(eZodiacSign), matchedSign);
+                return new ZodiacSignMatch(matchedSign);
             }
         }
 
-        public enum eZodiacSign
+        internal enum eZodiacSign
         {
             Aquarius = 0,
             Pisces,
@@ -37,19 +36,18 @@ namespace FaceBook_Application_WForms
             Capricorn
         }
 
-        static ZodiacSign()
+        static ZodiacSignMatch()
         {
             initZodiacSignsImagesUrlList();
         }
 
-        public ZodiacSign(string i_Birthday)
+        internal ZodiacSignMatch(string i_Birthday)
         {
             initUserZodiacSign(i_Birthday);
             PictureUrl = sr_ImagesUrl[Sign];
-            //setMatchedSign();
         }
 
-        private ZodiacSign(eZodiacSign i_Sign)
+        private ZodiacSignMatch(eZodiacSign i_Sign)
         {
             Sign = i_Sign;
             PictureUrl = sr_ImagesUrl[Sign];

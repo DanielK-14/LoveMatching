@@ -1,23 +1,18 @@
 ﻿using FacebookWrapper.ObjectModel;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace FaceBook_Application_WForms
 {
-    public partial class UserInformation : Form
+    internal partial class UserInformation : Form
     {
         private readonly User r_User;
         private List<PictureBox> m_pictureBoxes;
+        internal delegate void BackButtonDelegate();
+        internal event BackButtonDelegate BackButtonOperation;
 
-        public delegate void BackButtonDelegate();
-        public event BackButtonDelegate BackButtonOperation;
-        public UserInformation(User i_User)
+        internal UserInformation(User i_User)
         {
             InitializeComponent();
             initPictureBoxes();
@@ -27,10 +22,10 @@ namespace FaceBook_Application_WForms
         private void initPictureBoxes()
         {
             m_pictureBoxes = new List<PictureBox>();
-            m_pictureBoxes.Add(PictureBox1);
-            m_pictureBoxes.Add(PictureBox2);
-            m_pictureBoxes.Add(PictureBox3);
-            m_pictureBoxes.Add(PictureBox4);
+            m_pictureBoxes.Add(pictureBox1);
+            m_pictureBoxes.Add(pictureBox2);
+            m_pictureBoxes.Add(pictureBox3);
+            m_pictureBoxes.Add(pictureBox4);
             hidePhotos();
         }
 
@@ -42,15 +37,15 @@ namespace FaceBook_Application_WForms
 
         private void fetchUserInfo()
         {
-            ProfilePictureBox.LoadAsync(r_User.PictureLargeURL);
+            profilePictureBox.LoadAsync(r_User.PictureLargeURL);
             if (r_User.Cover != null)
             {
-                CoverPictureBox.LoadAsync(r_User.Cover.SourceURL);
+                coverPictureBox.LoadAsync(r_User.Cover.SourceURL);
             }
 
-            NameLabel.Text = r_User.Name;
-            BirthdayLabel.Text = r_User.Birthday;
-            EmailLabel.Text = r_User.Email;
+            nameLabel.Text = r_User.Name;
+            birthdayLabel.Text = r_User.Birthday;
+            emailLabel.Text = r_User.Email;
         }
 
         private void fetchPhotos()
@@ -86,7 +81,7 @@ namespace FaceBook_Application_WForms
             }
         }
 
-        private void BackButton_Click(object sender, EventArgs e)
+        private void backButton_Click(object sender, EventArgs e)
         {
             if (BackButtonOperation != null)
             {
