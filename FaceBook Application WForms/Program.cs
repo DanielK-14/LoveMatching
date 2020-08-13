@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FaceBook_Application_WForms
+namespace UI
 {
     public static class Program
     {
@@ -10,8 +10,8 @@ namespace FaceBook_Application_WForms
         [STAThread]
         public static void Main()
         {
-            AppManager WindowsApplication = new AppManager();
-            WindowsApplication.Run();
+            AppManager windowsApplication = new AppManager();
+            windowsApplication.Run();
         }
     }
 }

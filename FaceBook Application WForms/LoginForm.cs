@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using FacebookWrapper;
 
-namespace FaceBook_Application_WForms
+namespace UI
 {
     internal partial class LoginForm : Form
     {

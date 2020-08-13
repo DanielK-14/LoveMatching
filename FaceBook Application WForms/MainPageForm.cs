@@ -3,20 +3,25 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
+using Logic;
 
-namespace FaceBook_Application_WForms
+namespace UI
 {
     internal partial class MainPageForm : Form
     {
-        internal delegate void LinkDelegate();
+        private readonly int r_MaximumNumberOfFriendsToShow = 10;
+        private readonly int r_MaximumNumberOfPostsToShow = 15;
+        private readonly int r_MaximumNumberOfEventsToShow = 15;
 
-        internal event LinkDelegate ProfileLinkOperation;
+        internal delegate void LinkEventHandler();
 
-        internal event LinkDelegate ZodiacLinkOperation;
+        internal event LinkEventHandler ProfileLinkClicked;
 
-        internal event LinkDelegate LogoutButtonOperation;
+        internal event LinkEventHandler ZodiacLinkClicked;
 
-        internal readonly User r_LoggedInUser;
+        internal event LinkEventHandler LogoutButtonClicked;
+
+        private readonly User r_LoggedInUser;
 
         public MainPageForm(User i_User)
         {
@@ -34,7 +39,7 @@ namespace FaceBook_Application_WForms
             int counter = 0;
             foreach(Event eventFSB in r_LoggedInUser.Events)
             {
-                if(counter == 15)
+                if(counter == r_MaximumNumberOfEventsToShow)
                 {
                     break;
                 }
@@ -57,7 +62,7 @@ namespace FaceBook_Application_WForms
             int counter = 0;
             foreach (Post post in r_LoggedInUser.Posts)
             {
-                if(counter == 15)
+                if(counter == r_MaximumNumberOfPostsToShow)
                 {
                     break;
                 }
@@ -91,7 +96,7 @@ namespace FaceBook_Application_WForms
 
             foreach (User friend in r_LoggedInUser.Friends)
             {
-                if(counter == 10)
+                if(counter == r_MaximumNumberOfFriendsToShow)
                 {
                     break;
                 }
@@ -109,8 +114,15 @@ namespace FaceBook_Application_WForms
 
         private void PostButton_Click(object sender, EventArgs e)
         {
-            r_LoggedInUser.PostStatus(postTextBox.Text);
-            MessageBox.Show(string.Format("Status Posted! {0}{1}", Environment.NewLine, postTextBox.Text));
+            try
+            {
+                r_LoggedInUser.PostStatus(postTextBox.Text);
+                MessageBox.Show(string.Format("Status Posted! {0}{1}", Environment.NewLine, postTextBox.Text));
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("Could not post.");
+            }
         }
 
         private void ShowEventsButton_Click(object sender, EventArgs e)
@@ -143,7 +155,7 @@ namespace FaceBook_Application_WForms
             int counter = 0;
             foreach (User friend in friendsToMatchWith)
             {
-                if (counter == 10)
+                if (counter == r_MaximumNumberOfFriendsToShow)
                 {
                     break;
                 }
@@ -151,6 +163,11 @@ namespace FaceBook_Application_WForms
                 comboBoxDecisionData.Items.Add(friend);
                 friend.ReFetch(DynamicWrapper.eLoadOptions.Full);
                 counter++;
+            }
+
+            if (friendsToMatchWith.Count == 0)
+            {
+                MessageBox.Show("Could not find anyone for you.");
             }
         }
 
@@ -195,25 +212,25 @@ namespace FaceBook_Application_WForms
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (ProfileLinkOperation != null)
+            if (ProfileLinkClicked != null)
             {
-                ProfileLinkOperation.Invoke();
+                ProfileLinkClicked.Invoke();
             }
         }
 
         private void ZodiakSignLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (ZodiacLinkOperation != null)
+            if (ZodiacLinkClicked != null)
             {
-                ZodiacLinkOperation.Invoke();
+                ZodiacLinkClicked.Invoke();
             }
         }
 
         private void logoutButton_Click(object sender, EventArgs e)
         {
-            if (LogoutButtonOperation != null)
+            if (LogoutButtonClicked != null)
             {
-                LogoutButtonOperation.Invoke();
+                LogoutButtonClicked.Invoke();
             }
         }
     }

@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace FaceBook_Application_WForms
+namespace UI
 {
     public static class Logger
     {

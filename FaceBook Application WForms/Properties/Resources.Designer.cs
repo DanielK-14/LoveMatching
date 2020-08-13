@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FaceBook_Application_WForms.Properties {
+namespace UI.Properties {
     using System;
     
     

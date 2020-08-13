@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>FaceBook Application WForms.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,6 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>FaceBook Application WForms.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Facebook">
@@ -48,12 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppManager.cs" />
-    <Compile Include="AvailableFriends.cs" />
     <Compile Include="DataAnalyst.cs" />
-    <Compile Include="FormsManager.cs" />
-    <Compile Include="FormsManager.Designer.cs">
-      <DependentUpon>FormsManager.cs</DependentUpon>
-    </Compile>
     <Compile Include="Logger.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -75,16 +72,12 @@
     <Compile Include="UserInformation.Designer.cs">
       <DependentUpon>UserInformation.cs</DependentUpon>
     </Compile>
-    <Compile Include="ZodiacSignMatch.cs" />
-    <Compile Include="ZodiakSignForm.cs">
+    <Compile Include="ZodiacSignForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ZodiakSignForm.Designer.cs">
-      <DependentUpon>ZodiakSignForm.cs</DependentUpon>
+    <Compile Include="ZodiacSignForm.Designer.cs">
+      <DependentUpon>ZodiacSignForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="FormsManager.resx">
-      <DependentUpon>FormsManager.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -104,10 +97,12 @@
     <EmbeddedResource Include="UserInformation.resx">
       <DependentUpon>UserInformation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ZodiakSignForm.resx">
-      <DependentUpon>ZodiakSignForm.cs</DependentUpon>
+    <EmbeddedResource Include="ZodiacSignForm.resx">
+      <DependentUpon>ZodiacSignForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="FaceBook Application WForms.ruleset" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -117,6 +112,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Logic\Logic.csproj">
+      <Project>{5906ddec-4f4c-4389-b1c2-e3642e5b430d}</Project>
+      <Name>Logic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

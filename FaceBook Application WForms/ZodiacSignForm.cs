@@ -1,32 +1,49 @@
 ﻿using System;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
+using Logic;
 
-namespace FaceBook_Application_WForms
+namespace UI
 {
-    internal partial class ZodiakSignForm : Form
+    internal partial class ZodiacSignForm : Form
     {
-        internal delegate void BackButtonDelegate();
+        internal delegate void BackButtonEventHandler();
 
-        internal event BackButtonDelegate BackButtonOperation;
+        internal event BackButtonEventHandler BackButtonClicked;
 
         private readonly ZodiacSignMatch r_ZodiacMatch;
 
         private readonly User r_LoggedInUser;
 
-        internal ZodiakSignForm(User i_LoggedInUser)
+        internal ZodiacSignForm(User i_LoggedInUser)
         {
             r_LoggedInUser = i_LoggedInUser;
             r_ZodiacMatch = new ZodiacSignMatch(i_LoggedInUser.Birthday);
             InitializeComponent();
-            pictureBox1.LoadAsync(r_ZodiacMatch.PictureUrl);
+            try
+            {
+                pictureBox1.LoadAsync(r_ZodiacMatch.PictureUrl);
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("Could not load picture of zodiac sign.");
+            }
+
             userSignNameLabel.Text = Enum.GetName(typeof(ZodiacSignMatch.eZodiacSign), r_ZodiacMatch.Sign);
         }
 
         private void findButton_Click(object sender, EventArgs e)
         {
             ZodiacSignMatch bestMatch = r_ZodiacMatch.BestMatchedWithSign;
-            pictureBox2.LoadAsync(bestMatch.PictureUrl);
+            try
+            {
+                pictureBox2.LoadAsync(bestMatch.PictureUrl);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Could not load picture of zodiac sign.");
+            }
+
             matchSignNameLabel.Text = Enum.GetName(typeof(ZodiacSignMatch.eZodiacSign), bestMatch.Sign);
             findButton.Visible = false;
             pictureBox2.Visible = true;
@@ -38,9 +55,9 @@ namespace FaceBook_Application_WForms
 
         private void goBackButton_Click(object sender, EventArgs e)
         {
-            if (BackButtonOperation != null)
+            if (BackButtonClicked != null)
             {
-                BackButtonOperation.Invoke();
+                BackButtonClicked.Invoke();
             }
 
             findButton.Visible = true;
@@ -52,13 +69,20 @@ namespace FaceBook_Application_WForms
 
         private void shareButton_Click(object sender, EventArgs e)
         {
-            string textForPost = string.Format(
-                "Looking for {0} {1} {2} Anyone?",
-                r_ZodiacMatch.MatchSignName,
-                r_LoggedInUser.InterestedIn,
-                Environment.NewLine);
-            r_LoggedInUser.PostStatus(textForPost);
-            MessageBox.Show(string.Format("Status Posted! {0}{1}", Environment.NewLine, textForPost));
+            try
+            {
+                string textForPost = string.Format(
+                    "Looking for {0} {1} {2} Anyone?",
+                    r_ZodiacMatch.MatchSignName,
+                    r_LoggedInUser.InterestedIn,
+                    Environment.NewLine);
+                r_LoggedInUser.PostStatus(textForPost);
+                MessageBox.Show(string.Format("Status Posted! {0}{1}", Environment.NewLine, textForPost));
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("Could not share post.");
+            }
         }
     }
 }

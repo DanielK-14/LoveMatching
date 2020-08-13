@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 
-namespace FaceBook_Application_WForms
+namespace UI
 {
     internal partial class UserInformation : Form
     {
         private readonly User r_User;
-        private List<PictureBox> m_pictureBoxes;
+        private List<PictureBox> m_PictureBoxes;
 
-        internal delegate void BackButtonDelegate();
+        internal delegate void BackButtonEventHandler();
 
-        internal event BackButtonDelegate BackButtonOperation;
+        internal event BackButtonEventHandler BackButtonClicked;
 
         internal UserInformation(User i_User)
         {
@@ -23,11 +23,11 @@ namespace FaceBook_Application_WForms
 
         private void initPictureBoxes()
         {
-            m_pictureBoxes = new List<PictureBox>();
-            m_pictureBoxes.Add(pictureBox1);
-            m_pictureBoxes.Add(pictureBox2);
-            m_pictureBoxes.Add(pictureBox3);
-            m_pictureBoxes.Add(pictureBox4);
+            m_PictureBoxes = new List<PictureBox>();
+            m_PictureBoxes.Add(pictureBox1);
+            m_PictureBoxes.Add(pictureBox2);
+            m_PictureBoxes.Add(pictureBox3);
+            m_PictureBoxes.Add(pictureBox4);
             hidePhotos();
         }
 
@@ -39,25 +39,31 @@ namespace FaceBook_Application_WForms
 
         private void fetchUserInfo()
         {
-            profilePictureBox.LoadAsync(r_User.PictureLargeURL);
-            if (r_User.Cover != null)
-            {
-                coverPictureBox.LoadAsync(r_User.Cover.SourceURL);
-            }
-
             nameLabel.Text = r_User.Name;
             birthdayLabel.Text = r_User.Birthday;
             emailLabel.Text = r_User.Email;
+            profilePictureBox.LoadAsync(r_User.PictureLargeURL);
+            try
+            {
+                if (r_User.Cover != null)
+                {
+                    coverPictureBox.LoadAsync(r_User.Cover.SourceURL);
+                }
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("Could not get cover photo.");
+            }
         }
 
         private void fetchPhotos()
         {
-            IEnumerator<Photo> PhotosEnumerator = r_User.PhotosTaggedIn.GetEnumerator();
-            foreach (PictureBox pictureBox in m_pictureBoxes)
+            IEnumerator<Photo> photosEnumerator = r_User.PhotosTaggedIn.GetEnumerator();
+            foreach (PictureBox pictureBox in m_PictureBoxes)
             {
-                if (PhotosEnumerator.MoveNext())
+                if (photosEnumerator.MoveNext())
                 {
-                    pictureBox.LoadAsync(PhotosEnumerator.Current.PictureNormalURL);
+                    pictureBox.LoadAsync(photosEnumerator.Current.PictureNormalURL);
                     pictureBox.Visible = true;
                 }
                 else
@@ -69,7 +75,7 @@ namespace FaceBook_Application_WForms
 
         private void hidePhotos()
         {
-            foreach (PictureBox pictureBox in m_pictureBoxes)
+            foreach (PictureBox pictureBox in m_PictureBoxes)
             {
                 pictureBox.Visible = false;
             }
@@ -77,9 +83,9 @@ namespace FaceBook_Application_WForms
 
         private void backButton_Click(object sender, EventArgs e)
         {
-            if (BackButtonOperation != null)
+            if (BackButtonClicked != null)
             {
-                BackButtonOperation.Invoke();
+                BackButtonClicked.Invoke();
             }
         }
     }

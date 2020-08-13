@@ -1,6 +1,6 @@
-﻿namespace FaceBook_Application_WForms
+﻿namespace UI
 {
-    partial class ZodiakSignForm
+    partial class ZodiacSignForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ZodiakSignForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ZodiacSignForm));
             this.YouAreLabel = new System.Windows.Forms.Label();
             this.AndYouMachBestLabel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();

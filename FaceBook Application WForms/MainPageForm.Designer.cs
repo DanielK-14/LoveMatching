@@ -1,4 +1,4 @@
-﻿namespace FaceBook_Application_WForms
+﻿namespace UI
 {
     partial class MainPageForm
     {

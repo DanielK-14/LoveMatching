@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Text;
 using FacebookWrapper.ObjectModel;
 
-namespace FaceBook_Application_WForms
+namespace UI
 {
     internal static class DataAnalyst
     {
-        internal static LastButtonClicked s_ButtonClicked;
+        private static LastButtonClicked s_ButtonClicked;
 
         internal enum LastButtonClicked
         {
             Posts,
             Events,
-            Friends
+            Friends,
         }
 
         internal static LastButtonClicked ButtonClicked
