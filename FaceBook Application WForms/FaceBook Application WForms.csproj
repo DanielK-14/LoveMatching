@@ -49,9 +49,7 @@
   <ItemGroup>
     <Compile Include="AvailableFriends.cs" />
     <Compile Include="DataAnalyst.cs" />
-    <Compile Include="FormsManager.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="FormsManager.cs" />
     <Compile Include="FormsManager.Designer.cs">
       <DependentUpon>FormsManager.cs</DependentUpon>
     </Compile>
