@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using FacebookWrapper;
@@ -13,7 +8,7 @@ using FacebookWrapper.ObjectModel;
 
 namespace FaceBook_Application_WForms
 {
-    public class FormsManager
+    public class AppManager
     {
         private const string k_FileName = @"\AccessToken.txt";
         private MainPageForm m_MainForm;
@@ -40,14 +35,14 @@ namespace FaceBook_Application_WForms
                 }
 
                 m_CurrentShownForm = value;
-                if(m_CurrentShownForm != null)
+                if (m_CurrentShownForm != null)
                 {
                     m_CurrentShownForm.Show();
                 }
             }
         }
 
-        public FormsManager()
+        public AppManager()
         {
             m_AccessTokenFilePath = AppDomain.CurrentDomain.BaseDirectory + k_FileName;
             FacebookService.s_CollectionLimit = 200;
@@ -112,7 +107,7 @@ namespace FaceBook_Application_WForms
                     Environment.Exit(0);
                 }
 
-                m_LoggedInUser = loginForm.LogInInfo.LoggedInUser;    
+                m_LoggedInUser = loginForm.LogInInfo.LoggedInUser;
                 File.WriteAllText(m_AccessTokenFilePath, loginForm.LogInInfo.AccessToken);
             }
         }

@@ -1,6 +1,6 @@
 ﻿namespace FaceBook_Application_WForms
 {
-    partial class LoginForm
+    internal partial class LoginForm
     {
         /// <summary>
         /// Required designer variable.

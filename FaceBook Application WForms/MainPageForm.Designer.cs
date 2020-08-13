@@ -108,7 +108,7 @@
             this.postButton.TabIndex = 17;
             this.postButton.Text = "Post";
             this.postButton.UseVisualStyleBackColor = true;
-            this.postButton.Click += new System.EventHandler(this.postButton_Click);
+            this.postButton.Click += new System.EventHandler(this.PostButton_Click);
             // 
             // postTextBox
             // 
@@ -163,7 +163,7 @@
             this.showPostsButton.TabIndex = 25;
             this.showPostsButton.Text = "Show Posts";
             this.showPostsButton.UseVisualStyleBackColor = false;
-            this.showPostsButton.Click += new System.EventHandler(this.showPostsButton_Click);
+            this.showPostsButton.Click += new System.EventHandler(this.ShowPostsButton_Click);
             // 
             // showEventsButton
             // 
@@ -175,7 +175,7 @@
             this.showEventsButton.TabIndex = 26;
             this.showEventsButton.Text = "Show Events";
             this.showEventsButton.UseVisualStyleBackColor = false;
-            this.showEventsButton.Click += new System.EventHandler(this.showEventsButton_Click);
+            this.showEventsButton.Click += new System.EventHandler(this.ShowEventsButton_Click);
             // 
             // dataSelectedPictureBox
             // 
@@ -222,7 +222,7 @@
             this.showFriendsButton.TabIndex = 30;
             this.showFriendsButton.Text = "Show Friends";
             this.showFriendsButton.UseVisualStyleBackColor = false;
-            this.showFriendsButton.Click += new System.EventHandler(this.showFriendsButton_Click);
+            this.showFriendsButton.Click += new System.EventHandler(this.ShowFriendsButton_Click);
             // 
             // linkLabel2
             // 

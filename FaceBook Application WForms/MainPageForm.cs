@@ -6,12 +6,16 @@ using FacebookWrapper;
 
 namespace FaceBook_Application_WForms
 {
-    public partial class MainPageForm : Form
+    internal partial class MainPageForm : Form
     {
         internal delegate void LinkDelegate();
+
         internal event LinkDelegate ProfileLinkOperation;
+
         internal event LinkDelegate ZodiacLinkOperation;
+
         internal event LinkDelegate LogoutButtonOperation;
+
         internal readonly User r_LoggedInUser;
 
         public MainPageForm(User i_User)
@@ -38,6 +42,7 @@ namespace FaceBook_Application_WForms
                 {
                     comboBoxDecisionData.Items.Add(eventFSB.Name);
                 }
+
                 counter++;
             }
 
@@ -102,27 +107,27 @@ namespace FaceBook_Application_WForms
             }
         }
 
-        private void postButton_Click(object sender, EventArgs e)
+        private void PostButton_Click(object sender, EventArgs e)
         {
-            Status postNewStatus = r_LoggedInUser.PostStatus(postTextBox.Text);
+            r_LoggedInUser.PostStatus(postTextBox.Text);
             MessageBox.Show(string.Format("Status Posted! {0}{1}", Environment.NewLine, postTextBox.Text));
         }
 
-        private void showEventsButton_Click(object sender, EventArgs e)
+        private void ShowEventsButton_Click(object sender, EventArgs e)
         {
             cleanDataSelcetedComboBoxAndAnalyst();
             DataAnalyst.ButtonClicked = DataAnalyst.LastButtonClicked.Events;
             fetchEvents();
         }
 
-        private void showPostsButton_Click(object sender, EventArgs e)
+        private void ShowPostsButton_Click(object sender, EventArgs e)
         {
             cleanDataSelcetedComboBoxAndAnalyst();
             DataAnalyst.ButtonClicked = DataAnalyst.LastButtonClicked.Posts;
             fetchPosts();
         }
 
-        private void showFriendsButton_Click(object sender, EventArgs e)
+        private void ShowFriendsButton_Click(object sender, EventArgs e)
         {
             cleanDataSelcetedComboBoxAndAnalyst();
             DataAnalyst.ButtonClicked = DataAnalyst.LastButtonClicked.Friends;
