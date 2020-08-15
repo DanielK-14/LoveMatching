@@ -119,9 +119,10 @@ namespace UI
                 r_LoggedInUser.PostStatus(postTextBox.Text);
                 MessageBox.Show(string.Format("Status Posted! {0}{1}", Environment.NewLine, postTextBox.Text));
             }
-            catch(Exception)
+            catch(Exception ex)
             {
                 MessageBox.Show("Could not post.");
+                throw ex;
             }
         }
 

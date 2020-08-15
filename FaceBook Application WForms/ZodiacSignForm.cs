@@ -24,9 +24,10 @@ namespace UI
             {
                 pictureBox1.LoadAsync(r_ZodiacMatch.PictureUrl);
             }
-            catch(Exception)
+            catch(Exception ex)
             {
                 MessageBox.Show("Could not load picture of zodiac sign.");
+                throw ex;
             }
 
             userSignNameLabel.Text = Enum.GetName(typeof(ZodiacSignMatch.eZodiacSign), r_ZodiacMatch.Sign);
@@ -79,9 +80,10 @@ namespace UI
                 r_LoggedInUser.PostStatus(textForPost);
                 MessageBox.Show(string.Format("Status Posted! {0}{1}", Environment.NewLine, textForPost));
             }
-            catch(Exception)
+            catch(Exception ex)
             {
                 MessageBox.Show("Could not share post.");
+                throw ex;
             }
         }
     }

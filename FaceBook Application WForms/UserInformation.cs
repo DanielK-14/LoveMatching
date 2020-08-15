@@ -50,9 +50,10 @@ namespace UI
                     coverPictureBox.LoadAsync(r_User.Cover.SourceURL);
                 }
             }
-            catch(Exception)
+            catch(Exception ex)
             {
                 MessageBox.Show("Could not get cover photo.");
+                throw ex;
             }
         }
 
