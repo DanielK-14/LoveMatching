@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace UI
+namespace Logic
 {
     public static class Logger
     {
