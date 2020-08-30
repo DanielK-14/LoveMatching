@@ -21,14 +21,13 @@ namespace UI
 
         internal event LinkEventHandler LogoutButtonClicked;
 
-        private readonly User r_LoggedInUser;
+        private readonly LoggedInUserInfo r_LoggedInUser;
 
-        public MainPageForm(User i_User)
+        public MainPageForm(LoggedInUserInfo i_User)
         {
             InitializeComponent();
             FacebookService.s_CollectionLimit = 200;
             FacebookService.s_FbApiVersion = 2.8f;
-
             r_LoggedInUser = i_User;
             profilePictureBox.LoadAsync(r_LoggedInUser.PictureLargeURL);
             fullNameUser.Text = r_LoggedInUser.Name;

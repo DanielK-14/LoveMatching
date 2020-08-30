@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
     <Compile Include="AvailableFriends.cs" />
+    <Compile Include="LoggedInUserInfo.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="ZodiacSignMatch.cs" />
   </ItemGroup>

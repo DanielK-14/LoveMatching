@@ -11,11 +11,12 @@ namespace UI
 
         internal event BackButtonEventHandler BackButtonClicked;
 
+        /// Facade Pattern
         private readonly ZodiacSignMatch r_ZodiacMatch;
 
-        private readonly User r_LoggedInUser;
+        private readonly LoggedInUserInfo r_LoggedInUser;
 
-        internal ZodiacSignForm(User i_LoggedInUser)
+        internal ZodiacSignForm(LoggedInUserInfo i_LoggedInUser)
         {
             r_LoggedInUser = i_LoggedInUser;
             r_ZodiacMatch = new ZodiacSignMatch(i_LoggedInUser.Birthday);

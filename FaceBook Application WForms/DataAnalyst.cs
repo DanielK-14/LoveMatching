@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 using FacebookWrapper.ObjectModel;
+using Logic;
 
 namespace UI
 {
     internal static class DataAnalyst
     {
-        private static LastButtonClicked s_ButtonClicked;
-
         internal enum LastButtonClicked
         {
             Posts,
@@ -16,13 +15,9 @@ namespace UI
             Friends,
         }
 
-        internal static LastButtonClicked ButtonClicked
-        {
-            get { return s_ButtonClicked; }
-            set { s_ButtonClicked = value; }
-        }
+        internal static LastButtonClicked ButtonClicked { get; set; }
 
-        internal static List<string> AnalyzeData(int i_Index, User i_User)
+        internal static List<string> AnalyzeData(int i_Index, LoggedInUserInfo i_User)
         {
             List<string> analayzedData = new List<string>();
             string pictureUrl, infoString;

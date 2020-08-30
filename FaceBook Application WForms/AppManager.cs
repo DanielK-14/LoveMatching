@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using FacebookWrapper;
@@ -14,7 +13,7 @@ namespace UI
         private readonly AppSettings r_AppSettings;
         private MainPageForm m_MainForm;
         private UserInformation m_UserInformation;
-        private User m_LoggedInUser;
+        private LoggedInUserInfo m_LoggedInUser;
         private ZodiacSignForm m_ZodiacSignForm;
         private Form m_CurrentShownForm;
 
@@ -69,6 +68,7 @@ namespace UI
         {
             try
             {
+                ///Abs or Method Factory Pattern
                 m_MainForm = new MainPageForm(m_LoggedInUser);
                 m_UserInformation = new UserInformation(m_LoggedInUser);
                 m_ZodiacSignForm = new ZodiacSignForm(m_LoggedInUser);
@@ -97,7 +97,7 @@ namespace UI
             string accessToken = r_AppSettings.LastAccessToken;
             if (accessToken != null)
             {
-                m_LoggedInUser = FacebookService.Connect(accessToken).LoggedInUser;
+                m_LoggedInUser = new LoggedInUserInfo(accessToken);
             }
             else
             {
@@ -107,7 +107,7 @@ namespace UI
                     Environment.Exit(0);
                 }
 
-                m_LoggedInUser = loginForm.LogInInfo.LoggedInUser;
+                m_LoggedInUser = new LoggedInUserInfo(loginForm.LogInInfo.LoggedInUser);
                 r_AppSettings.LastAccessToken = loginForm.LogInInfo.AccessToken;
                 r_AppSettings.SaveToFile();
             }

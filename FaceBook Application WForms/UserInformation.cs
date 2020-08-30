@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
+using Logic;
 
 namespace UI
 {
     internal partial class UserInformation : Form
     {
-        private readonly User r_User;
+        private readonly LoggedInUserInfo r_User;
         private List<PictureBox> m_PictureBoxes;
 
         internal delegate void BackButtonEventHandler();
 
         internal event BackButtonEventHandler BackButtonClicked;
 
-        internal UserInformation(User i_User)
+        internal UserInformation(LoggedInUserInfo i_User)
         {
             InitializeComponent();
             initPictureBoxes();

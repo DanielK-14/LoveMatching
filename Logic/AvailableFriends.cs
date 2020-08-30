@@ -5,12 +5,12 @@ namespace Logic
 {
     public static class AvailableFriends
     {
-        public static List<User> GetAvailabeFriends(User i_User)
+        public static List<User> GetAvailabeFriends(LoggedInUserInfo i_User)
         {
             List<User> availableFriends = new List<User>();
             foreach (User friend in i_User.Friends)
             {
-                if (usersCanBeMatched(friend, i_User))
+                if (usersCanBeMatched(friend, i_User.LoggedUser))
                 {
                     availableFriends.Add(friend);
                 }
@@ -25,10 +25,10 @@ namespace Logic
             if (i_MainUser.InterestedIn != null && i_MainUser.Gender != null && i_Friend.InterestedIn != null && i_Friend.Gender != null)
             {
                 bool userMightBeInterested = userIsInterestedIn(i_Friend.Gender.Value, i_MainUser);
-                bool friendMightNeInterested = userIsInterestedIn(i_MainUser.Gender.Value, i_Friend);
+                bool friendMightBeInterested = userIsInterestedIn(i_MainUser.Gender.Value, i_Friend);
                 bool friendIsSingle = i_Friend.RelationshipStatus != User.eRelationshipStatus.Married && i_Friend.RelationshipStatus != User.eRelationshipStatus.Enagaged && i_Friend.RelationshipStatus != User.eRelationshipStatus.InARelationship;
 
-                isAvailable = userMightBeInterested && friendMightNeInterested && friendIsSingle;
+                isAvailable = userMightBeInterested && friendMightBeInterested && friendIsSingle;
             }
 
             return isAvailable;

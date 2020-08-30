@@ -46,6 +46,7 @@ namespace Logic
 
         public ZodiacSignMatch(string i_Birthday)
         {
+            ///Adapter Pattern
             initUserZodiacSign(i_Birthday);
             PictureUrl = sr_ImagesUrl[Sign];
         }
