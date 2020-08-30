@@ -8,7 +8,7 @@ namespace Logic
         public static List<User> GetAvailabeFriends(User i_User)
         {
             List<User> availableFriends = new List<User>();
-            foreach(User friend in i_User.Friends)
+            foreach (User friend in i_User.Friends)
             {
                 if (usersCanBeMatched(friend, i_User))
                 {

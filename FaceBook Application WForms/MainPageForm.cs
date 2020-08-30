@@ -37,9 +37,9 @@ namespace UI
         private void fetchEvents()
         {
             int counter = 0;
-            foreach(Event eventFSB in r_LoggedInUser.Events)
+            foreach (Event eventFSB in r_LoggedInUser.Events)
             {
-                if(counter == r_MaximumNumberOfEventsToShow)
+                if (counter == r_MaximumNumberOfEventsToShow)
                 {
                     break;
                 }
@@ -62,7 +62,7 @@ namespace UI
             int counter = 0;
             foreach (Post post in r_LoggedInUser.Posts)
             {
-                if(counter == r_MaximumNumberOfPostsToShow)
+                if (counter == r_MaximumNumberOfPostsToShow)
                 {
                     break;
                 }
@@ -96,7 +96,7 @@ namespace UI
 
             foreach (User friend in r_LoggedInUser.Friends)
             {
-                if(counter == r_MaximumNumberOfFriendsToShow)
+                if (counter == r_MaximumNumberOfFriendsToShow)
                 {
                     break;
                 }
@@ -119,7 +119,7 @@ namespace UI
                 r_LoggedInUser.PostStatus(postTextBox.Text);
                 MessageBox.Show(string.Format("Status Posted! {0}{1}", Environment.NewLine, postTextBox.Text));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Could not post.");
                 throw ex;
