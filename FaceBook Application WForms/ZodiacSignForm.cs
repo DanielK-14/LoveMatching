@@ -46,7 +46,7 @@ namespace UI
                 MessageBox.Show("Could not load picture of zodiac sign.");
             }
 
-            matchSignNameLabel.Text = Enum.GetName(typeof(ZodiacSign.eZodiacSign), r_ZodiacMatch.BestMatchedSign.Name);
+            matchSignNameLabel.Text = r_ZodiacMatch.BestMatchedSign.Name;
             findButton.Visible = false;
             pictureBox2.Visible = true;
             matchSignNameLabel.Visible = true;

@@ -10,9 +10,19 @@ namespace UI
     {
         private ZodiacSign m_RealZodiacSign;
 
-        public string PictureUrl { get; private set; }
+        public string PictureUrl {
+            get
+            {
+                return m_RealZodiacSign.PictureUrl;
+            }
+         }
 
-        public string Name { get; private set; }
+        public string Name { 
+            get
+            {
+                return Enum.GetName(typeof(ZodiacSign.eZodiacSign), m_RealZodiacSign.Sign);
+            }
+        }
 
         public ZodiacSignAdapter BestMatchedSign { get; private set; }
 
