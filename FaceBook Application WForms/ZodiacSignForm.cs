@@ -12,14 +12,14 @@ namespace UI
         internal event BackButtonEventHandler BackButtonClicked;
 
         /// Facade Pattern
-        private readonly ZodiacSignMatch r_ZodiacMatch;
+        private readonly ZodiacSignAdapter r_ZodiacMatch;
 
         private readonly LoggedInUserInfo r_LoggedInUser;
 
         internal ZodiacSignForm(LoggedInUserInfo i_LoggedInUser)
         {
             r_LoggedInUser = i_LoggedInUser;
-            r_ZodiacMatch = new ZodiacSignMatch(i_LoggedInUser.Birthday);
+            r_ZodiacMatch = new ZodiacSignAdapter(i_LoggedInUser.Birthday);
             InitializeComponent();
             try
             {
@@ -31,22 +31,22 @@ namespace UI
                 throw ex;
             }
 
-            userSignNameLabel.Text = Enum.GetName(typeof(ZodiacSignMatch.eZodiacSign), r_ZodiacMatch.Sign);
+            userSignNameLabel.Text = r_ZodiacMatch.Name;
         }
 
         private void findButton_Click(object sender, EventArgs e)
         {
-            ZodiacSignMatch bestMatch = r_ZodiacMatch.BestMatchedWithSign;
+            r_ZodiacMatch.UpdateBestMatchedSign();
             try
             {
-                pictureBox2.LoadAsync(bestMatch.PictureUrl);
+                pictureBox2.LoadAsync(r_ZodiacMatch.BestMatchedSign.PictureUrl);
             }
             catch (Exception)
             {
                 MessageBox.Show("Could not load picture of zodiac sign.");
             }
 
-            matchSignNameLabel.Text = Enum.GetName(typeof(ZodiacSignMatch.eZodiacSign), bestMatch.Sign);
+            matchSignNameLabel.Text = Enum.GetName(typeof(ZodiacSign.eZodiacSign), r_ZodiacMatch.BestMatchedSign.Name);
             findButton.Visible = false;
             pictureBox2.Visible = true;
             matchSignNameLabel.Visible = true;
@@ -75,7 +75,7 @@ namespace UI
             {
                 string textForPost = string.Format(
                     "Looking for {0} {1} {2} Anyone?",
-                    r_ZodiacMatch.MatchSignName,
+                    r_ZodiacMatch.BestMatchedSign.Name,
                     r_LoggedInUser.InterestedIn,
                     Environment.NewLine);
                 r_LoggedInUser.PostStatus(textForPost);
