@@ -21,9 +21,9 @@ namespace UI
 
         internal event LinkEventHandler LogoutButtonClicked;
 
-        private readonly LoggedInUserInfo r_LoggedInUser;
+        private readonly User r_LoggedInUser;
 
-        public MainPageForm(LoggedInUserInfo i_User)
+        public MainPageForm(User i_User)
         {
             InitializeComponent();
             FacebookService.s_CollectionLimit = 200;

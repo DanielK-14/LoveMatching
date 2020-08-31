@@ -5,12 +5,12 @@ namespace Logic
 {
     public static class AvailableFriends
     {
-        public static List<User> GetAvailabeFriends(LoggedInUserInfo i_User)
+        public static List<User> GetAvailabeFriends(User i_User)
         {
             List<User> availableFriends = new List<User>();
             foreach (User friend in i_User.Friends)
             {
-                if (usersCanBeMatched(friend, i_User.LoggedUser))
+                if (usersCanBeMatched(friend, i_User))
                 {
                     availableFriends.Add(friend);
                 }

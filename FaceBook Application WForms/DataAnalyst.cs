@@ -17,7 +17,7 @@ namespace UI
 
         internal static LastButtonClicked ButtonClicked { get; set; }
 
-        internal static List<string> AnalyzeData(int i_Index, LoggedInUserInfo i_User)
+        internal static List<string> AnalyzeData(int i_Index, User i_User)
         {
             List<string> analayzedData = new List<string>();
             string pictureUrl, infoString;
