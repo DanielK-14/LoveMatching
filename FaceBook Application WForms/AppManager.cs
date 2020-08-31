@@ -3,12 +3,11 @@ using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using FacebookWrapper;
-using FacebookWrapper.ObjectModel;
 using Logic;
 
 namespace UI
 {
-    public class AppManager
+    public class AppManager ///Facade Pattern ***(1)***
     {
         private readonly AppSettings r_AppSettings;
         private MainPageForm m_MainForm;
