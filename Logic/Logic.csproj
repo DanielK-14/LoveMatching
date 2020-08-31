@@ -39,7 +39,7 @@
     <Compile Include="AvailableFriends.cs" />
     <Compile Include="LoggedInUserInfo.cs" />
     <Compile Include="Logger.cs" />
-    <Compile Include="ZodiacSignMatch.cs" />
+    <Compile Include="ZodiacSign.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Facebook">

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 
 namespace Logic
 {
-    public class ZodiacSignMatch
+    public class ZodiacSign
     {
         private static Dictionary<eZodiacSign, string> sr_ImagesUrl;
 
@@ -11,16 +12,12 @@ namespace Logic
 
         public string PictureUrl { get; private set; }
 
-        public string MatchSignName { get; private set; }
-
-        public ZodiacSignMatch BestMatchedWithSign
+        static public ZodiacSign GetRandomSign()
         {
-            get
-            {
-                eZodiacSign matchedSign = pickMatchedSign();
-                MatchSignName = Enum.GetName(typeof(eZodiacSign), matchedSign);
-                return new ZodiacSignMatch(matchedSign);
-            }
+            Random random = new Random();
+            int fateSelection = random.Next(0, Enum.GetNames(typeof(eZodiacSign)).Length);
+            eZodiacSign matchedSign = (eZodiacSign)fateSelection;
+            return new ZodiacSign(matchedSign);
         }
 
         public enum eZodiacSign
@@ -39,19 +36,19 @@ namespace Logic
             Capricorn,
         }
 
-        static ZodiacSignMatch()
+        static ZodiacSign()
         {
             initZodiacSignsImagesUrlList();
         }
 
-        public ZodiacSignMatch(string i_Birthday)
+        public ZodiacSign(int i_Month, int i_Day)
         {
             ///Adapter Pattern
-            initUserZodiacSign(i_Birthday);
+            initUserZodiacSign(i_Month, i_Day);
             PictureUrl = sr_ImagesUrl[Sign];
         }
 
-        private ZodiacSignMatch(eZodiacSign i_Sign)
+        private ZodiacSign(eZodiacSign i_Sign)
         {
             Sign = i_Sign;
             PictureUrl = sr_ImagesUrl[Sign];
@@ -75,58 +72,48 @@ namespace Logic
             sr_ImagesUrl[eZodiacSign.Capricorn] = "https://www.astrology-zodiac-signs.com/images/capricorn.jpg";
         }
 
-        private void initUserZodiacSign(string i_Birthday)
+        private void initUserZodiacSign(int i_Month, int i_Day)
         {
-            string[] dateFormat = i_Birthday.Split('/');
-            int month = int.Parse(dateFormat[0]);
-            int day = int.Parse(dateFormat[1]);
-
-            switch (month)
+            switch (i_Month)
             {
                 case 1:
-                    Sign = day >= 20 ? eZodiacSign.Aquarius : eZodiacSign.Capricorn;
+                    Sign = i_Day >= 20 ? eZodiacSign.Aquarius : eZodiacSign.Capricorn;
                     break;
                 case 2:
-                    Sign = day >= 19 ? eZodiacSign.Pisces : eZodiacSign.Capricorn;
+                    Sign = i_Day >= 19 ? eZodiacSign.Pisces : eZodiacSign.Capricorn;
                     break;
                 case 3:
-                    Sign = day >= 21 ? eZodiacSign.Aries : eZodiacSign.Pisces;
+                    Sign = i_Day >= 21 ? eZodiacSign.Aries : eZodiacSign.Pisces;
                     break;
                 case 4:
-                    Sign = day >= 20 ? eZodiacSign.Taurus : eZodiacSign.Aries;
+                    Sign = i_Day >= 20 ? eZodiacSign.Taurus : eZodiacSign.Aries;
                     break;
                 case 5:
-                    Sign = day >= 21 ? eZodiacSign.Gemini : eZodiacSign.Taurus;
+                    Sign = i_Day >= 21 ? eZodiacSign.Gemini : eZodiacSign.Taurus;
                     break;
                 case 6:
-                    Sign = day >= 21 ? eZodiacSign.Cancer : eZodiacSign.Gemini;
+                    Sign = i_Day >= 21 ? eZodiacSign.Cancer : eZodiacSign.Gemini;
                     break;
                 case 7:
-                    Sign = day >= 23 ? eZodiacSign.Leo : eZodiacSign.Cancer;
+                    Sign = i_Day >= 23 ? eZodiacSign.Leo : eZodiacSign.Cancer;
                     break;
                 case 8:
-                    Sign = day >= 23 ? eZodiacSign.Virgo : eZodiacSign.Leo;
+                    Sign = i_Day >= 23 ? eZodiacSign.Virgo : eZodiacSign.Leo;
                     break;
                 case 9:
-                    Sign = day >= 23 ? eZodiacSign.Libra : eZodiacSign.Virgo;
+                    Sign = i_Day >= 23 ? eZodiacSign.Libra : eZodiacSign.Virgo;
                     break;
                 case 10:
-                    Sign = day >= 23 ? eZodiacSign.Scorpio : eZodiacSign.Libra;
+                    Sign = i_Day >= 23 ? eZodiacSign.Scorpio : eZodiacSign.Libra;
                     break;
                 case 11:
-                    Sign = day >= 22 ? eZodiacSign.Sagittarius : eZodiacSign.Scorpio;
+                    Sign = i_Day >= 22 ? eZodiacSign.Sagittarius : eZodiacSign.Scorpio;
                     break;
                 case 12:
-                    Sign = day >= 22 ? eZodiacSign.Capricorn : eZodiacSign.Sagittarius;
+                    Sign = i_Day >= 22 ? eZodiacSign.Capricorn : eZodiacSign.Sagittarius;
                     break;
             }
         }
 
-        private eZodiacSign pickMatchedSign()
-        {
-            Random random = new Random();
-            int fateSelection = random.Next(0, Enum.GetNames(typeof(eZodiacSign)).Length);
-            return (eZodiacSign)fateSelection;
-        }
     }
 }
