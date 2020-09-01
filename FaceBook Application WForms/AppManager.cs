@@ -8,16 +8,51 @@ using Logic;
 
 namespace UI
 {
-    public class AppManager ///Facade Pattern ***(1)***
+    /// <summary>
+    /// Singelton Pattern
+    /// AppManger class is accessible to all.
+    /// There is only one instance of itself created.
+    /// </summary>
+    public sealed class AppManager
     {
         private readonly AppSettings r_AppSettings;
-        private MainPageForm m_MainForm;
-        private UserInformation m_UserInformation;
         private User m_LoggedInUser;
-        private ZodiacSignForm m_ZodiacSignForm;
         private Form m_CurrentShownForm;
+        private WinFormAppPages m_PagesFactory;
 
-        private Form CurrentShownForm
+        public static AppManager s_Instance = null;
+        private static readonly object sr_CreationalLockContext = new object();
+
+        private AppManager()
+        {
+            r_AppSettings = AppSettings.LoadFromFile();
+            FacebookService.s_CollectionLimit = 200;
+            FacebookService.s_FbApiVersion = 2.8f;
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.ThreadException += new ThreadExceptionEventHandler(MyCommonExceptionHandlingMethod);
+        }
+
+        public static AppManager GetInstance
+        {
+            get
+            {
+                if(s_Instance == null)
+                {
+                    lock(sr_CreationalLockContext)
+                    {
+                        if(s_Instance == null)
+                        {
+                            s_Instance = new AppManager();
+                        }
+                    }
+                }
+
+                return s_Instance;
+            }
+        }
+
+        internal Form CurrentShownForm
         {
             get { return m_CurrentShownForm; }
 
@@ -42,14 +77,9 @@ namespace UI
             }
         }
 
-        public AppManager()
+        internal AppSettings Settings
         {
-            r_AppSettings = AppSettings.LoadFromFile();
-            FacebookService.s_CollectionLimit = 200;
-            FacebookService.s_FbApiVersion = 2.8f;
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.ThreadException += new ThreadExceptionEventHandler(MyCommonExceptionHandlingMethod);
+            get { return r_AppSettings; }
         }
 
         private static void MyCommonExceptionHandlingMethod(object sender, ThreadExceptionEventArgs i_ThreadException)
@@ -68,28 +98,32 @@ namespace UI
         {
             try
             {
-                ///Abs or Method Factory Pattern
-                m_MainForm = new MainPageForm(m_LoggedInUser);
-                m_UserInformation = new UserInformation(m_LoggedInUser);
-                m_ZodiacSignForm = new ZodiacSignForm(m_LoggedInUser);
+                m_PagesFactory = new WinFormAppPages(m_LoggedInUser);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
 
-            m_MainForm.StartPosition = FormStartPosition.Manual;
-            m_UserInformation.StartPosition = FormStartPosition.Manual;
-            m_ZodiacSignForm.StartPosition = FormStartPosition.Manual;
-            m_MainForm.FormClosing += endApplication;
-            m_MainForm.ProfileLinkClicked += switchToUserInformation;
-            m_MainForm.ZodiacLinkClicked += switchToZodiacForm;
-            m_MainForm.LogoutButtonClicked += logout;
-            m_UserInformation.FormClosing += endApplication;
-            m_UserInformation.BackButtonClicked += switchToMainForm;
-            m_ZodiacSignForm.FormClosing += endApplication;
-            m_ZodiacSignForm.BackButtonClicked += switchToMainForm;
-            CurrentShownForm = m_MainForm;
+            foreach (Form pageForm in m_PagesFactory.AppPages)
+            {
+                pageForm.StartPosition = FormStartPosition.Manual;
+                pageForm.FormClosing += endApplication;
+            }
+
+            MainPageForm mainPage = m_PagesFactory.AppPages[0] as MainPageForm;
+            UserInformation userInformationPage = m_PagesFactory.AppPages[1] as UserInformation;
+            ZodiacSignForm zodiacPage = m_PagesFactory.AppPages[2] as ZodiacSignForm;
+
+            mainPage.ProfileLinkClicked += switchToUserInformation;
+            mainPage.ZodiacLinkClicked += switchToZodiacForm;
+            mainPage.LogoutButtonClicked += logout;
+
+            userInformationPage.BackButtonClicked += switchToMainForm;
+
+            zodiacPage.BackButtonClicked += switchToMainForm;
+
+            CurrentShownForm = mainPage;
         }
 
         private void login()
@@ -113,34 +147,33 @@ namespace UI
             }
         }
 
-        private void logout()
+        internal void switchToUserInformation()
         {
-            CurrentShownForm = null;
-            r_AppSettings.LastAccessToken = null;
-            r_AppSettings.SaveToFile();
-            login();
-            initAllFormsAndStart();
-        }
-
-        private void switchToUserInformation()
-        {
-            CurrentShownForm = m_UserInformation;
-            m_UserInformation.fetchOnLoad();
+            CurrentShownForm = m_PagesFactory.AppPages[1];
         }
 
         private void switchToMainForm()
         {
-            CurrentShownForm = m_MainForm;
+            CurrentShownForm = m_PagesFactory.AppPages[0];
         }
 
         private void switchToZodiacForm()
         {
-            CurrentShownForm = m_ZodiacSignForm;
+            CurrentShownForm = m_PagesFactory.AppPages[2];
         }
 
         private void endApplication(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        internal void logout()
+        {
+            CurrentShownForm = null;
+            Settings.LastAccessToken = null;
+            Settings.SaveToFile();
+            login();
+            initAllFormsAndStart();
         }
     }
 }
