@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
-using FacebookWrapper;
 using Logic;
 
 namespace UI
 {
-    internal partial class MainPageForm : Form
+    public partial class MainPageForm : Form
     {
         private readonly int r_MaximumNumberOfFriendsToShow = 10;
         private readonly int r_MaximumNumberOfPostsToShow = 15;
@@ -26,8 +25,6 @@ namespace UI
         public MainPageForm(User i_User)
         {
             InitializeComponent();
-            FacebookService.s_CollectionLimit = 200;
-            FacebookService.s_FbApiVersion = 2.8f;
             r_LoggedInUser = i_User;
             profilePictureBox.LoadAsync(r_LoggedInUser.PictureLargeURL);
             fullNameUser.Text = r_LoggedInUser.Name;

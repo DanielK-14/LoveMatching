@@ -31,10 +31,11 @@ namespace UI
             hidePhotos();
         }
 
-        internal void fetchOnLoad()
+        internal new void Show()
         {
             fetchUserInfo();
             fetchPhotos();
+            base.Show();
         }
 
         private void fetchUserInfo()

@@ -10,11 +10,8 @@ namespace UI
         [STAThread]
         public static void Main()
         {
-            AppManager.Run();
-            /*
-            AppManager windowsApplication = new AppManager();
+            AppManager windowsApplication = AppManager.GetInstance;
             windowsApplication.Run();
-            */
         }
     }
 }
