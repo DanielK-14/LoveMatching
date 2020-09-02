@@ -7,13 +7,12 @@ namespace UI
 {
     internal partial class ZodiacSignForm : Form
     {
-        internal delegate void BackButtonEventHandler();
-
-        internal event BackButtonEventHandler BackButtonClicked;
 
         private readonly ZodiacSignAdapter r_ZodiacMatch;
 
         private readonly User r_LoggedInUser;
+
+        private readonly AppManager r_appManager = AppManager.GetInstance;
 
         internal ZodiacSignForm(User i_LoggedInUser)
         {
@@ -56,11 +55,7 @@ namespace UI
 
         private void goBackButton_Click(object sender, EventArgs e)
         {
-            if (BackButtonClicked != null)
-            {
-                BackButtonClicked.Invoke();
-            }
-
+            r_appManager.Back();
             findButton.Visible = true;
             pictureBox2.Visible = false;
             matchSignNameLabel.Visible = false;

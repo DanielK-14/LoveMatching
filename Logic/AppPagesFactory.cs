@@ -13,7 +13,7 @@ namespace Logic
     {
         protected List<T> m_Pages = new List<T>(); 
 
-        public AppPagesFactory()
+        protected AppPagesFactory()
         {
             CreatePages();
         }

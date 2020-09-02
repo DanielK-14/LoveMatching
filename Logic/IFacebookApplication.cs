@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Logic
 {
-    interface IFacebookApplication
+    public interface IFacebookApplication
     {
         void Run();
 

@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using FacebookWrapper;
@@ -13,12 +16,15 @@ namespace UI
     /// AppManger class is accessible to all.
     /// There is only one instance of itself created.
     /// </summary>
-    public sealed class AppManager
+    ///
+
+    public sealed class AppManager : IFacebookApplication
     {
         private readonly AppSettings r_AppSettings;
         private User m_LoggedInUser;
         private Form m_CurrentShownForm;
         private WinFormAppPagesCreator m_PagesFactory;
+        private readonly Stack<Form> r_PagesStack = new Stack<Form>();
 
         public static AppManager s_Instance = null;
         private static readonly object sr_CreationalLockContext = new object();
@@ -89,7 +95,7 @@ namespace UI
 
         public void Run()
         {
-            login();
+            Login();
             initAllFormsAndStart();
             Application.Run();
         }
@@ -111,22 +117,18 @@ namespace UI
                 pageForm.FormClosing += endApplication;
             }
 
-            MainPageForm mainPage = m_PagesFactory.AppPages[0] as MainPageForm;
-            UserInformation userInformationPage = m_PagesFactory.AppPages[1] as UserInformation;
-            ZodiacSignForm zodiacPage = m_PagesFactory.AppPages[2] as ZodiacSignForm;
+            Form mainPage = m_PagesFactory.AppPages[0];
+            Form userInformationPage = m_PagesFactory.AppPages[1];
+            Form zodiacPage = m_PagesFactory.AppPages[2];
 
-            mainPage.ProfileLinkClicked += switchToUserInformation;
-            mainPage.ZodiacLinkClicked += switchToZodiacForm;
-            mainPage.LogoutButtonClicked += logout;
-
-            userInformationPage.BackButtonClicked += switchToMainForm;
-
-            zodiacPage.BackButtonClicked += switchToMainForm;
-
+           // mainPage.ProfileLinkClicked += switchToUserInformation;
+           // mainPage.ZodiacLinkClicked += switchToZodiacForm;
+           // mainPage.LogoutButtonClicked += logout;
+           // userInformationPage.BackButtonClicked += switchToMainForm;
             CurrentShownForm = mainPage;
         }
 
-        private void login()
+        public void Login()
         {
             string accessToken = r_AppSettings.LastAccessToken;
             if (accessToken != null)
@@ -147,19 +149,23 @@ namespace UI
             }
         }
 
-        internal void switchToUserInformation()
+        public void Back()
         {
-            CurrentShownForm = m_PagesFactory.AppPages[1];
+            if (r_PagesStack.Count == 1)
+            {
+                r_PagesStack.Pop();
+                CurrentShownForm = r_PagesStack.Peek();
+            }
+            else
+            {
+                Environment.Exit(0);
+            }
         }
 
-        private void switchToMainForm()
+        public void NextPage(Form i_PageToShow)
         {
-            CurrentShownForm = m_PagesFactory.AppPages[0];
-        }
-
-        private void switchToZodiacForm()
-        {
-            CurrentShownForm = m_PagesFactory.AppPages[2];
+            r_PagesStack.Push(i_PageToShow);
+            CurrentShownForm = i_PageToShow;
         }
 
         private void endApplication(object sender, System.ComponentModel.CancelEventArgs e)
@@ -167,12 +173,12 @@ namespace UI
             Environment.Exit(0);
         }
 
-        internal void logout()
+        public void Logout()
         {
             CurrentShownForm = null;
             Settings.LastAccessToken = null;
             Settings.SaveToFile();
-            login();
+            Login();
             initAllFormsAndStart();
         }
     }
