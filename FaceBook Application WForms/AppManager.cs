@@ -8,16 +8,16 @@ using Logic;
 
 namespace UI
 {
-    public class AppManager ///Facade Pattern ***(1)***
+    public static class AppManager ///Facade Pattern ***(1)***
     {
-        private readonly AppSettings r_AppSettings;
-        private MainPageForm m_MainForm;
-        private UserInformation m_UserInformation;
-        private User m_LoggedInUser;
-        private ZodiacSignForm m_ZodiacSignForm;
-        private Form m_CurrentShownForm;
+        private static readonly AppSettings r_AppSettings;
+        private static MainPageForm m_MainForm;
+        private static UserInformation m_UserInformation;
+        private static User m_LoggedInUser;
+        private static ZodiacSignForm m_ZodiacSignForm;
+        private static Form m_CurrentShownForm;
 
-        private Form CurrentShownForm
+        private static Form CurrentShownForm
         {
             get { return m_CurrentShownForm; }
 
@@ -42,7 +42,7 @@ namespace UI
             }
         }
 
-        public AppManager()
+        /*public*/static AppManager()
         {
             r_AppSettings = AppSettings.LoadFromFile();
             FacebookService.s_CollectionLimit = 200;
@@ -57,14 +57,14 @@ namespace UI
             Logger.WriteException(i_ThreadException.Exception.Message);
         }
 
-        public void Run()
+        public static void Run()
         {
             login();
             initAllFormsAndStart();
             Application.Run();
         }
 
-        private void initAllFormsAndStart()
+        private static void initAllFormsAndStart()
         {
             try
             {
@@ -92,7 +92,7 @@ namespace UI
             CurrentShownForm = m_MainForm;
         }
 
-        private void login()
+        private static void login()
         {
             string accessToken = r_AppSettings.LastAccessToken;
             if (accessToken != null)
@@ -113,7 +113,7 @@ namespace UI
             }
         }
 
-        private void logout()
+        private static void logout()
         {
             CurrentShownForm = null;
             r_AppSettings.LastAccessToken = null;
@@ -122,23 +122,23 @@ namespace UI
             initAllFormsAndStart();
         }
 
-        private void switchToUserInformation()
+        private static void switchToUserInformation()
         {
             CurrentShownForm = m_UserInformation;
             m_UserInformation.fetchOnLoad();
         }
 
-        private void switchToMainForm()
+        private static void switchToMainForm()
         {
             CurrentShownForm = m_MainForm;
         }
 
-        private void switchToZodiacForm()
+        private static void switchToZodiacForm()
         {
             CurrentShownForm = m_ZodiacSignForm;
         }
 
-        private void endApplication(object sender, System.ComponentModel.CancelEventArgs e)
+        private static void endApplication(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Environment.Exit(0);
         }

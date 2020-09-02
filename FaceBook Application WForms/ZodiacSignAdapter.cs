@@ -17,7 +17,7 @@ namespace UI
             }
          }
 
-        public string Name { 
+        public string Name {
             get
             {
                 return Enum.GetName(typeof(ZodiacSign.eZodiacSign), m_RealZodiacSign.Sign);
@@ -45,7 +45,5 @@ namespace UI
         {
             BestMatchedSign = new ZodiacSignAdapter(ZodiacSign.GetRandomSign());
         }
-
-
     }
 }
