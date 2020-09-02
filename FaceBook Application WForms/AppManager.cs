@@ -23,6 +23,7 @@ namespace UI
         private readonly AppSettings r_AppSettings;
         private User m_LoggedInUser;
         private Form m_CurrentShownForm;
+        private Dictionary<string, Form> m_FormPagesDictionary = new Dictionary<string, Form>();
         private WinFormAppPagesCreator m_PagesFactory;
         private readonly Stack<Form> r_PagesStack = new Stack<Form>();
 
@@ -102,30 +103,21 @@ namespace UI
 
         private void initAllFormsAndStart()
         {
-            try
-            {
-                m_PagesFactory = new WinFormAppPagesCreator(m_LoggedInUser);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
+            m_PagesFactory = new WinFormAppPagesCreator(m_LoggedInUser);
             foreach (Form pageForm in m_PagesFactory.AppPages)
             {
                 pageForm.StartPosition = FormStartPosition.Manual;
                 pageForm.FormClosing += endApplication;
+                m_FormPagesDictionary.Add(pageForm.GetType().Name.ToLower(), pageForm);
             }
 
-            Form mainPage = m_PagesFactory.AppPages[0];
-            Form userInformationPage = m_PagesFactory.AppPages[1];
-            Form zodiacPage = m_PagesFactory.AppPages[2];
+            CurrentShownForm = m_FormPagesDictionary[typeof(MainPageForm).Name];
 
-           // mainPage.ProfileLinkClicked += switchToUserInformation;
-           // mainPage.ZodiacLinkClicked += switchToZodiacForm;
-           // mainPage.LogoutButtonClicked += logout;
-           // userInformationPage.BackButtonClicked += switchToMainForm;
-            CurrentShownForm = mainPage;
+            // mainPage.ProfileLinkClicked += switchToUserInformation;
+            // mainPage.ZodiacLinkClicked += switchToZodiacForm;
+            // mainPage.LogoutButtonClicked += logout;
+            // userInformationPage.BackButtonClicked += switchToMainForm;
+
         }
 
         public void Login()
@@ -162,10 +154,11 @@ namespace UI
             }
         }
 
-        public void NextPage(Form i_PageToShow)
+        public void NextPage(string i_NextPageClassName)
         {
-            r_PagesStack.Push(i_PageToShow);
-            CurrentShownForm = i_PageToShow;
+            Form nextPage = m_FormPagesDictionary[i_NextPageClassName];
+            r_PagesStack.Push(nextPage);
+            CurrentShownForm = nextPage;
         }
 
         private void endApplication(object sender, System.ComponentModel.CancelEventArgs e)
