@@ -11,7 +11,7 @@ namespace Logic
     /// </summary>
     public abstract class AppPagesFactory<T>
     {
-        private List<T> m_Pages = new List<T>(); 
+        protected List<T> m_Pages = new List<T>(); 
 
         public AppPagesFactory()
         {
@@ -20,6 +20,12 @@ namespace Logic
 
         public abstract void CreatePages();
 
-        public List<T> AppPages { get; private set; }
+        public List<T> AppPages 
+        {
+            get
+            {
+                return m_Pages;
+            }
+        }
     }
 }
