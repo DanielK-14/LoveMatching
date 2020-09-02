@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
+using Logic;
 
 namespace UI
 {
@@ -15,12 +16,14 @@ namespace UI
         {
             InitializeComponent();
             r_AppManager.LoginEvent += switchUser;
+            initPictureBoxes();
         }
 
         private void switchUser()
         {
             m_LoggedInUser = r_AppManager.LoggedInUser;
-            initPictureBoxes();
+            fetchUserInfo();
+            fetchPhotos();
         }
 
         private void initPictureBoxes()
@@ -31,13 +34,6 @@ namespace UI
             m_PictureBoxes.Add(pictureBox3);
             m_PictureBoxes.Add(pictureBox4);
             hidePhotos();
-        }
-
-        internal new void Show()
-        {
-            fetchUserInfo();
-            fetchPhotos();
-            base.Show();
         }
 
         private void fetchUserInfo()
@@ -56,7 +52,7 @@ namespace UI
             catch (Exception ex)
             {
                 MessageBox.Show("Could not get cover photo.");
-                throw ex;
+                Logger.WriteException(ex.Message);
             }
         }
 

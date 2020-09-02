@@ -21,12 +21,12 @@ namespace UI
     public sealed class AppManager : IFacebookApplication
     {
         private readonly AppSettings r_AppSettings;
+        private readonly WinFormAppPagesCreator r_PagesFactory = new WinFormAppPagesCreator();
+        private readonly Stack<Form> r_PagesStack = new Stack<Form>();
         private Form m_CurrentShownForm;
         public delegate void MyOperationFunctionDelegate();
         public event MyOperationFunctionDelegate LoginEvent;
         private Dictionary<string, Form> m_FormPagesDictionary = new Dictionary<string, Form>();
-        private readonly WinFormAppPagesCreator r_PagesFactory = new WinFormAppPagesCreator();
-        private readonly Stack<Form> r_PagesStack = new Stack<Form>();
 
         public User LoggedInUser { get; private set; }
 
@@ -41,12 +41,6 @@ namespace UI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.ThreadException += new ThreadExceptionEventHandler(MyCommonExceptionHandlingMethod);
-            foreach (Form pageForm in r_PagesFactory.AppPages)
-            {
-                pageForm.StartPosition = FormStartPosition.Manual;
-                pageForm.FormClosing += endApplication;
-                m_FormPagesDictionary.Add(pageForm.GetType().Name.ToLower(), pageForm);
-            }
         }
 
         public static AppManager GetInstance
@@ -105,8 +99,15 @@ namespace UI
 
         public void Run()
         {
-            r_PagesStack.Clear();
             r_PagesFactory.CreatePages();
+            foreach (Form pageForm in r_PagesFactory.AppPages)
+            {
+                pageForm.StartPosition = FormStartPosition.Manual;
+                pageForm.FormClosing += endApplication;
+                m_FormPagesDictionary.Add(pageForm.GetType().Name.ToLower(), pageForm);
+            }
+
+            r_PagesStack.Clear();
             Login();
             Application.Run();
         }
@@ -129,19 +130,19 @@ namespace UI
 
                 LoggedInUser = loginForm.LogInInfo.LoggedInUser;
                 r_AppSettings.LastAccessToken = loginForm.LogInInfo.AccessToken;
-                if (LoginEvent != null)
-                {
-                    LoginEvent.Invoke();
-                }
 
                 r_AppSettings.SaveToFile();
+            }
+            if (LoginEvent != null)
+            {
+                LoginEvent.Invoke();
             }
             NextPage(r_PagesFactory.AppPages[0].GetType().Name.ToLower());
         }
 
         public void Back()
         {
-            if (r_PagesStack.Count == 1)
+            if (r_PagesStack.Count > 1)
             {
                 r_PagesStack.Pop();
                 CurrentShownForm = r_PagesStack.Peek();
@@ -154,7 +155,7 @@ namespace UI
 
         public void NextPage(string i_NextPageClassName)
         {
-            Form nextPage = m_FormPagesDictionary[i_NextPageClassName];
+            Form nextPage = m_FormPagesDictionary[i_NextPageClassName.ToLower()];
             r_PagesStack.Push(nextPage);
             CurrentShownForm = nextPage;
         }

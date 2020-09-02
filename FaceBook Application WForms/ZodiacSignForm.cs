@@ -83,7 +83,7 @@ namespace UI
             catch (Exception ex)
             {
                 MessageBox.Show("Could not share post.");
-                throw ex;
+                Logger.WriteException(ex.Message);
             }
         }
     }

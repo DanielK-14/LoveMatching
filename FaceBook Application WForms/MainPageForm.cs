@@ -28,6 +28,7 @@ namespace UI
             profilePictureBox.LoadAsync(m_LoggedInUser.PictureLargeURL);
             fullNameUser.Text = m_LoggedInUser.Name;
         }
+
         private void fetchEvents()
         {
             int counter = 0;
