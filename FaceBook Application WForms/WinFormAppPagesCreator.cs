@@ -11,15 +11,13 @@ namespace UI
     /// Concrete creator for windows forms application.
     /// Creates pages with Form type.
     /// </summary>
-    public class WinFormAppPages : AppPagesFactory<Form>
+    public class WinFormAppPagesCreator : AppPagesFactory<Form>
     {
         private readonly User r_User;
-        private readonly AppManager r_AppManager;
 
-        public WinFormAppPages(User i_User)
+        public WinFormAppPagesCreator(User i_User)
         {
             r_User = i_User;
-            r_AppManager = AppManager.GetInstance;
         }
 
         public override void CreatePages()

@@ -18,7 +18,7 @@ namespace UI
         private readonly AppSettings r_AppSettings;
         private User m_LoggedInUser;
         private Form m_CurrentShownForm;
-        private WinFormAppPages m_PagesFactory;
+        private WinFormAppPagesCreator m_PagesFactory;
 
         public static AppManager s_Instance = null;
         private static readonly object sr_CreationalLockContext = new object();
@@ -98,7 +98,7 @@ namespace UI
         {
             try
             {
-                m_PagesFactory = new WinFormAppPages(m_LoggedInUser);
+                m_PagesFactory = new WinFormAppPagesCreator(m_LoggedInUser);
             }
             catch (Exception ex)
             {
