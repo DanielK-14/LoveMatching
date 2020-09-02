@@ -129,7 +129,6 @@ namespace UI
 
                 LoggedInUser = loginForm.LogInInfo.LoggedInUser;
                 r_AppSettings.LastAccessToken = loginForm.LogInInfo.AccessToken;
-                NextPage(r_PagesFactory.AppPages[0].GetType().Name.ToLower());
                 if (LoginEvent != null)
                 {
                     LoginEvent.Invoke();
@@ -137,6 +136,7 @@ namespace UI
 
                 r_AppSettings.SaveToFile();
             }
+            NextPage(r_PagesFactory.AppPages[0].GetType().Name.ToLower());
         }
 
         public void Back()
