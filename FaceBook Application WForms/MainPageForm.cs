@@ -12,28 +12,26 @@ namespace UI
         private readonly int r_MaximumNumberOfPostsToShow = 15;
         private readonly int r_MaximumNumberOfEventsToShow = 15;
 
-        internal delegate void LinkEventHandler();
+        private  User m_LoggedInUser;
 
-        internal event LinkEventHandler ProfileLinkClicked;
+        private readonly AppManager r_AppManager = AppManager.GetInstance;
 
-        internal event LinkEventHandler ZodiacLinkClicked;
-
-        internal event LinkEventHandler LogoutButtonClicked;
-
-        private readonly User r_LoggedInUser;
-
-        public MainPageForm(User i_User)
+        public MainPageForm()
         {
             InitializeComponent();
-            r_LoggedInUser = i_User;
-            profilePictureBox.LoadAsync(r_LoggedInUser.PictureLargeURL);
-            fullNameUser.Text = r_LoggedInUser.Name;
+            r_AppManager.LoginEvent += switchUser;
         }
 
+        private void switchUser()
+        {
+            m_LoggedInUser = r_AppManager.LoggedInUser;
+            profilePictureBox.LoadAsync(m_LoggedInUser.PictureLargeURL);
+            fullNameUser.Text = m_LoggedInUser.Name;
+        }
         private void fetchEvents()
         {
             int counter = 0;
-            foreach (Event eventFSB in r_LoggedInUser.Events)
+            foreach (Event eventFSB in m_LoggedInUser.Events)
             {
                 if (counter == r_MaximumNumberOfEventsToShow)
                 {
@@ -47,7 +45,7 @@ namespace UI
                 counter++;
             }
 
-            if (r_LoggedInUser.Events.Count == 0)
+            if (m_LoggedInUser.Events.Count == 0)
             {
                 MessageBox.Show("No events to retrieve!");
             }
@@ -56,7 +54,7 @@ namespace UI
         private void fetchPosts()
         {
             int counter = 0;
-            foreach (Post post in r_LoggedInUser.Posts)
+            foreach (Post post in m_LoggedInUser.Posts)
             {
                 if (counter == r_MaximumNumberOfPostsToShow)
                 {
@@ -78,7 +76,7 @@ namespace UI
                 counter++;
             }
 
-            if (r_LoggedInUser.Posts.Count == 0)
+            if (m_LoggedInUser.Posts.Count == 0)
             {
                 MessageBox.Show("No posts to retrieve!");
             }
@@ -90,7 +88,7 @@ namespace UI
             comboBoxDecisionData.DisplayMember = "Name";
             int counter = 0;
 
-            foreach (User friend in r_LoggedInUser.Friends)
+            foreach (User friend in m_LoggedInUser.Friends)
             {
                 if (counter == r_MaximumNumberOfFriendsToShow)
                 {
@@ -102,7 +100,7 @@ namespace UI
                 counter++;
             }
 
-            if (r_LoggedInUser.Friends.Count == 0)
+            if (m_LoggedInUser.Friends.Count == 0)
             {
                 MessageBox.Show("No Friends to retrieve!");
             }
@@ -112,7 +110,7 @@ namespace UI
         {
             try
             {
-                r_LoggedInUser.PostStatus(postTextBox.Text);
+                m_LoggedInUser.PostStatus(postTextBox.Text);
                 MessageBox.Show(string.Format("Status Posted! {0}{1}", Environment.NewLine, postTextBox.Text));
             }
             catch (Exception ex)
@@ -148,7 +146,7 @@ namespace UI
             cleanDataSelcetedComboBoxAndAnalyst();
             DataAnalyst.ButtonClicked = DataAnalyst.LastButtonClicked.Friends;
 
-            List<User> friendsToMatchWith = AvailableFriends.GetAvailabeFriends(r_LoggedInUser);
+            List<User> friendsToMatchWith = AvailableFriends.GetAvailabeFriends(m_LoggedInUser);
             int counter = 0;
             foreach (User friend in friendsToMatchWith)
             {
@@ -180,7 +178,7 @@ namespace UI
         private void comboBoxDecisionData_SelectedIndexChanged(object sender, EventArgs e)
         {
             resetDataAnalyst();
-            showAnalayzeResults(DataAnalyst.AnalyzeData(comboBoxDecisionData.SelectedIndex, r_LoggedInUser));
+            showAnalayzeResults(DataAnalyst.AnalyzeData(comboBoxDecisionData.SelectedIndex, m_LoggedInUser));
         }
 
         private void resetDataAnalyst()
@@ -209,26 +207,17 @@ namespace UI
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (ProfileLinkClicked != null)
-            {
-                ProfileLinkClicked.Invoke();
-            }
+            r_AppManager.NextPage("UserInformation");
         }
 
         private void ZodiakSignLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (ZodiacLinkClicked != null)
-            {
-                ZodiacLinkClicked.Invoke();
-            }
+            r_AppManager.NextPage("ZodiacSignForm");
         }
 
         private void logoutButton_Click(object sender, EventArgs e)
         {
-            if (LogoutButtonClicked != null)
-            {
-                LogoutButtonClicked.Invoke();
-            }
+            r_AppManager.Logout();
         }
     }
 }

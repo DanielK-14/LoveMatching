@@ -21,11 +21,14 @@ namespace UI
     public sealed class AppManager : IFacebookApplication
     {
         private readonly AppSettings r_AppSettings;
-        private User m_LoggedInUser;
         private Form m_CurrentShownForm;
+        public delegate void MyOperationFunctionDelegate();
+        public event MyOperationFunctionDelegate LoginEvent;
         private Dictionary<string, Form> m_FormPagesDictionary = new Dictionary<string, Form>();
-        private WinFormAppPagesCreator m_PagesFactory;
+        private readonly WinFormAppPagesCreator r_PagesFactory = new WinFormAppPagesCreator();
         private readonly Stack<Form> r_PagesStack = new Stack<Form>();
+
+        public User LoggedInUser { get; private set; }
 
         public static AppManager s_Instance = null;
         private static readonly object sr_CreationalLockContext = new object();
@@ -38,6 +41,12 @@ namespace UI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.ThreadException += new ThreadExceptionEventHandler(MyCommonExceptionHandlingMethod);
+            foreach (Form pageForm in r_PagesFactory.AppPages)
+            {
+                pageForm.StartPosition = FormStartPosition.Manual;
+                pageForm.FormClosing += endApplication;
+                m_FormPagesDictionary.Add(pageForm.GetType().Name.ToLower(), pageForm);
+            }
         }
 
         public static AppManager GetInstance
@@ -96,36 +105,19 @@ namespace UI
 
         public void Run()
         {
+            r_PagesStack.Clear();
+            r_PagesFactory.CreatePages();
             Login();
-            initAllFormsAndStart();
             Application.Run();
         }
 
-        private void initAllFormsAndStart()
-        {
-            m_PagesFactory = new WinFormAppPagesCreator(m_LoggedInUser);
-            foreach (Form pageForm in m_PagesFactory.AppPages)
-            {
-                pageForm.StartPosition = FormStartPosition.Manual;
-                pageForm.FormClosing += endApplication;
-                m_FormPagesDictionary.Add(pageForm.GetType().Name.ToLower(), pageForm);
-            }
-
-            CurrentShownForm = m_FormPagesDictionary[typeof(MainPageForm).Name];
-
-            // mainPage.ProfileLinkClicked += switchToUserInformation;
-            // mainPage.ZodiacLinkClicked += switchToZodiacForm;
-            // mainPage.LogoutButtonClicked += logout;
-            // userInformationPage.BackButtonClicked += switchToMainForm;
-
-        }
 
         public void Login()
         {
             string accessToken = r_AppSettings.LastAccessToken;
             if (accessToken != null)
             {
-                m_LoggedInUser = FacebookService.Connect(accessToken).LoggedInUser;
+                LoggedInUser = FacebookService.Connect(accessToken).LoggedInUser;
             }
             else
             {
@@ -135,8 +127,14 @@ namespace UI
                     Environment.Exit(0);
                 }
 
-                m_LoggedInUser = loginForm.LogInInfo.LoggedInUser;
+                LoggedInUser = loginForm.LogInInfo.LoggedInUser;
                 r_AppSettings.LastAccessToken = loginForm.LogInInfo.AccessToken;
+                NextPage(r_PagesFactory.AppPages[0].GetType().Name.ToLower());
+                if (LoginEvent != null)
+                {
+                    LoginEvent.Invoke();
+                }
+
                 r_AppSettings.SaveToFile();
             }
         }
@@ -172,7 +170,6 @@ namespace UI
             Settings.LastAccessToken = null;
             Settings.SaveToFile();
             Login();
-            initAllFormsAndStart();
         }
     }
 }

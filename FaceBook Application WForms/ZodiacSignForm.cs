@@ -8,20 +8,25 @@ namespace UI
     internal partial class ZodiacSignForm : Form
     {
 
-        private readonly ZodiacSignAdapter r_ZodiacMatch;
+        private ZodiacSignAdapter m_ZodiacMatch;
 
-        private readonly User r_LoggedInUser;
+        private User m_LoggedInUser;
 
-        private readonly AppManager r_appManager = AppManager.GetInstance;
+        private readonly AppManager r_AppManager = AppManager.GetInstance;
 
-        internal ZodiacSignForm(User i_LoggedInUser)
+        internal ZodiacSignForm()
         {
-            r_LoggedInUser = i_LoggedInUser;
-            r_ZodiacMatch = new ZodiacSignAdapter(i_LoggedInUser.Birthday);
             InitializeComponent();
+            r_AppManager.LoginEvent += switchUser;
+        }
+
+        private void switchUser()
+        {
+            m_LoggedInUser = r_AppManager.LoggedInUser;
+            m_ZodiacMatch = new ZodiacSignAdapter(m_LoggedInUser.Birthday);
             try
             {
-                pictureBox1.LoadAsync(r_ZodiacMatch.PictureUrl);
+                pictureBox1.LoadAsync(m_ZodiacMatch.PictureUrl);
             }
             catch (Exception ex)
             {
@@ -29,22 +34,22 @@ namespace UI
                 throw ex;
             }
 
-            userSignNameLabel.Text = r_ZodiacMatch.Name;
-        }
+            userSignNameLabel.Text = m_ZodiacMatch.Name;
 
+        }
         private void findButton_Click(object sender, EventArgs e)
         {
-            r_ZodiacMatch.UpdateBestMatchedSign();
+            m_ZodiacMatch.UpdateBestMatchedSign();
             try
             {
-                pictureBox2.LoadAsync(r_ZodiacMatch.BestMatchedSign.PictureUrl);
+                pictureBox2.LoadAsync(m_ZodiacMatch.BestMatchedSign.PictureUrl);
             }
             catch (Exception)
             {
                 MessageBox.Show("Could not load picture of zodiac sign.");
             }
 
-            matchSignNameLabel.Text = r_ZodiacMatch.BestMatchedSign.Name;
+            matchSignNameLabel.Text = m_ZodiacMatch.BestMatchedSign.Name;
             findButton.Visible = false;
             pictureBox2.Visible = true;
             matchSignNameLabel.Visible = true;
@@ -55,7 +60,7 @@ namespace UI
 
         private void goBackButton_Click(object sender, EventArgs e)
         {
-            r_appManager.Back();
+            r_AppManager.Back();
             findButton.Visible = true;
             pictureBox2.Visible = false;
             matchSignNameLabel.Visible = false;
@@ -69,10 +74,10 @@ namespace UI
             {
                 string textForPost = string.Format(
                     "Looking for {0} {1} {2} Anyone?",
-                    r_ZodiacMatch.BestMatchedSign.Name,
-                    r_LoggedInUser.InterestedIn,
+                    m_ZodiacMatch.BestMatchedSign.Name,
+                    m_LoggedInUser.InterestedIn,
                     Environment.NewLine);
-                r_LoggedInUser.PostStatus(textForPost);
+                m_LoggedInUser.PostStatus(textForPost);
                 MessageBox.Show(string.Format("Status Posted! {0}{1}", Environment.NewLine, textForPost));
             }
             catch (Exception ex)

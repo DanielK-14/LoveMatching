@@ -13,18 +13,12 @@ namespace UI
     /// </summary>
     public class WinFormAppPagesCreator : AppPagesFactory<Form>
     {
-        private readonly User r_User;
-
-        public WinFormAppPagesCreator(User i_User)
-        {
-            r_User = i_User;
-        }
 
         public override void CreatePages()
         {
-            AppPages.Add(new MainPageForm(r_User));
-            AppPages.Add(new UserInformation(r_User));
-            AppPages.Add(new ZodiacSignForm(r_User));
+            AppPages.Add(new MainPageForm());
+            AppPages.Add(new UserInformation());
+            AppPages.Add(new ZodiacSignForm());
         }
     }
 }

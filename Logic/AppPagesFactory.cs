@@ -13,11 +13,6 @@ namespace Logic
     {
         protected List<T> m_Pages = new List<T>(); 
 
-        protected AppPagesFactory()
-        {
-            CreatePages();
-        }
-
         public abstract void CreatePages();
 
         public List<T> AppPages 

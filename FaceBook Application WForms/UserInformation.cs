@@ -7,18 +7,20 @@ namespace UI
 {
     internal partial class UserInformation : Form
     {
-        private readonly User r_User;
+        private User m_LoggedInUser;
         private List<PictureBox> m_PictureBoxes;
+        private readonly AppManager r_AppManager = AppManager.GetInstance;
 
-        internal delegate void BackButtonEventHandler();
-
-        internal event BackButtonEventHandler BackButtonClicked;
-
-        internal UserInformation(User i_User)
+        internal UserInformation()
         {
             InitializeComponent();
+            r_AppManager.LoginEvent += switchUser;
+        }
+
+        private void switchUser()
+        {
+            m_LoggedInUser = r_AppManager.LoggedInUser;
             initPictureBoxes();
-            r_User = i_User;
         }
 
         private void initPictureBoxes()
@@ -40,15 +42,15 @@ namespace UI
 
         private void fetchUserInfo()
         {
-            nameLabel.Text = r_User.Name;
-            birthdayLabel.Text = r_User.Birthday;
-            emailLabel.Text = r_User.Email;
-            profilePictureBox.LoadAsync(r_User.PictureLargeURL);
+            nameLabel.Text = m_LoggedInUser.Name;
+            birthdayLabel.Text = m_LoggedInUser.Birthday;
+            emailLabel.Text = m_LoggedInUser.Email;
+            profilePictureBox.LoadAsync(m_LoggedInUser.PictureLargeURL);
             try
             {
-                if (r_User.Cover != null)
+                if (m_LoggedInUser.Cover != null)
                 {
-                    coverPictureBox.LoadAsync(r_User.Cover.SourceURL);
+                    coverPictureBox.LoadAsync(m_LoggedInUser.Cover.SourceURL);
                 }
             }
             catch (Exception ex)
@@ -60,7 +62,7 @@ namespace UI
 
         private void fetchPhotos()
         {
-            IEnumerator<Photo> photosEnumerator = r_User.PhotosTaggedIn.GetEnumerator();
+            IEnumerator<Photo> photosEnumerator = m_LoggedInUser.PhotosTaggedIn.GetEnumerator();
             foreach (PictureBox pictureBox in m_PictureBoxes)
             {
                 if (photosEnumerator.MoveNext())
@@ -85,10 +87,7 @@ namespace UI
 
         private void backButton_Click(object sender, EventArgs e)
         {
-            if (BackButtonClicked != null)
-            {
-                BackButtonClicked.Invoke();
-            }
+            r_AppManager.Back();
         }
     }
 }
