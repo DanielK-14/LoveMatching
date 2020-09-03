@@ -11,6 +11,7 @@ namespace UI
         public static void Main()
         {
             AppManager windowsApplication = AppManager.GetInstance;
+            windowsApplication.Factory = new WinFormAppPagesCreator();
             windowsApplication.Run();
         }
     }

@@ -21,13 +21,12 @@ namespace UI
     public sealed class AppManager : IFacebookApplication
     {
         private readonly AppSettings r_AppSettings;
-        private readonly WinFormAppPagesCreator r_PagesFactory = new WinFormAppPagesCreator();
         private readonly Stack<Form> r_PagesStack = new Stack<Form>();
         private Form m_CurrentShownForm;
         public delegate void MyOperationFunctionDelegate();
         public event MyOperationFunctionDelegate LoginEvent;
         private Dictionary<string, Form> m_FormPagesDictionary = new Dictionary<string, Form>();
-
+        public AppPagesFactory<Form> Factory { get; set; }
         public User LoggedInUser { get; private set; }
 
         public static AppManager s_Instance = null;
@@ -99,15 +98,21 @@ namespace UI
 
         public void Run()
         {
-            r_PagesFactory.CreatePages();
-            foreach (Form pageForm in r_PagesFactory.AppPages)
+            if (Factory == null)
+            {
+                throw new Exception("Cannot run without initializing a pages creator");
+            }
+
+
+            r_PagesStack.Clear();
+            Factory.CreatePages();
+            foreach (Form pageForm in Factory.AppPages)
             {
                 pageForm.StartPosition = FormStartPosition.Manual;
                 pageForm.FormClosing += endApplication;
                 m_FormPagesDictionary.Add(pageForm.GetType().Name.ToLower(), pageForm);
             }
 
-            r_PagesStack.Clear();
             Login();
             Application.Run();
         }
@@ -137,7 +142,7 @@ namespace UI
             {
                 LoginEvent.Invoke();
             }
-            NextPage(r_PagesFactory.AppPages[0].GetType().Name.ToLower());
+            NextPage(Factory.AppPages[0].GetType().Name.ToLower());
         }
 
         public void Back()
