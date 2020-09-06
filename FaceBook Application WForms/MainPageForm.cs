@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 using Logic;
@@ -31,6 +32,7 @@ namespace UI
 
         private void fetchEvents()
         {
+            /*
             int counter = 0;
             foreach (Event eventFSB in m_LoggedInUser.Events)
             {
@@ -50,9 +52,21 @@ namespace UI
             {
                 MessageBox.Show("No events to retrieve!");
             }
+            */
+
+            var allEvents = m_LoggedInUser.Events.Take(15).ToList();
+
+            if (eventsListBox.InvokeRequired == false)
+            {
+                eventBindingSource.DataSource = allEvents;
+            }
+            else
+            {
+                eventsListBox.Invoke(new Action(() => eventBindingSource.DataSource = allEvents));
+            }
         }
 
-        private void fetchPosts()
+        /*private void fetchPosts()
         {
             int counter = 0;
             foreach (Post post in m_LoggedInUser.Posts)
@@ -80,6 +94,20 @@ namespace UI
             if (m_LoggedInUser.Posts.Count == 0)
             {
                 MessageBox.Show("No posts to retrieve!");
+            }
+        }
+        */
+        private void fetchPosts()
+        {
+            var allPosts = m_LoggedInUser.Posts.Take(15).ToList();
+
+            if(postsListBox.InvokeRequired == false)
+            {
+                postBindingSource.DataSource = allPosts;
+            }
+            else
+            {
+                postsListBox.Invoke(new Action(() => postBindingSource.DataSource = allPosts));
             }
         }
 
@@ -219,6 +247,11 @@ namespace UI
         private void logoutButton_Click(object sender, EventArgs e)
         {
             r_AppManager.Logout();
+        }
+
+        private void MainPageForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -139,6 +139,9 @@
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="FaceBook Application WForms.ruleset" />
+    <None Include="FacebookWrapper.ObjectModel.Event.datasource" />
+    <None Include="FacebookWrapper.ObjectModel.Post.datasource" />
+    <None Include="FacebookWrapper.ObjectModel.User.datasource" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
