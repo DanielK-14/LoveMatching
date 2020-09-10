@@ -143,6 +143,7 @@ namespace UI
             {
                 LoginEvent.Invoke();
             }
+
             NextPage(Factory.AppPages[0].GetType().Name.ToLower());
         }
 

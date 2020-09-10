@@ -51,7 +51,6 @@ namespace UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Could not get cover photo.");
                 Logger.WriteException(ex.Message);
             }
         }

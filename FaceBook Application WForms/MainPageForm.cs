@@ -10,7 +10,7 @@ namespace UI
 {
     public partial class MainPageForm : Form
     {
-        private readonly int r_MaximumNumberOfFriendsToShow = 10;
+        private readonly int r_MaximumNumberOfFriendsToShow = 15;
         private readonly int r_MaximumNumberOfPostsToShow = 15;
         private readonly int r_MaximumNumberOfEventsToShow = 15;
         private  User m_LoggedInUser;
@@ -18,6 +18,12 @@ namespace UI
         private List<Post> m_Posts;
         private List<User> m_Friends;
         private List<Event> m_Events;
+        private readonly object sr_LoadEventsLock = new object();
+        private readonly object sr_LoadPostsLock = new object();
+        private readonly object sr_LoadFriendsLock = new object();
+        private bool m_EventsLoaded;
+        private bool m_PostsLoaded;
+        private bool m_FriendsLoaded;
 
         public MainPageForm()
         {
@@ -31,35 +37,102 @@ namespace UI
             m_LoggedInUser = r_AppManager.LoggedInUser;
             profilePictureBox.LoadAsync(m_LoggedInUser.PictureLargeURL);
             fullNameUser.Text = m_LoggedInUser.Name;
-            new Thread(loadEvents).Start();
-            new Thread(loadPosts).Start();
-            new Thread(loadFriends).Start();
+            updateInfo();
+        }
+
+        private void updateInfo()
+        {
+            Thread thread1 = new Thread(loadEvents);
+            thread1.Start();
+            Thread thread2 = new Thread(loadPosts);
+            thread2.Start();
+            Thread thread3 = new Thread(loadFriends);
+            thread3.Start();
         }
 
         private void loadEvents()
         {
-            m_Events = m_LoggedInUser.Events.Take(15).ToList();
-            showEventsButton.Enabled = m_Events.Count > 0;
-            showEventsButton.Text = m_Events.Count > 0 ? "Show Events" : "No Events";
-            showEventsButton.BackColor = m_Events.Count > 0 ? System.Drawing.Color.Orange : showEventsButton.BackColor;
+            /*
+            if (!m_EventsLoaded)
+            {
+                lock (sr_LoadEventsLock)
+                {
+                    if (!m_EventsLoaded)
+                    {
+                        m_Events = m_LoggedInUser.Events.Take(r_MaximumNumberOfEventsToShow).ToList();
+                        m_EventsLoaded = true;
+                    }
+                }
+            }
+            */
+
+            m_Events = m_LoggedInUser.Events.Take(r_MaximumNumberOfEventsToShow).ToList();
+            showEventsButton.Invoke(new Action(
+                () =>
+                {
+                    showEventsButton.Enabled = m_Events.Count > 0;
+                    showEventsButton.Text = m_Events.Count > 0 ? "Show Events" : "No Events";
+                    showEventsButton.BackColor = m_Events.Count > 0 ? System.Drawing.Color.Orange : showEventsButton.BackColor;
+                }));
         }
 
         private void loadPosts()
         {
-            m_Posts = m_LoggedInUser.Posts.Take(15).ToList();
-            showPostsButton.Enabled = m_Posts.Count > 0;
-            showPostsButton.Text = m_Posts.Count > 0 ? "Show Posts" : "No Posts";
-            showPostsButton.BackColor = m_Posts.Count > 0 ? System.Drawing.Color.Blue : showPostsButton.BackColor;
+            /*
+            if (!m_PostsLoaded)
+            {
+                lock (sr_LoadPostsLock)
+                {
+                    if (!m_PostsLoaded)
+                    {
+                        m_Posts = m_LoggedInUser.Posts.Take(r_MaximumNumberOfPostsToShow).ToList();
+                        m_PostsLoaded = true;
+                    }
+                }
+            }
+            */
+
+            m_Posts = m_LoggedInUser.Posts.Take(r_MaximumNumberOfPostsToShow).ToList();
+            showPostsButton.Invoke(new Action(
+                () =>
+                {
+                    showPostsButton.Enabled = m_Posts.Count > 0;
+                    showPostsButton.Text = m_Posts.Count > 0 ? "Show Posts" : "No Posts";
+                    showPostsButton.BackColor = m_Posts.Count > 0 ? System.Drawing.Color.Blue : showPostsButton.BackColor;
+                }));
         }
 
         private void loadFriends()
         {
-            m_Friends = m_LoggedInUser.Friends.Take(15).ToList();
-            showFriendsButton.Enabled = m_Friends.Count > 0;
-            showFriendsButton.Text = m_Friends.Count > 0 ? "Show Friends" : "No Friends";
-            showFriendsButton.BackColor = m_Friends.Count > 0 ? System.Drawing.Color.Green : showFriendsButton.BackColor;
-            GetMatchesButton.Enabled = m_Friends.Count > 0;
-            GetMatchesButton.BackColor = m_Friends.Count > 0 ? System.Drawing.Color.Purple : GetMatchesButton.BackColor;
+            /*
+            if (!m_FriendsLoaded)
+            {
+                lock (sr_LoadFriendsLock)
+                {
+                    if (!m_FriendsLoaded)
+                    {
+                        m_Friends = m_LoggedInUser.Friends.Take(r_MaximumNumberOfFriendsToShow).ToList();
+                        m_FriendsLoaded = true;
+                    }
+                }
+            }
+            */
+
+            m_Friends = m_LoggedInUser.Friends.Take(r_MaximumNumberOfFriendsToShow).ToList();
+            showFriendsButton.Invoke(new Action(
+                () =>
+                {
+                    showFriendsButton.Enabled = m_Friends.Count > 0;
+                    showFriendsButton.Text = m_Friends.Count > 0 ? "Show Friends" : "No Friends";
+                    showFriendsButton.BackColor = m_Friends.Count > 0 ? System.Drawing.Color.Green : showFriendsButton.BackColor;
+                }));
+
+            GetMatchesButton.Invoke(new Action(
+                () =>
+                {
+                    GetMatchesButton.Enabled = m_Friends.Count > 0;
+                    GetMatchesButton.BackColor = m_Friends.Count > 0 ? System.Drawing.Color.Purple : GetMatchesButton.BackColor;
+                }));
         }
 
         private void disableButtons()
@@ -76,6 +149,7 @@ namespace UI
             showEventsButton.Text = "Loading Events";
             showEventsButton.BackColor = System.Drawing.Color.Gray;
         }
+
         private void fetchEvents()
         {
             if (eventsListBox.InvokeRequired == false)
