@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 using Logic;
@@ -12,10 +13,11 @@ namespace UI
         private readonly int r_MaximumNumberOfFriendsToShow = 10;
         private readonly int r_MaximumNumberOfPostsToShow = 15;
         private readonly int r_MaximumNumberOfEventsToShow = 15;
-
         private  User m_LoggedInUser;
-
         private readonly AppManager r_AppManager = AppManager.GetInstance;
+        private List<Post> m_Posts;
+        private List<User> m_Friends;
+        private List<Event> m_Events;
 
         public MainPageForm()
         {
@@ -28,6 +30,9 @@ namespace UI
             m_LoggedInUser = r_AppManager.LoggedInUser;
             profilePictureBox.LoadAsync(m_LoggedInUser.PictureLargeURL);
             fullNameUser.Text = m_LoggedInUser.Name;
+            new Thread(() => { m_Events = m_LoggedInUser.Events.Take(15).ToList(); });
+            new Thread(() => { m_Posts = m_LoggedInUser.Posts.Take(15).ToList(); });
+            new Thread(() => { m_Friends = m_LoggedInUser.Friends.Take(15).ToList(); });
         }
 
         private void fetchEvents()
@@ -53,17 +58,14 @@ namespace UI
                 MessageBox.Show("No events to retrieve!");
             }
             */
-
-            var allEvents = m_LoggedInUser.Events.Take(15).ToList();
-
             if (eventsListBox.InvokeRequired == false)
             {
-                eventBindingSource.DataSource = allEvents;
+                eventBindingSource.DataSource = m_Events;
                 
             }
             else
             {
-                eventsListBox.Invoke(new Action(() => eventBindingSource.DataSource = allEvents));
+                eventsListBox.Invoke(new Action(() => eventBindingSource.DataSource = m_Events));
             }
         }
 
@@ -100,15 +102,14 @@ namespace UI
         */
         private void fetchPosts()
         {
-            var allPosts = m_LoggedInUser.Posts.Take(15).ToList();
 
             if(postsListBox.InvokeRequired == false)
             {
-                postBindingSource.DataSource = allPosts;
+                postBindingSource.DataSource = m_Posts;
             }
             else
             {
-                postsListBox.Invoke(new Action(() => postBindingSource.DataSource = allPosts));
+                postsListBox.Invoke(new Action(() => postBindingSource.DataSource = m_Posts));
             }
         }
 
