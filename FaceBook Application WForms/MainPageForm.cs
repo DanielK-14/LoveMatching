@@ -59,7 +59,6 @@ namespace UI
             if (eventsListBox.InvokeRequired == false)
             {
                 eventBindingSource.DataSource = allEvents;
-                
             }
             else
             {
