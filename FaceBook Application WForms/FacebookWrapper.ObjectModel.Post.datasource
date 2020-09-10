@@ -12,11 +12,9 @@
          <TypeUISetting>
             <PropertyUISettings>
                <PropertyUISetting Name="Post.Comments.From">
-                  <ControlSettings>
-                     <ControlSetting ArtifactName="Microsoft:System.Windows.Forms:Form">
+                  <ControlSettings><ControlSetting ArtifactName="Microsoft:System.Windows.Forms:Form" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
                         <BindableControlInfo Name="[None]" Type="Microsoft.VSDesigner.Data.BindManager.NoneControlPlaceHolder" />
-                     </ControlSetting>
-                  </ControlSettings>
+                     </ControlSetting></ControlSettings>
                </PropertyUISetting>
                <PropertyUISetting Name="Post.From">
                   <ControlSettings>
@@ -47,25 +45,19 @@
          <TypeUISetting>
             <PropertyUISettings>
                <PropertyUISetting Name="LikedByUser">
-                  <ControlSettings>
-                     <ControlSetting ArtifactName="Microsoft:System.Windows.Forms:Form">
+                  <ControlSettings><ControlSetting ArtifactName="Microsoft:System.Windows.Forms:Form" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
                         <BindableControlInfo Name="[None]" Type="Microsoft.VSDesigner.Data.BindManager.NoneControlPlaceHolder" />
-                     </ControlSetting>
-                  </ControlSettings>
+                     </ControlSetting></ControlSettings>
                </PropertyUISetting>
                <PropertyUISetting Name="Id">
-                  <ControlSettings>
-                     <ControlSetting ArtifactName="Microsoft:System.Windows.Forms:Form">
+                  <ControlSettings><ControlSetting ArtifactName="Microsoft:System.Windows.Forms:Form" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
                         <BindableControlInfo Name="[None]" Type="Microsoft.VSDesigner.Data.BindManager.NoneControlPlaceHolder" />
-                     </ControlSetting>
-                  </ControlSettings>
+                     </ControlSetting></ControlSettings>
                </PropertyUISetting>
                <PropertyUISetting Name="CreatedTime">
-                  <ControlSettings>
-                     <ControlSetting ArtifactName="Microsoft:System.Windows.Forms:Form">
+                  <ControlSettings><ControlSetting ArtifactName="Microsoft:System.Windows.Forms:Form" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
                         <BindableControlInfo Name="[None]" Type="Microsoft.VSDesigner.Data.BindManager.NoneControlPlaceHolder" />
-                     </ControlSetting>
-                  </ControlSettings>
+                     </ControlSetting></ControlSettings>
                </PropertyUISetting>
             </PropertyUISettings>
          </TypeUISetting>
@@ -105,7 +97,7 @@
          <PropertyUISetting Name="PictureURL">
             <ControlSettings>
                <ControlSetting ArtifactName="Microsoft:System.Windows.Forms:Form">
-                  <BindableControlInfo Name="PictureBox" Type="System.Windows.Forms.PictureBox" AssemblyName="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+                  <BindableControlInfo Name="[None]" Type="Microsoft.VSDesigner.Data.BindManager.NoneControlPlaceHolder" />
                </ControlSetting>
             </ControlSettings>
          </PropertyUISetting>

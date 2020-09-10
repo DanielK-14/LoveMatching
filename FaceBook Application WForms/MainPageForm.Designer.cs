@@ -57,14 +57,14 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.createdTimeLabel1 = new System.Windows.Forms.Label();
             this.descriptionTextBox = new System.Windows.Forms.TextBox();
-            this.pictureURLPictureBox = new System.Windows.Forms.PictureBox();
+            this.postPictureBox = new System.Windows.Forms.PictureBox();
             this.updateTimeLabel1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.descriptionTextBox1 = new System.Windows.Forms.TextBox();
             this.eventBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.endTimeLabel1 = new System.Windows.Forms.Label();
             this.nameLabel1 = new System.Windows.Forms.Label();
-            this.pictureLargeURLPictureBox = new System.Windows.Forms.PictureBox();
+            this.eventPictureBox = new System.Windows.Forms.PictureBox();
             this.privacyLabel1 = new System.Windows.Forms.Label();
             this.startTimeLabel1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -98,10 +98,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.postBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureURLPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.postPictureBox)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.eventBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureLargeURLPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eventPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.postBindingNavigator)).BeginInit();
             this.postBindingNavigator.SuspendLayout();
             this.SuspendLayout();
@@ -359,7 +359,7 @@
             this.panel1.Controls.Add(this.createdTimeLabel1);
             this.panel1.Controls.Add(descriptionLabel);
             this.panel1.Controls.Add(this.descriptionTextBox);
-            this.panel1.Controls.Add(this.pictureURLPictureBox);
+            this.panel1.Controls.Add(this.postPictureBox);
             this.panel1.Controls.Add(updateTimeLabel);
             this.panel1.Controls.Add(this.updateTimeLabel1);
             this.panel1.Location = new System.Drawing.Point(144, 312);
@@ -385,14 +385,14 @@
             this.descriptionTextBox.Size = new System.Drawing.Size(142, 84);
             this.descriptionTextBox.TabIndex = 3;
             // 
-            // pictureURLPictureBox
+            // postPictureBox
             // 
-            this.pictureURLPictureBox.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.postBindingSource, "PictureURL", true));
-            this.pictureURLPictureBox.Location = new System.Drawing.Point(33, 3);
-            this.pictureURLPictureBox.Name = "pictureURLPictureBox";
-            this.pictureURLPictureBox.Size = new System.Drawing.Size(100, 88);
-            this.pictureURLPictureBox.TabIndex = 5;
-            this.pictureURLPictureBox.TabStop = false;
+            this.postPictureBox.DataBindings.Add(new System.Windows.Forms.Binding("ImageLocation", this.postBindingSource, "PictureURL", true));
+            this.postPictureBox.Location = new System.Drawing.Point(33, 3);
+            this.postPictureBox.Name = "postPictureBox";
+            this.postPictureBox.Size = new System.Drawing.Size(100, 88);
+            this.postPictureBox.TabIndex = 5;
+            this.postPictureBox.TabStop = false;
             // 
             // updateTimeLabel1
             // 
@@ -412,7 +412,7 @@
             this.panel2.Controls.Add(this.endTimeLabel1);
             this.panel2.Controls.Add(nameLabel);
             this.panel2.Controls.Add(this.nameLabel1);
-            this.panel2.Controls.Add(this.pictureLargeURLPictureBox);
+            this.panel2.Controls.Add(this.eventPictureBox);
             this.panel2.Controls.Add(privacyLabel);
             this.panel2.Controls.Add(this.privacyLabel1);
             this.panel2.Controls.Add(startTimeLabel);
@@ -453,14 +453,14 @@
             this.nameLabel1.TabIndex = 5;
             this.nameLabel1.Text = "label4";
             // 
-            // pictureLargeURLPictureBox
+            // eventPictureBox
             // 
-            this.pictureLargeURLPictureBox.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.eventBindingSource, "PictureLargeURL", true));
-            this.pictureLargeURLPictureBox.Location = new System.Drawing.Point(38, 3);
-            this.pictureLargeURLPictureBox.Name = "pictureLargeURLPictureBox";
-            this.pictureLargeURLPictureBox.Size = new System.Drawing.Size(100, 86);
-            this.pictureLargeURLPictureBox.TabIndex = 7;
-            this.pictureLargeURLPictureBox.TabStop = false;
+            this.eventPictureBox.DataBindings.Add(new System.Windows.Forms.Binding("ImageLocation", this.eventBindingSource, "PictureLargeURL", true));
+            this.eventPictureBox.Location = new System.Drawing.Point(38, 3);
+            this.eventPictureBox.Name = "eventPictureBox";
+            this.eventPictureBox.Size = new System.Drawing.Size(100, 86);
+            this.eventPictureBox.TabIndex = 7;
+            this.eventPictureBox.TabStop = false;
             // 
             // privacyLabel1
             // 
@@ -710,11 +710,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.postBindingSource)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureURLPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.postPictureBox)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.eventBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureLargeURLPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eventPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.postBindingNavigator)).EndInit();
             this.postBindingNavigator.ResumeLayout(false);
             this.postBindingNavigator.PerformLayout();
@@ -744,14 +744,14 @@
         private System.Windows.Forms.Label createdTimeLabel1;
         private System.Windows.Forms.BindingSource postBindingSource;
         private System.Windows.Forms.TextBox descriptionTextBox;
-        private System.Windows.Forms.PictureBox pictureURLPictureBox;
+        private System.Windows.Forms.PictureBox postPictureBox;
         private System.Windows.Forms.Label updateTimeLabel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox descriptionTextBox1;
         private System.Windows.Forms.BindingSource eventBindingSource;
         private System.Windows.Forms.Label endTimeLabel1;
         private System.Windows.Forms.Label nameLabel1;
-        private System.Windows.Forms.PictureBox pictureLargeURLPictureBox;
+        private System.Windows.Forms.PictureBox eventPictureBox;
         private System.Windows.Forms.Label privacyLabel1;
         private System.Windows.Forms.Label startTimeLabel1;
         private System.Windows.Forms.Label label2;

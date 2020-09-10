@@ -138,6 +138,7 @@ namespace UI
 
                 r_AppSettings.SaveToFile();
             }
+
             if (LoginEvent != null)
             {
                 LoginEvent.Invoke();

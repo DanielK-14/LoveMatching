@@ -30,37 +30,19 @@ namespace UI
             m_LoggedInUser = r_AppManager.LoggedInUser;
             profilePictureBox.LoadAsync(m_LoggedInUser.PictureLargeURL);
             fullNameUser.Text = m_LoggedInUser.Name;
-            new Thread(() => { m_Events = m_LoggedInUser.Events.Take(15).ToList(); });
-            new Thread(() => { m_Posts = m_LoggedInUser.Posts.Take(15).ToList(); });
-            new Thread(() => { m_Friends = m_LoggedInUser.Friends.Take(15).ToList(); });
+            new Thread(() => 
+            { 
+                m_Events = m_LoggedInUser.Events.Take(15).ToList(); 
+            }).Start();
+            new Thread(() => { m_Posts = m_LoggedInUser.Posts.Take(15).ToList(); }).Start();
+            new Thread(() => { m_Friends = m_LoggedInUser.Friends.Take(15).ToList(); }).Start();
         }
 
         private void fetchEvents()
         {
-            /*
-            int counter = 0;
-            foreach (Event eventFSB in m_LoggedInUser.Events)
-            {
-                if (counter == r_MaximumNumberOfEventsToShow)
-                {
-                    break;
-                }
-                else
-                {
-                    comboBoxDecisionData.Items.Add(eventFSB.Name);
-                }
-
-                counter++;
-            }
-
-            if (m_LoggedInUser.Events.Count == 0)
-            {
-                MessageBox.Show("No events to retrieve!");
-            }
-            */
             if (eventsListBox.InvokeRequired == false)
             {
-                eventBindingSource.DataSource = allEvents;
+                eventBindingSource.DataSource = m_Events;
             }
             else
             {
@@ -68,40 +50,8 @@ namespace UI
             }
         }
 
-        /*private void fetchPosts()
-        {
-            int counter = 0;
-            foreach (Post post in m_LoggedInUser.Posts)
-            {
-                if (counter == r_MaximumNumberOfPostsToShow)
-                {
-                    break;
-                }
-                else if (post.Message != null)
-                {
-                    comboBoxDecisionData.Items.Add(post.Message);
-                }
-                else if (post.Caption != null)
-                {
-                    comboBoxDecisionData.Items.Add(post.Caption);
-                }
-                else
-                {
-                    comboBoxDecisionData.Items.Add(string.Format("[{0}]", post.Type));
-                }
-
-                counter++;
-            }
-
-            if (m_LoggedInUser.Posts.Count == 0)
-            {
-                MessageBox.Show("No posts to retrieve!");
-            }
-        }
-        */
         private void fetchPosts()
         {
-
             if(postsListBox.InvokeRequired == false)
             {
                 postBindingSource.DataSource = m_Posts;

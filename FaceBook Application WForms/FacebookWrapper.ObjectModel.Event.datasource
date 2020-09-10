@@ -56,9 +56,6 @@
             </PropertyUISettings>
          </TypeUISetting>
       </GenericObjectDataSource>
-      <GenericObjectDataSource DisplayName="WallPosts" Version="1.0">
-         <TypeInfo>FacebookWrapper.ObjectModel.Post, FbGraphApiWrapper, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
-      </GenericObjectDataSource>
       <GenericObjectDataSource DisplayName="Pictures" Version="1.0">
          <TypeInfo>FacebookWrapper.ObjectModel.PicturesColleciton, FbGraphApiWrapper, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
          <TypeUISetting>
