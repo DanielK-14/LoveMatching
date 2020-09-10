@@ -145,14 +145,20 @@ namespace UI
         {
             //cleanDataSelcetedComboBoxAndAnalyst();
             //DataAnalyst.ButtonClicked = DataAnalyst.LastButtonClicked.Events;
-            fetchEvents();
+            if (showEventsButton.Enabled)
+            {
+                fetchEvents();
+            }
         }
 
         private void ShowPostsButton_Click(object sender, EventArgs e)
         {
             //cleanDataSelcetedComboBoxAndAnalyst();
             //DataAnalyst.ButtonClicked = DataAnalyst.LastButtonClicked.Posts;
-            fetchPosts();
+            if (showPostsButton.Enabled)
+            {
+                fetchPosts();
+            }
         }
 
         /*
