@@ -59,6 +59,7 @@ namespace UI
             if (eventsListBox.InvokeRequired == false)
             {
                 eventBindingSource.DataSource = allEvents;
+                
             }
             else
             {
@@ -111,6 +112,8 @@ namespace UI
             }
         }
 
+
+        /*
         private void fetchFriends()
         {
             comboBoxDecisionData.Items.Clear();
@@ -134,6 +137,7 @@ namespace UI
                 MessageBox.Show("No Friends to retrieve!");
             }
         }
+        */
 
         private void PostButton_Click(object sender, EventArgs e)
         {
@@ -151,25 +155,28 @@ namespace UI
 
         private void ShowEventsButton_Click(object sender, EventArgs e)
         {
-            cleanDataSelcetedComboBoxAndAnalyst();
-            DataAnalyst.ButtonClicked = DataAnalyst.LastButtonClicked.Events;
+            //cleanDataSelcetedComboBoxAndAnalyst();
+            //DataAnalyst.ButtonClicked = DataAnalyst.LastButtonClicked.Events;
             fetchEvents();
         }
 
         private void ShowPostsButton_Click(object sender, EventArgs e)
         {
-            cleanDataSelcetedComboBoxAndAnalyst();
-            DataAnalyst.ButtonClicked = DataAnalyst.LastButtonClicked.Posts;
+            //cleanDataSelcetedComboBoxAndAnalyst();
+            //DataAnalyst.ButtonClicked = DataAnalyst.LastButtonClicked.Posts;
             fetchPosts();
         }
 
+        /*
         private void ShowFriendsButton_Click(object sender, EventArgs e)
         {
             cleanDataSelcetedComboBoxAndAnalyst();
             DataAnalyst.ButtonClicked = DataAnalyst.LastButtonClicked.Friends;
             fetchFriends();
         }
+        */
 
+        /*
         private void GetMatchesButton_Click(object sender, EventArgs e)
         {
             cleanDataSelcetedComboBoxAndAnalyst();
@@ -233,6 +240,7 @@ namespace UI
 
             dataAnalystRichBox.Text = dataAnalyzed;
         }
+        */
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {

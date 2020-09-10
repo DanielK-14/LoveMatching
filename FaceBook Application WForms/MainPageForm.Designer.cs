@@ -52,10 +52,10 @@
             this.ZodiakSignLink = new System.Windows.Forms.LinkLabel();
             this.logoutButton = new System.Windows.Forms.Button();
             this.postsListBox = new System.Windows.Forms.ListBox();
+            this.postBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.createdTimeLabel1 = new System.Windows.Forms.Label();
-            this.postBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.descriptionTextBox = new System.Windows.Forms.TextBox();
             this.pictureURLPictureBox = new System.Windows.Forms.PictureBox();
             this.updateTimeLabel1 = new System.Windows.Forms.Label();
@@ -84,6 +84,9 @@
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.postBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
+            this.label4 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             createdTimeLabel = new System.Windows.Forms.Label();
             descriptionLabel = new System.Windows.Forms.Label();
             updateTimeLabel = new System.Windows.Forms.Label();
@@ -93,8 +96,8 @@
             privacyLabel = new System.Windows.Forms.Label();
             startTimeLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).BeginInit();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.postBindingSource)).BeginInit();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureURLPictureBox)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.eventBindingSource)).BeginInit();
@@ -274,7 +277,6 @@
             this.showFriendsButton.TabIndex = 30;
             this.showFriendsButton.Text = "Show Friends";
             this.showFriendsButton.UseVisualStyleBackColor = false;
-            this.showFriendsButton.Click += new System.EventHandler(this.ShowFriendsButton_Click);
             // 
             // linkLabel2
             // 
@@ -299,7 +301,6 @@
             this.GetMatchesButton.TabIndex = 33;
             this.GetMatchesButton.Text = "Get Matches";
             this.GetMatchesButton.UseVisualStyleBackColor = false;
-            this.GetMatchesButton.Click += new System.EventHandler(this.GetMatchesButton_Click);
             // 
             // ZodiakSignLink
             // 
@@ -338,6 +339,10 @@
             this.postsListBox.Size = new System.Drawing.Size(119, 277);
             this.postsListBox.TabIndex = 36;
             // 
+            // postBindingSource
+            // 
+            this.postBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.Post);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -370,10 +375,6 @@
             this.createdTimeLabel1.Size = new System.Drawing.Size(87, 23);
             this.createdTimeLabel1.TabIndex = 1;
             this.createdTimeLabel1.Text = "label4";
-            // 
-            // postBindingSource
-            // 
-            this.postBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.Post);
             // 
             // descriptionTextBox
             // 
@@ -503,7 +504,7 @@
             this.friendsListBox.FormattingEnabled = true;
             this.friendsListBox.Location = new System.Drawing.Point(658, 312);
             this.friendsListBox.Name = "friendsListBox";
-            this.friendsListBox.Size = new System.Drawing.Size(200, 277);
+            this.friendsListBox.Size = new System.Drawing.Size(200, 134);
             this.friendsListBox.TabIndex = 42;
             // 
             // label3
@@ -640,6 +641,32 @@
             this.postBindingNavigatorSaveItem.Size = new System.Drawing.Size(23, 22);
             this.postBindingNavigatorSaveItem.Text = "Save Data";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(675, 449);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(76, 13);
+            this.label4.TabIndex = 46;
+            this.label4.Text = "Your Matches:";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(658, 466);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(200, 21);
+            this.comboBox1.TabIndex = 47;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(658, 495);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(200, 38);
+            this.button1.TabIndex = 48;
+            this.button1.Text = "Ask to go out";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // MainPageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -647,6 +674,9 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(884, 661);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.postBindingNavigator);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.friendsListBox);
@@ -677,9 +707,9 @@
             this.Text = "MainPageForm";
             this.Load += new System.EventHandler(this.MainPageForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.postBindingSource)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.postBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureURLPictureBox)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -741,5 +771,8 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.ToolStripButton postBindingNavigatorSaveItem;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button button1;
     }
 }
