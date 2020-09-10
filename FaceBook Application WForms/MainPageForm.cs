@@ -27,17 +27,55 @@ namespace UI
 
         private void switchUser()
         {
+            disableButtons();
             m_LoggedInUser = r_AppManager.LoggedInUser;
             profilePictureBox.LoadAsync(m_LoggedInUser.PictureLargeURL);
             fullNameUser.Text = m_LoggedInUser.Name;
-            new Thread(() => 
-            { 
-                m_Events = m_LoggedInUser.Events.Take(15).ToList(); 
-            }).Start();
-            new Thread(() => { m_Posts = m_LoggedInUser.Posts.Take(15).ToList(); }).Start();
-            new Thread(() => { m_Friends = m_LoggedInUser.Friends.Take(15).ToList(); }).Start();
+            new Thread(loadEvents).Start();
+            new Thread(loadPosts).Start();
+            new Thread(loadFriends).Start();
         }
 
+        private void loadEvents()
+        {
+            m_Events = m_LoggedInUser.Events.Take(15).ToList();
+            showEventsButton.Enabled = m_Events.Count > 0;
+            showEventsButton.Text = m_Events.Count > 0 ? "Show Events" : "No Events";
+            showEventsButton.BackColor = m_Events.Count > 0 ? System.Drawing.Color.Orange : showEventsButton.BackColor;
+        }
+
+        private void loadPosts()
+        {
+            m_Posts = m_LoggedInUser.Posts.Take(15).ToList();
+            showPostsButton.Enabled = m_Posts.Count > 0;
+            showPostsButton.Text = m_Posts.Count > 0 ? "Show Posts" : "No Posts";
+            showPostsButton.BackColor = m_Posts.Count > 0 ? System.Drawing.Color.Blue : showPostsButton.BackColor;
+        }
+
+        private void loadFriends()
+        {
+            m_Friends = m_LoggedInUser.Friends.Take(15).ToList();
+            showFriendsButton.Enabled = m_Friends.Count > 0;
+            showFriendsButton.Text = m_Friends.Count > 0 ? "Show Friends" : "No Friends";
+            showFriendsButton.BackColor = m_Friends.Count > 0 ? System.Drawing.Color.Green : showFriendsButton.BackColor;
+            GetMatchesButton.Enabled = m_Friends.Count > 0;
+            GetMatchesButton.BackColor = m_Friends.Count > 0 ? System.Drawing.Color.Purple : GetMatchesButton.BackColor;
+        }
+
+        private void disableButtons()
+        {
+            showFriendsButton.Enabled = false;
+            showFriendsButton.Text = "Loading Friends";
+            showFriendsButton.BackColor = System.Drawing.Color.Gray;
+            GetMatchesButton.Enabled =false;
+            GetMatchesButton.BackColor =System.Drawing.Color.Gray;
+            showPostsButton.Enabled = false;
+            showPostsButton.Text = "Loading Posts";
+            showPostsButton.BackColor = System.Drawing.Color.Gray;
+            showEventsButton.Enabled = false;
+            showEventsButton.Text = "Loading Events";
+            showEventsButton.BackColor = System.Drawing.Color.Gray;
+        }
         private void fetchEvents()
         {
             if (eventsListBox.InvokeRequired == false)
