@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows.Forms;
-using FacebookWrapper.ObjectModel;
+﻿using System.Windows.Forms;
 using Logic;
 
 namespace UI
@@ -13,7 +11,6 @@ namespace UI
     /// </summary>
     public class WinFormAppPagesCreator : AppPagesFactory<Form>
     {
-
         public override void CreatePages()
         {
             AppPages.Add(new MainPageForm());

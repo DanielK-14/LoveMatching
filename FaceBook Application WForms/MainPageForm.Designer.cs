@@ -48,19 +48,21 @@
             this.showEventsButton = new System.Windows.Forms.Button();
             this.showFriendsButton = new System.Windows.Forms.Button();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.GetMatchesButton = new System.Windows.Forms.Button();
+            this.getMatchesButton = new System.Windows.Forms.Button();
             this.ZodiakSignLink = new System.Windows.Forms.LinkLabel();
             this.logoutButton = new System.Windows.Forms.Button();
             this.postsListBox = new System.Windows.Forms.ListBox();
             this.postBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.postPictureBox = new System.Windows.Forms.PictureBox();
             this.createdTimeLabel1 = new System.Windows.Forms.Label();
             this.descriptionTextBox = new System.Windows.Forms.TextBox();
             this.updateTimeLabel1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.descriptionTextBox1 = new System.Windows.Forms.TextBox();
+            this.eventPictureBox = new System.Windows.Forms.PictureBox();
             this.eventBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.descriptionTextBox1 = new System.Windows.Forms.TextBox();
             this.endTimeLabel1 = new System.Windows.Forms.Label();
             this.nameLabel1 = new System.Windows.Forms.Label();
             this.privacyLabel1 = new System.Windows.Forms.Label();
@@ -68,12 +70,16 @@
             this.label2 = new System.Windows.Forms.Label();
             this.eventsListBox = new System.Windows.Forms.ListBox();
             this.friendsListBox = new System.Windows.Forms.ListBox();
+            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.matchesComboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.eventPictureBox = new System.Windows.Forms.PictureBox();
-            this.postPictureBox = new System.Windows.Forms.PictureBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.birthdayLabel1 = new System.Windows.Forms.Label();
+            this.emailLabel1 = new System.Windows.Forms.Label();
+            this.nameLabel3 = new System.Windows.Forms.Label();
+            this.pictureLargeURLPictureBox = new System.Windows.Forms.PictureBox();
             createdTimeLabel = new System.Windows.Forms.Label();
             descriptionLabel = new System.Windows.Forms.Label();
             updateTimeLabel = new System.Windows.Forms.Label();
@@ -85,10 +91,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.postBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.eventBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.eventPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.postPictureBox)).BeginInit();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.eventPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eventBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureLargeURLPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // createdTimeLabel
@@ -279,17 +288,18 @@
             this.linkLabel2.Text = "Profile";
             this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
-            // GetMatchesButton
+            // getMatchesButton
             // 
-            this.GetMatchesButton.BackColor = System.Drawing.Color.Gray;
-            this.GetMatchesButton.Enabled = false;
-            this.GetMatchesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GetMatchesButton.Location = new System.Drawing.Point(645, 225);
-            this.GetMatchesButton.Name = "GetMatchesButton";
-            this.GetMatchesButton.Size = new System.Drawing.Size(209, 43);
-            this.GetMatchesButton.TabIndex = 33;
-            this.GetMatchesButton.Text = "Get Matches";
-            this.GetMatchesButton.UseVisualStyleBackColor = false;
+            this.getMatchesButton.BackColor = System.Drawing.Color.Gray;
+            this.getMatchesButton.Enabled = false;
+            this.getMatchesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.getMatchesButton.Location = new System.Drawing.Point(645, 225);
+            this.getMatchesButton.Name = "getMatchesButton";
+            this.getMatchesButton.Size = new System.Drawing.Size(209, 43);
+            this.getMatchesButton.TabIndex = 33;
+            this.getMatchesButton.Text = "Get Matches";
+            this.getMatchesButton.UseVisualStyleBackColor = false;
+            this.getMatchesButton.Click += new System.EventHandler(this.GetMatchesButton_Click);
             // 
             // ZodiakSignLink
             // 
@@ -321,7 +331,7 @@
             // postsListBox
             // 
             this.postsListBox.DataSource = this.postBindingSource;
-            this.postsListBox.DisplayMember = "Message";
+            this.postsListBox.DisplayMember = "Name";
             this.postsListBox.FormattingEnabled = true;
             this.postsListBox.Location = new System.Drawing.Point(23, 312);
             this.postsListBox.Name = "postsListBox";
@@ -355,6 +365,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(168, 277);
             this.panel1.TabIndex = 38;
+            // 
+            // postPictureBox
+            // 
+            this.postPictureBox.DataBindings.Add(new System.Windows.Forms.Binding("ImageLocation", this.postBindingSource, "PictureURL", true));
+            this.postPictureBox.Location = new System.Drawing.Point(33, 3);
+            this.postPictureBox.Name = "postPictureBox";
+            this.postPictureBox.Size = new System.Drawing.Size(100, 89);
+            this.postPictureBox.TabIndex = 8;
+            this.postPictureBox.TabStop = false;
             // 
             // createdTimeLabel1
             // 
@@ -401,6 +420,19 @@
             this.panel2.Size = new System.Drawing.Size(180, 277);
             this.panel2.TabIndex = 41;
             // 
+            // eventPictureBox
+            // 
+            this.eventPictureBox.DataBindings.Add(new System.Windows.Forms.Binding("ImageLocation", this.eventBindingSource, "PictureLargeURL", true));
+            this.eventPictureBox.Location = new System.Drawing.Point(38, 3);
+            this.eventPictureBox.Name = "eventPictureBox";
+            this.eventPictureBox.Size = new System.Drawing.Size(100, 89);
+            this.eventPictureBox.TabIndex = 12;
+            this.eventPictureBox.TabStop = false;
+            // 
+            // eventBindingSource
+            // 
+            this.eventBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.Event);
+            // 
             // descriptionTextBox1
             // 
             this.descriptionTextBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.eventBindingSource, "Description", true));
@@ -409,10 +441,6 @@
             this.descriptionTextBox1.Name = "descriptionTextBox1";
             this.descriptionTextBox1.Size = new System.Drawing.Size(161, 62);
             this.descriptionTextBox1.TabIndex = 1;
-            // 
-            // eventBindingSource
-            // 
-            this.eventBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.Event);
             // 
             // endTimeLabel1
             // 
@@ -471,11 +499,17 @@
             // 
             // friendsListBox
             // 
+            this.friendsListBox.DataSource = this.userBindingSource;
+            this.friendsListBox.DisplayMember = "Name";
             this.friendsListBox.FormattingEnabled = true;
             this.friendsListBox.Location = new System.Drawing.Point(658, 312);
             this.friendsListBox.Name = "friendsListBox";
-            this.friendsListBox.Size = new System.Drawing.Size(200, 134);
+            this.friendsListBox.Size = new System.Drawing.Size(200, 108);
             this.friendsListBox.TabIndex = 42;
+            // 
+            // userBindingSource
+            // 
+            this.userBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.User);
             // 
             // label3
             // 
@@ -489,46 +523,76 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(675, 449);
+            this.label4.Location = new System.Drawing.Point(675, 502);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(76, 13);
             this.label4.TabIndex = 46;
             this.label4.Text = "Your Matches:";
             // 
-            // comboBox1
+            // matchesComboBox1
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(658, 466);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(200, 21);
-            this.comboBox1.TabIndex = 47;
+            this.matchesComboBox1.FormattingEnabled = true;
+            this.matchesComboBox1.Location = new System.Drawing.Point(658, 519);
+            this.matchesComboBox1.Name = "matchesComboBox1";
+            this.matchesComboBox1.Size = new System.Drawing.Size(200, 21);
+            this.matchesComboBox1.TabIndex = 47;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(658, 495);
+            this.button1.Location = new System.Drawing.Point(658, 548);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 38);
             this.button1.TabIndex = 48;
             this.button1.Text = "Ask to go out";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // eventPictureBox
+            // panel3
             // 
-            this.eventPictureBox.DataBindings.Add(new System.Windows.Forms.Binding("ImageLocation", this.eventBindingSource, "PictureLargeURL", true));
-            this.eventPictureBox.Location = new System.Drawing.Point(38, 3);
-            this.eventPictureBox.Name = "eventPictureBox";
-            this.eventPictureBox.Size = new System.Drawing.Size(100, 89);
-            this.eventPictureBox.TabIndex = 12;
-            this.eventPictureBox.TabStop = false;
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.panel3.Controls.Add(this.birthdayLabel1);
+            this.panel3.Controls.Add(this.emailLabel1);
+            this.panel3.Controls.Add(this.nameLabel3);
+            this.panel3.Controls.Add(this.pictureLargeURLPictureBox);
+            this.panel3.Location = new System.Drawing.Point(658, 427);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(200, 72);
+            this.panel3.TabIndex = 49;
             // 
-            // postPictureBox
+            // birthdayLabel1
             // 
-            this.postPictureBox.DataBindings.Add(new System.Windows.Forms.Binding("ImageLocation", this.postBindingSource, "PictureURL", true));
-            this.postPictureBox.Location = new System.Drawing.Point(33, 3);
-            this.postPictureBox.Name = "postPictureBox";
-            this.postPictureBox.Size = new System.Drawing.Size(100, 89);
-            this.postPictureBox.TabIndex = 8;
-            this.postPictureBox.TabStop = false;
+            this.birthdayLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Birthday", true));
+            this.birthdayLabel1.Location = new System.Drawing.Point(3, 26);
+            this.birthdayLabel1.Name = "birthdayLabel1";
+            this.birthdayLabel1.Size = new System.Drawing.Size(134, 23);
+            this.birthdayLabel1.TabIndex = 1;
+            this.birthdayLabel1.Text = "label5";
+            // 
+            // emailLabel1
+            // 
+            this.emailLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Email", true));
+            this.emailLabel1.Location = new System.Drawing.Point(3, 49);
+            this.emailLabel1.Name = "emailLabel1";
+            this.emailLabel1.Size = new System.Drawing.Size(134, 23);
+            this.emailLabel1.TabIndex = 3;
+            this.emailLabel1.Text = "label5";
+            // 
+            // nameLabel3
+            // 
+            this.nameLabel3.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Name", true));
+            this.nameLabel3.Location = new System.Drawing.Point(3, 3);
+            this.nameLabel3.Name = "nameLabel3";
+            this.nameLabel3.Size = new System.Drawing.Size(134, 23);
+            this.nameLabel3.TabIndex = 5;
+            this.nameLabel3.Text = "label5";
+            // 
+            // pictureLargeURLPictureBox
+            // 
+            this.pictureLargeURLPictureBox.DataBindings.Add(new System.Windows.Forms.Binding("ImageLocation", this.userBindingSource, "PictureLargeURL", true));
+            this.pictureLargeURLPictureBox.Location = new System.Drawing.Point(143, 11);
+            this.pictureLargeURLPictureBox.Name = "pictureLargeURLPictureBox";
+            this.pictureLargeURLPictureBox.Size = new System.Drawing.Size(53, 50);
+            this.pictureLargeURLPictureBox.TabIndex = 7;
+            this.pictureLargeURLPictureBox.TabStop = false;
             // 
             // MainPageForm
             // 
@@ -537,8 +601,9 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(882, 644);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.matchesComboBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.friendsListBox);
@@ -550,7 +615,7 @@
             this.Controls.Add(this.postsListBox);
             this.Controls.Add(this.logoutButton);
             this.Controls.Add(this.ZodiakSignLink);
-            this.Controls.Add(this.GetMatchesButton);
+            this.Controls.Add(this.getMatchesButton);
             this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.showFriendsButton);
             this.Controls.Add(this.showEventsButton);
@@ -568,16 +633,18 @@
             this.Name = "MainPageForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "MainPageForm";
-            this.Load += new System.EventHandler(this.MainPageForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.postBindingSource)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.postPictureBox)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.eventBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.eventPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.postPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eventBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
+            this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureLargeURLPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -595,7 +662,7 @@
         private System.Windows.Forms.Button showEventsButton;
         private System.Windows.Forms.Button showFriendsButton;
         private System.Windows.Forms.LinkLabel linkLabel2;
-        private System.Windows.Forms.Button GetMatchesButton;
+        private System.Windows.Forms.Button getMatchesButton;
         private System.Windows.Forms.LinkLabel ZodiakSignLink;
         private System.Windows.Forms.Button logoutButton;
         private System.Windows.Forms.ListBox postsListBox;
@@ -617,9 +684,15 @@
         private System.Windows.Forms.ListBox friendsListBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox matchesComboBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox postPictureBox;
         private System.Windows.Forms.PictureBox eventPictureBox;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label birthdayLabel1;
+        private System.Windows.Forms.BindingSource userBindingSource;
+        private System.Windows.Forms.Label emailLabel1;
+        private System.Windows.Forms.Label nameLabel3;
+        private System.Windows.Forms.PictureBox pictureLargeURLPictureBox;
     }
 }

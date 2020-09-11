@@ -8,9 +8,9 @@ namespace UI
 {
     internal partial class UserInformation : Form
     {
+        private readonly AppManager r_AppManager = AppManager.GetInstance;
         private User m_LoggedInUser;
         private List<PictureBox> m_PictureBoxes;
-        private readonly AppManager r_AppManager = AppManager.GetInstance;
 
         internal UserInformation()
         {

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
 
 namespace Logic
 {
@@ -12,7 +11,7 @@ namespace Logic
 
         public string PictureUrl { get; private set; }
 
-        static public ZodiacSign GetRandomSign()
+        public static ZodiacSign GetRandomSign()
         {
             Random random = new Random();
             int fateSelection = random.Next(0, Enum.GetNames(typeof(eZodiacSign)).Length);
@@ -114,6 +113,5 @@ namespace Logic
                     break;
             }
         }
-
     }
 }

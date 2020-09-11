@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using FacebookWrapper;
@@ -15,22 +13,43 @@ namespace UI
     /// Singelton Pattern
     /// AppManger class is accessible to all.
     /// There is only one instance of itself created.
+    /// It saves the logged in user and controls the pages show order.
     /// </summary>
-    ///
-
     public sealed class AppManager : IFacebookApplication
     {
+        private static readonly object sr_CreationalLockContext = new object();
+        public static AppManager s_Instance = null;
         private readonly AppSettings r_AppSettings;
         private readonly Stack<Form> r_PagesStack = new Stack<Form>();
         private Form m_CurrentShownForm;
-        public delegate void MyOperationFunctionDelegate();
-        public event MyOperationFunctionDelegate LoginEvent;
         private Dictionary<string, Form> m_FormPagesDictionary = new Dictionary<string, Form>();
-        public AppPagesFactory<Form> Factory { get; set; }
-        public User LoggedInUser { get; private set; }
 
-        public static AppManager s_Instance = null;
-        private static readonly object sr_CreationalLockContext = new object();
+        public event MyOperationFunctionDelegate LoginEvent;
+
+        public delegate void MyOperationFunctionDelegate();
+
+        public static AppManager GetInstance
+        {
+            get
+            {
+                if (s_Instance == null)
+                {
+                    lock (sr_CreationalLockContext)
+                    {
+                        if (s_Instance == null)
+                        {
+                            s_Instance = new AppManager();
+                        }
+                    }
+                }
+
+                return s_Instance;
+            }
+        }
+
+        public AppPagesFactory<Form> Factory { get; set; }
+
+        public User LoggedInUser { get; private set; }
 
         private AppManager()
         {
@@ -40,25 +59,6 @@ namespace UI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.ThreadException += new ThreadExceptionEventHandler(MyCommonExceptionHandlingMethod);
-        }
-
-        public static AppManager GetInstance
-        {
-            get
-            {
-                if(s_Instance == null)
-                {
-                    lock(sr_CreationalLockContext)
-                    {
-                        if(s_Instance == null)
-                        {
-                            s_Instance = new AppManager();
-                        }
-                    }
-                }
-
-                return s_Instance;
-            }
         }
 
         internal Form CurrentShownForm
@@ -103,7 +103,6 @@ namespace UI
                 throw new Exception("Cannot run without initializing a pages creator");
             }
 
-
             r_PagesStack.Clear();
             Factory.CreatePages();
             foreach (Form pageForm in Factory.AppPages)
@@ -116,7 +115,6 @@ namespace UI
             Login();
             Application.Run();
         }
-
 
         public void Login()
         {

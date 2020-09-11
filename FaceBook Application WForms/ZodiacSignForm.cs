@@ -7,12 +7,9 @@ namespace UI
 {
     internal partial class ZodiacSignForm : Form
     {
-
-        private ZodiacSignAdapter m_ZodiacMatch;
-
-        private User m_LoggedInUser;
-
         private readonly AppManager r_AppManager = AppManager.GetInstance;
+        private ZodiacSignAdapter m_ZodiacMatch;
+        private User m_LoggedInUser;
 
         internal ZodiacSignForm()
         {
@@ -35,8 +32,8 @@ namespace UI
             }
 
             userSignNameLabel.Text = m_ZodiacMatch.Name;
-
         }
+
         private void findButton_Click(object sender, EventArgs e)
         {
             m_ZodiacMatch.UpdateBestMatchedSign();

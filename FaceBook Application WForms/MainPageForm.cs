@@ -10,20 +10,17 @@ namespace UI
 {
     public partial class MainPageForm : Form
     {
+        private delegate void ChangeMyButtonDelegate(Control i_Ctrl, string i_Text, System.Drawing.Color i_Color, bool i_Enable);
+
         private readonly int r_MaximumNumberOfFriendsToShow = 15;
         private readonly int r_MaximumNumberOfPostsToShow = 15;
         private readonly int r_MaximumNumberOfEventsToShow = 15;
-        private  User m_LoggedInUser;
         private readonly AppManager r_AppManager = AppManager.GetInstance;
+        private User m_LoggedInUser;
         private List<Post> m_Posts;
         private List<User> m_Friends;
+        private List<User> m_Matches;
         private List<Event> m_Events;
-        private readonly object sr_LoadEventsLock = new object();
-        private readonly object sr_LoadPostsLock = new object();
-        private readonly object sr_LoadFriendsLock = new object();
-        private bool m_EventsLoaded;
-        private bool m_PostsLoaded;
-        private bool m_FriendsLoaded;
 
         public MainPageForm()
         {
@@ -42,97 +39,75 @@ namespace UI
 
         private void updateInfo()
         {
-            Thread thread1 = new Thread(loadEvents);
-            thread1.Start();
-            Thread thread2 = new Thread(loadPosts);
-            thread2.Start();
-            Thread thread3 = new Thread(loadFriends);
-            thread3.Start();
+            new Thread(loadEvents).Start();
+            new Thread(loadPosts).Start();
+            new Thread(loadFriends).Start();
+        }
+
+        private void clearFields()
+        {
+            m_Events = null;
+            m_Friends = null;
+            m_Matches = null;
+            m_Posts = null;
+
+            eventBindingSource.Clear();
+            postBindingSource.Clear();
+            userBindingSource.Clear();
+            matchesComboBox1.Items.Clear();
+        }
+
+        private void changeButton(Control i_Ctrl, string i_Text, System.Drawing.Color i_Color, bool i_Enable)
+        {
+            if (i_Ctrl.InvokeRequired)
+            {
+                ChangeMyButtonDelegate del = new ChangeMyButtonDelegate(changeButton);
+                i_Ctrl.Invoke(del, i_Ctrl, i_Text, i_Color, i_Enable);
+            }
+            else
+            {
+                i_Ctrl.Text = i_Text;
+                i_Ctrl.BackColor = i_Color;
+                i_Ctrl.Enabled = i_Enable;
+            }
+        }
+
+        public static void ChangeControlText(Control i_Ctrl, string i_Text)
+        {
+            i_Ctrl.Text = i_Text;
         }
 
         private void loadEvents()
         {
-            /*
-            if (!m_EventsLoaded)
-            {
-                lock (sr_LoadEventsLock)
-                {
-                    if (!m_EventsLoaded)
-                    {
-                        m_Events = m_LoggedInUser.Events.Take(r_MaximumNumberOfEventsToShow).ToList();
-                        m_EventsLoaded = true;
-                    }
-                }
-            }
-            */
-
             m_Events = m_LoggedInUser.Events.Take(r_MaximumNumberOfEventsToShow).ToList();
-            showEventsButton.Invoke(new Action(
-                () =>
-                {
-                    showEventsButton.Enabled = m_Events.Count > 0;
-                    showEventsButton.Text = m_Events.Count > 0 ? "Show Events" : "No Events";
-                    showEventsButton.BackColor = m_Events.Count > 0 ? System.Drawing.Color.Orange : showEventsButton.BackColor;
-                }));
+            sendButtonForChange(showEventsButton, "Show Events", "No Events", System.Drawing.Color.Orange, m_Events);
+        }
+
+        private void sendButtonForChange<T>(
+            Control i_Control,
+            string i_Text1,
+            string i_Text2,
+            System.Drawing.Color i_Color,
+            List<T> i_Collection)
+        {
+            string text = i_Collection.Count > 0 ? i_Text1 : i_Text2;
+            bool enable = i_Collection.Count > 0;
+            System.Drawing.Color color = i_Collection.Count > 0 ? i_Color : System.Drawing.Color.Empty;
+            changeButton(i_Control, text, color, enable);
         }
 
         private void loadPosts()
         {
-            /*
-            if (!m_PostsLoaded)
-            {
-                lock (sr_LoadPostsLock)
-                {
-                    if (!m_PostsLoaded)
-                    {
-                        m_Posts = m_LoggedInUser.Posts.Take(r_MaximumNumberOfPostsToShow).ToList();
-                        m_PostsLoaded = true;
-                    }
-                }
-            }
-            */
-
             m_Posts = m_LoggedInUser.Posts.Take(r_MaximumNumberOfPostsToShow).ToList();
-            showPostsButton.Invoke(new Action(
-                () =>
-                {
-                    showPostsButton.Enabled = m_Posts.Count > 0;
-                    showPostsButton.Text = m_Posts.Count > 0 ? "Show Posts" : "No Posts";
-                    showPostsButton.BackColor = m_Posts.Count > 0 ? System.Drawing.Color.Blue : showPostsButton.BackColor;
-                }));
+            sendButtonForChange(showPostsButton, "Show Posts", "No Posts", System.Drawing.Color.Blue, m_Posts);
         }
 
         private void loadFriends()
         {
-            /*
-            if (!m_FriendsLoaded)
-            {
-                lock (sr_LoadFriendsLock)
-                {
-                    if (!m_FriendsLoaded)
-                    {
-                        m_Friends = m_LoggedInUser.Friends.Take(r_MaximumNumberOfFriendsToShow).ToList();
-                        m_FriendsLoaded = true;
-                    }
-                }
-            }
-            */
-
             m_Friends = m_LoggedInUser.Friends.Take(r_MaximumNumberOfFriendsToShow).ToList();
-            showFriendsButton.Invoke(new Action(
-                () =>
-                {
-                    showFriendsButton.Enabled = m_Friends.Count > 0;
-                    showFriendsButton.Text = m_Friends.Count > 0 ? "Show Friends" : "No Friends";
-                    showFriendsButton.BackColor = m_Friends.Count > 0 ? System.Drawing.Color.Green : showFriendsButton.BackColor;
-                }));
-
-            GetMatchesButton.Invoke(new Action(
-                () =>
-                {
-                    GetMatchesButton.Enabled = m_Friends.Count > 0;
-                    GetMatchesButton.BackColor = m_Friends.Count > 0 ? System.Drawing.Color.Purple : GetMatchesButton.BackColor;
-                }));
+            Console.WriteLine(m_Friends[0].Name);
+            sendButtonForChange(showFriendsButton, "Show Friends", "No Friends", System.Drawing.Color.Green, m_Friends);
+            sendButtonForChange(getMatchesButton, "Show Matches", "Show Matches", System.Drawing.Color.Purple, m_Friends);
         }
 
         private void disableButtons()
@@ -140,8 +115,9 @@ namespace UI
             showFriendsButton.Enabled = false;
             showFriendsButton.Text = "Loading Friends";
             showFriendsButton.BackColor = System.Drawing.Color.Gray;
-            GetMatchesButton.Enabled =false;
-            GetMatchesButton.BackColor =System.Drawing.Color.Gray;
+            getMatchesButton.Text = "Show Matches";
+            getMatchesButton.Enabled = false;
+            getMatchesButton.BackColor = System.Drawing.Color.Gray;
             showPostsButton.Enabled = false;
             showPostsButton.Text = "Loading Posts";
             showPostsButton.BackColor = System.Drawing.Color.Gray;
@@ -164,7 +140,7 @@ namespace UI
 
         private void fetchPosts()
         {
-            if(postsListBox.InvokeRequired == false)
+            if (postsListBox.InvokeRequired == false)
             {
                 postBindingSource.DataSource = m_Posts;
             }
@@ -174,32 +150,17 @@ namespace UI
             }
         }
 
-
-        /*
         private void fetchFriends()
         {
-            comboBoxDecisionData.Items.Clear();
-            comboBoxDecisionData.DisplayMember = "Name";
-            int counter = 0;
-
-            foreach (User friend in m_LoggedInUser.Friends)
+            if (friendsListBox.InvokeRequired == false)
             {
-                if (counter == r_MaximumNumberOfFriendsToShow)
-                {
-                    break;
-                }
-
-                comboBoxDecisionData.Items.Add(friend);
-                friend.ReFetch(DynamicWrapper.eLoadOptions.Full);
-                counter++;
+                userBindingSource.DataSource = m_Friends;
             }
-
-            if (m_LoggedInUser.Friends.Count == 0)
+            else
             {
-                MessageBox.Show("No Friends to retrieve!");
+                friendsListBox.Invoke(new Action(() => userBindingSource.DataSource = m_Friends));
             }
         }
-        */
 
         private void PostButton_Click(object sender, EventArgs e)
         {
@@ -217,8 +178,6 @@ namespace UI
 
         private void ShowEventsButton_Click(object sender, EventArgs e)
         {
-            //cleanDataSelcetedComboBoxAndAnalyst();
-            //DataAnalyst.ButtonClicked = DataAnalyst.LastButtonClicked.Events;
             if (showEventsButton.Enabled)
             {
                 fetchEvents();
@@ -227,88 +186,41 @@ namespace UI
 
         private void ShowPostsButton_Click(object sender, EventArgs e)
         {
-            //cleanDataSelcetedComboBoxAndAnalyst();
-            //DataAnalyst.ButtonClicked = DataAnalyst.LastButtonClicked.Posts;
             if (showPostsButton.Enabled)
             {
                 fetchPosts();
             }
         }
 
-        /*
         private void ShowFriendsButton_Click(object sender, EventArgs e)
         {
-            cleanDataSelcetedComboBoxAndAnalyst();
-            DataAnalyst.ButtonClicked = DataAnalyst.LastButtonClicked.Friends;
-            fetchFriends();
+            if (showFriendsButton.Enabled)
+            {
+                fetchFriends();
+            }
         }
-        */
 
-        /*
         private void GetMatchesButton_Click(object sender, EventArgs e)
         {
-            cleanDataSelcetedComboBoxAndAnalyst();
-            DataAnalyst.ButtonClicked = DataAnalyst.LastButtonClicked.Friends;
-
-            List<User> friendsToMatchWith = AvailableFriends.GetAvailabeFriends(m_LoggedInUser);
+            m_Matches = AvailableFriends.GetAvailabeFriends(m_LoggedInUser);
             int counter = 0;
-            foreach (User friend in friendsToMatchWith)
+            foreach (User friend in m_Matches)
             {
                 if (counter == r_MaximumNumberOfFriendsToShow)
                 {
                     break;
                 }
 
-                comboBoxDecisionData.Items.Add(friend);
+                matchesComboBox1.Items.Add(friend);
                 friend.ReFetch(DynamicWrapper.eLoadOptions.Full);
                 counter++;
             }
 
-            if (friendsToMatchWith.Count == 0)
+            if (m_Matches.Count == 0)
             {
                 MessageBox.Show("Could not find anyone for you.");
             }
         }
-
-        private void cleanDataSelcetedComboBoxAndAnalyst()
-        {
-            comboBoxDecisionData.Items.Clear();
-            dataAnalystRichBox.Text = string.Empty;
-            dataAnalystRichBox.Visible = false;
-
-            resetDataAnalyst();
-        }
-
-        private void comboBoxDecisionData_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            resetDataAnalyst();
-            showAnalayzeResults(DataAnalyst.AnalyzeData(comboBoxDecisionData.SelectedIndex, m_LoggedInUser));
-        }
-
-        private void resetDataAnalyst()
-        {
-            dataAnalystRichBox.Clear();
-            dataAnalystRichBox.Visible = false;
-
-            dataSelectedPictureBox.Image = null;
-            dataSelectedPictureBox.Visible = false;
-        }
-
-        private void showAnalayzeResults(List<string> i_Data)
-        {
-            string imageUrl = i_Data[1];
-            string dataAnalyzed = i_Data[0];
-            dataAnalystRichBox.Visible = true;
-
-            if (string.IsNullOrEmpty(imageUrl) == false)
-            {
-                dataSelectedPictureBox.Visible = true;
-                dataSelectedPictureBox.LoadAsync(imageUrl);
-            }
-
-            dataAnalystRichBox.Text = dataAnalyzed;
-        }
-        */
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -322,12 +234,8 @@ namespace UI
 
         private void logoutButton_Click(object sender, EventArgs e)
         {
+            clearFields();
             r_AppManager.Logout();
-        }
-
-        private void MainPageForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
