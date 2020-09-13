@@ -8,20 +8,19 @@ namespace UI
 {
     internal partial class UserInformation : Form
     {
-        private readonly AppManager r_AppManager = AppManager.GetInstance;
         private User m_LoggedInUser;
         private List<PictureBox> m_PictureBoxes;
 
         internal UserInformation()
         {
             InitializeComponent();
-            r_AppManager.LoginEvent += switchUser;
+            AppManager.GetInstance.LoginEvent += switchUser;
             initPictureBoxes();
         }
 
         private void switchUser()
         {
-            m_LoggedInUser = r_AppManager.LoggedInUser;
+            m_LoggedInUser = AppManager.GetInstance.LoggedInUser;
             fetchUserInfo();
             fetchPhotos();
         }
@@ -82,7 +81,7 @@ namespace UI
 
         private void backButton_Click(object sender, EventArgs e)
         {
-            r_AppManager.Back();
+            AppManager.GetInstance.Back();
         }
     }
 }

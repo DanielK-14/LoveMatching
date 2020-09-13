@@ -7,19 +7,18 @@ namespace UI
 {
     internal partial class ZodiacSignForm : Form
     {
-        private readonly AppManager r_AppManager = AppManager.GetInstance;
         private ZodiacSignAdapter m_ZodiacMatch;
         private User m_LoggedInUser;
 
         internal ZodiacSignForm()
         {
             InitializeComponent();
-            r_AppManager.LoginEvent += switchUser;
+            AppManager.GetInstance.LoginEvent += switchUser;
         }
 
         private void switchUser()
         {
-            m_LoggedInUser = r_AppManager.LoggedInUser;
+            m_LoggedInUser = AppManager.GetInstance.LoggedInUser;
             m_ZodiacMatch = new ZodiacSignAdapter(m_LoggedInUser.Birthday);
             try
             {
@@ -57,7 +56,7 @@ namespace UI
 
         private void goBackButton_Click(object sender, EventArgs e)
         {
-            r_AppManager.Back();
+            AppManager.GetInstance.Back();
             findButton.Visible = true;
             pictureBox2.Visible = false;
             matchSignNameLabel.Visible = false;

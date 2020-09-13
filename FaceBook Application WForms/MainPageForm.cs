@@ -15,7 +15,6 @@ namespace UI
         private readonly int r_MaximumNumberOfFriendsToShow = 15;
         private readonly int r_MaximumNumberOfPostsToShow = 15;
         private readonly int r_MaximumNumberOfEventsToShow = 15;
-        private readonly AppManager r_AppManager = AppManager.GetInstance;
         private User m_LoggedInUser;
         private List<Post> m_Posts;
         private List<User> m_Friends;
@@ -25,13 +24,13 @@ namespace UI
         public MainPageForm()
         {
             InitializeComponent();
-            r_AppManager.LoginEvent += switchUser;
+            AppManager.GetInstance.LoginEvent += switchUser;
         }
 
         private void switchUser()
         {
             disableButtons();
-            m_LoggedInUser = r_AppManager.LoggedInUser;
+            m_LoggedInUser = AppManager.GetInstance.LoggedInUser;
             profilePictureBox.LoadAsync(m_LoggedInUser.PictureLargeURL);
             fullNameUser.Text = m_LoggedInUser.Name;
             updateInfo();
@@ -224,18 +223,18 @@ namespace UI
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            r_AppManager.NextPage("UserInformation");
+            AppManager.GetInstance.NextPage("UserInformation");
         }
 
         private void ZodiakSignLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            r_AppManager.NextPage("ZodiacSignForm");
+            AppManager.GetInstance.NextPage("ZodiacSignForm");
         }
 
         private void logoutButton_Click(object sender, EventArgs e)
         {
             clearFields();
-            r_AppManager.Logout();
+            AppManager.GetInstance.Logout();
         }
     }
 }

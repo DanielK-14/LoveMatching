@@ -42,7 +42,6 @@ namespace Logic
 
         public ZodiacSign(int i_Month, int i_Day)
         {
-            ///Adapter Pattern
             initUserZodiacSign(i_Month, i_Day);
             PictureUrl = sr_ImagesUrl[Sign];
         }
