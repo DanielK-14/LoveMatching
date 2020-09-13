@@ -105,7 +105,6 @@ namespace UI
         private void loadFriends()
         {
             m_Friends = m_LoggedInUser.Friends.Take(r_MaximumNumberOfFriendsToShow).ToList();
-            Console.WriteLine(m_Friends[0].Name);
             sendButtonForChange(showFriendsButton, "Show Friends", "No Friends", System.Drawing.Color.Green, m_Friends);
             sendButtonForChange(getMatchesButton, "Show Matches", "Show Matches", System.Drawing.Color.Purple, m_Friends);
         }
@@ -128,7 +127,7 @@ namespace UI
 
         private void fetchEvents()
         {
-            if (eventsListBox.InvokeRequired == false)
+            if (!eventsListBox.InvokeRequired)
             {
                 eventBindingSource.DataSource = m_Events;
             }
@@ -140,7 +139,7 @@ namespace UI
 
         private void fetchPosts()
         {
-            if (postsListBox.InvokeRequired == false)
+            if (!postsListBox.InvokeRequired)
             {
                 postBindingSource.DataSource = m_Posts;
             }
@@ -152,7 +151,7 @@ namespace UI
 
         private void fetchFriends()
         {
-            if (friendsListBox.InvokeRequired == false)
+            if (!friendsListBox.InvokeRequired)
             {
                 userBindingSource.DataSource = m_Friends;
             }
@@ -192,11 +191,12 @@ namespace UI
             }
         }
 
-        private void ShowFriendsButton_Click(object sender, EventArgs e)
+        private void showFriendsButton_Click(object sender, EventArgs e)
         {
             if (showFriendsButton.Enabled)
             {
                 fetchFriends();
+                friendsListBox.DisplayMember = "Name";
             }
         }
 

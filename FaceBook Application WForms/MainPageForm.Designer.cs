@@ -74,12 +74,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.matchesComboBox1 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.birthdayLabel1 = new System.Windows.Forms.Label();
             this.emailLabel1 = new System.Windows.Forms.Label();
             this.nameLabel3 = new System.Windows.Forms.Label();
             this.pictureLargeURLPictureBox = new System.Windows.Forms.PictureBox();
+            this.albumsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             createdTimeLabel = new System.Windows.Forms.Label();
             descriptionLabel = new System.Windows.Forms.Label();
             updateTimeLabel = new System.Windows.Forms.Label();
@@ -98,77 +98,86 @@
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureLargeURLPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.albumsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // createdTimeLabel
             // 
             createdTimeLabel.AutoSize = true;
-            createdTimeLabel.Location = new System.Drawing.Point(7, 100);
+            createdTimeLabel.Location = new System.Drawing.Point(10, 154);
+            createdTimeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             createdTimeLabel.Name = "createdTimeLabel";
-            createdTimeLabel.Size = new System.Drawing.Size(73, 13);
+            createdTimeLabel.Size = new System.Drawing.Size(108, 20);
             createdTimeLabel.TabIndex = 0;
             createdTimeLabel.Text = "Created Time:";
             // 
             // descriptionLabel
             // 
             descriptionLabel.AutoSize = true;
-            descriptionLabel.Location = new System.Drawing.Point(7, 137);
+            descriptionLabel.Location = new System.Drawing.Point(10, 211);
+            descriptionLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             descriptionLabel.Name = "descriptionLabel";
-            descriptionLabel.Size = new System.Drawing.Size(63, 13);
+            descriptionLabel.Size = new System.Drawing.Size(93, 20);
             descriptionLabel.TabIndex = 2;
             descriptionLabel.Text = "Description:";
             // 
             // updateTimeLabel
             // 
             updateTimeLabel.AutoSize = true;
-            updateTimeLabel.Location = new System.Drawing.Point(5, 245);
+            updateTimeLabel.Location = new System.Drawing.Point(8, 377);
+            updateTimeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             updateTimeLabel.Name = "updateTimeLabel";
-            updateTimeLabel.Size = new System.Drawing.Size(71, 13);
+            updateTimeLabel.Size = new System.Drawing.Size(104, 20);
             updateTimeLabel.TabIndex = 6;
             updateTimeLabel.Text = "Update Time:";
             // 
             // descriptionLabel1
             // 
             descriptionLabel1.AutoSize = true;
-            descriptionLabel1.Location = new System.Drawing.Point(5, 167);
+            descriptionLabel1.Location = new System.Drawing.Point(8, 257);
+            descriptionLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             descriptionLabel1.Name = "descriptionLabel1";
-            descriptionLabel1.Size = new System.Drawing.Size(63, 13);
+            descriptionLabel1.Size = new System.Drawing.Size(93, 20);
             descriptionLabel1.TabIndex = 0;
             descriptionLabel1.Text = "Description:";
             // 
             // endTimeLabel
             // 
             endTimeLabel.AutoSize = true;
-            endTimeLabel.Location = new System.Drawing.Point(1, 123);
+            endTimeLabel.Location = new System.Drawing.Point(2, 189);
+            endTimeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             endTimeLabel.Name = "endTimeLabel";
-            endTimeLabel.Size = new System.Drawing.Size(55, 13);
+            endTimeLabel.Size = new System.Drawing.Size(80, 20);
             endTimeLabel.TabIndex = 2;
             endTimeLabel.Text = "End Time:";
             // 
             // nameLabel
             // 
             nameLabel.AutoSize = true;
-            nameLabel.Location = new System.Drawing.Point(3, 148);
+            nameLabel.Location = new System.Drawing.Point(4, 228);
+            nameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             nameLabel.Name = "nameLabel";
-            nameLabel.Size = new System.Drawing.Size(38, 13);
+            nameLabel.Size = new System.Drawing.Size(55, 20);
             nameLabel.TabIndex = 4;
             nameLabel.Text = "Name:";
             // 
             // privacyLabel
             // 
             privacyLabel.AutoSize = true;
-            privacyLabel.Location = new System.Drawing.Point(5, 250);
+            privacyLabel.Location = new System.Drawing.Point(8, 385);
+            privacyLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             privacyLabel.Name = "privacyLabel";
-            privacyLabel.Size = new System.Drawing.Size(45, 13);
+            privacyLabel.Size = new System.Drawing.Size(62, 20);
             privacyLabel.TabIndex = 8;
             privacyLabel.Text = "Privacy:";
             // 
             // startTimeLabel
             // 
             startTimeLabel.AutoSize = true;
-            startTimeLabel.Location = new System.Drawing.Point(2, 98);
+            startTimeLabel.Location = new System.Drawing.Point(3, 151);
+            startTimeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             startTimeLabel.Name = "startTimeLabel";
-            startTimeLabel.Size = new System.Drawing.Size(58, 13);
+            startTimeLabel.Size = new System.Drawing.Size(86, 20);
             startTimeLabel.TabIndex = 10;
             startTimeLabel.Text = "Start Time:";
             // 
@@ -176,9 +185,10 @@
             // 
             this.profilePictureBox.AccessibleRole = System.Windows.Forms.AccessibleRole.OutlineButton;
             this.profilePictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.profilePictureBox.Location = new System.Drawing.Point(23, 22);
+            this.profilePictureBox.Location = new System.Drawing.Point(34, 34);
+            this.profilePictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.profilePictureBox.Name = "profilePictureBox";
-            this.profilePictureBox.Size = new System.Drawing.Size(130, 118);
+            this.profilePictureBox.Size = new System.Drawing.Size(195, 182);
             this.profilePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.profilePictureBox.TabIndex = 1;
             this.profilePictureBox.TabStop = false;
@@ -188,19 +198,21 @@
             this.ChooseDataTypeLabel.AutoSize = true;
             this.ChooseDataTypeLabel.BackColor = System.Drawing.Color.Transparent;
             this.ChooseDataTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ChooseDataTypeLabel.Location = new System.Drawing.Point(274, 192);
+            this.ChooseDataTypeLabel.Location = new System.Drawing.Point(411, 295);
+            this.ChooseDataTypeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ChooseDataTypeLabel.Name = "ChooseDataTypeLabel";
             this.ChooseDataTypeLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.ChooseDataTypeLabel.Size = new System.Drawing.Size(331, 29);
+            this.ChooseDataTypeLabel.Size = new System.Drawing.Size(482, 40);
             this.ChooseDataTypeLabel.TabIndex = 20;
             this.ChooseDataTypeLabel.Text = "What would you like to see:";
             // 
             // postButton
             // 
             this.postButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.postButton.Location = new System.Drawing.Point(771, 153);
+            this.postButton.Location = new System.Drawing.Point(1156, 235);
+            this.postButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.postButton.Name = "postButton";
-            this.postButton.Size = new System.Drawing.Size(97, 32);
+            this.postButton.Size = new System.Drawing.Size(146, 49);
             this.postButton.TabIndex = 17;
             this.postButton.Text = "Post";
             this.postButton.UseVisualStyleBackColor = true;
@@ -208,9 +220,10 @@
             // 
             // postTextBox
             // 
-            this.postTextBox.Location = new System.Drawing.Point(225, 161);
+            this.postTextBox.Location = new System.Drawing.Point(338, 248);
+            this.postTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.postTextBox.Name = "postTextBox";
-            this.postTextBox.Size = new System.Drawing.Size(540, 20);
+            this.postTextBox.Size = new System.Drawing.Size(808, 26);
             this.postTextBox.TabIndex = 22;
             // 
             // postLabel
@@ -218,9 +231,10 @@
             this.postLabel.AutoSize = true;
             this.postLabel.BackColor = System.Drawing.Color.Transparent;
             this.postLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.postLabel.Location = new System.Drawing.Point(18, 153);
+            this.postLabel.Location = new System.Drawing.Point(27, 235);
+            this.postLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.postLabel.Name = "postLabel";
-            this.postLabel.Size = new System.Drawing.Size(211, 29);
+            this.postLabel.Size = new System.Drawing.Size(310, 40);
             this.postLabel.TabIndex = 16;
             this.postLabel.Text = "Write new status:";
             // 
@@ -229,9 +243,10 @@
             this.fullNameUser.AutoSize = true;
             this.fullNameUser.BackColor = System.Drawing.Color.Transparent;
             this.fullNameUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fullNameUser.Location = new System.Drawing.Point(159, 35);
+            this.fullNameUser.Location = new System.Drawing.Point(238, 54);
+            this.fullNameUser.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.fullNameUser.Name = "fullNameUser";
-            this.fullNameUser.Size = new System.Drawing.Size(243, 55);
+            this.fullNameUser.Size = new System.Drawing.Size(361, 82);
             this.fullNameUser.TabIndex = 13;
             this.fullNameUser.Text = "Full name";
             // 
@@ -242,9 +257,10 @@
             this.showPostsButton.Enabled = false;
             this.showPostsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showPostsButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.showPostsButton.Location = new System.Drawing.Point(23, 225);
+            this.showPostsButton.Location = new System.Drawing.Point(34, 346);
+            this.showPostsButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.showPostsButton.Name = "showPostsButton";
-            this.showPostsButton.Size = new System.Drawing.Size(209, 43);
+            this.showPostsButton.Size = new System.Drawing.Size(314, 66);
             this.showPostsButton.TabIndex = 25;
             this.showPostsButton.Text = "Loading Posts";
             this.showPostsButton.UseVisualStyleBackColor = false;
@@ -255,9 +271,10 @@
             this.showEventsButton.BackColor = System.Drawing.Color.Gray;
             this.showEventsButton.Enabled = false;
             this.showEventsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.showEventsButton.Location = new System.Drawing.Point(438, 225);
+            this.showEventsButton.Location = new System.Drawing.Point(657, 346);
+            this.showEventsButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.showEventsButton.Name = "showEventsButton";
-            this.showEventsButton.Size = new System.Drawing.Size(209, 43);
+            this.showEventsButton.Size = new System.Drawing.Size(314, 66);
             this.showEventsButton.TabIndex = 26;
             this.showEventsButton.Text = "Loading Events";
             this.showEventsButton.UseVisualStyleBackColor = false;
@@ -268,21 +285,24 @@
             this.showFriendsButton.BackColor = System.Drawing.Color.Gray;
             this.showFriendsButton.Enabled = false;
             this.showFriendsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.showFriendsButton.Location = new System.Drawing.Point(230, 225);
+            this.showFriendsButton.Location = new System.Drawing.Point(345, 346);
+            this.showFriendsButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.showFriendsButton.Name = "showFriendsButton";
-            this.showFriendsButton.Size = new System.Drawing.Size(209, 43);
+            this.showFriendsButton.Size = new System.Drawing.Size(314, 66);
             this.showFriendsButton.TabIndex = 30;
             this.showFriendsButton.Text = "Loading Friends";
             this.showFriendsButton.UseVisualStyleBackColor = false;
+            this.showFriendsButton.Click += new System.EventHandler(this.showFriendsButton_Click);
             // 
             // linkLabel2
             // 
             this.linkLabel2.AutoSize = true;
             this.linkLabel2.BackColor = System.Drawing.Color.Transparent;
             this.linkLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel2.Location = new System.Drawing.Point(173, 96);
+            this.linkLabel2.Location = new System.Drawing.Point(260, 148);
+            this.linkLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(69, 24);
+            this.linkLabel2.Size = new System.Drawing.Size(104, 32);
             this.linkLabel2.TabIndex = 32;
             this.linkLabel2.TabStop = true;
             this.linkLabel2.Text = "Profile";
@@ -293,9 +313,10 @@
             this.getMatchesButton.BackColor = System.Drawing.Color.Gray;
             this.getMatchesButton.Enabled = false;
             this.getMatchesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.getMatchesButton.Location = new System.Drawing.Point(645, 225);
+            this.getMatchesButton.Location = new System.Drawing.Point(968, 346);
+            this.getMatchesButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.getMatchesButton.Name = "getMatchesButton";
-            this.getMatchesButton.Size = new System.Drawing.Size(209, 43);
+            this.getMatchesButton.Size = new System.Drawing.Size(314, 66);
             this.getMatchesButton.TabIndex = 33;
             this.getMatchesButton.Text = "Get Matches";
             this.getMatchesButton.UseVisualStyleBackColor = false;
@@ -307,10 +328,9 @@
             this.ZodiakSignLink.BackColor = System.Drawing.Color.Transparent;
             this.ZodiakSignLink.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.ZodiakSignLink.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.ZodiakSignLink.Location = new System.Drawing.Point(172, 120);
-            this.ZodiakSignLink.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.ZodiakSignLink.Location = new System.Drawing.Point(258, 185);
             this.ZodiakSignLink.Name = "ZodiakSignLink";
-            this.ZodiakSignLink.Size = new System.Drawing.Size(114, 24);
+            this.ZodiakSignLink.Size = new System.Drawing.Size(165, 32);
             this.ZodiakSignLink.TabIndex = 34;
             this.ZodiakSignLink.TabStop = true;
             this.ZodiakSignLink.Text = "Find Match";
@@ -319,10 +339,9 @@
             // logoutButton
             // 
             this.logoutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.logoutButton.Location = new System.Drawing.Point(777, 22);
-            this.logoutButton.Margin = new System.Windows.Forms.Padding(2);
+            this.logoutButton.Location = new System.Drawing.Point(1166, 34);
             this.logoutButton.Name = "logoutButton";
-            this.logoutButton.Size = new System.Drawing.Size(81, 31);
+            this.logoutButton.Size = new System.Drawing.Size(122, 48);
             this.logoutButton.TabIndex = 35;
             this.logoutButton.Text = "Logout";
             this.logoutButton.UseVisualStyleBackColor = true;
@@ -333,9 +352,11 @@
             this.postsListBox.DataSource = this.postBindingSource;
             this.postsListBox.DisplayMember = "Name";
             this.postsListBox.FormattingEnabled = true;
-            this.postsListBox.Location = new System.Drawing.Point(23, 312);
+            this.postsListBox.ItemHeight = 20;
+            this.postsListBox.Location = new System.Drawing.Point(34, 480);
+            this.postsListBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.postsListBox.Name = "postsListBox";
-            this.postsListBox.Size = new System.Drawing.Size(119, 277);
+            this.postsListBox.Size = new System.Drawing.Size(176, 424);
             this.postsListBox.TabIndex = 36;
             // 
             // postBindingSource
@@ -345,9 +366,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(55, 296);
+            this.label1.Location = new System.Drawing.Point(82, 455);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 13);
+            this.label1.Size = new System.Drawing.Size(91, 20);
             this.label1.TabIndex = 37;
             this.label1.Text = "Your Posts:";
             // 
@@ -361,43 +383,48 @@
             this.panel1.Controls.Add(this.descriptionTextBox);
             this.panel1.Controls.Add(updateTimeLabel);
             this.panel1.Controls.Add(this.updateTimeLabel1);
-            this.panel1.Location = new System.Drawing.Point(144, 312);
+            this.panel1.Location = new System.Drawing.Point(216, 480);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(168, 277);
+            this.panel1.Size = new System.Drawing.Size(252, 426);
             this.panel1.TabIndex = 38;
             // 
             // postPictureBox
             // 
             this.postPictureBox.DataBindings.Add(new System.Windows.Forms.Binding("ImageLocation", this.postBindingSource, "PictureURL", true));
-            this.postPictureBox.Location = new System.Drawing.Point(33, 3);
+            this.postPictureBox.Location = new System.Drawing.Point(50, 5);
+            this.postPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.postPictureBox.Name = "postPictureBox";
-            this.postPictureBox.Size = new System.Drawing.Size(100, 89);
+            this.postPictureBox.Size = new System.Drawing.Size(150, 137);
             this.postPictureBox.TabIndex = 8;
             this.postPictureBox.TabStop = false;
             // 
             // createdTimeLabel1
             // 
             this.createdTimeLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.postBindingSource, "CreatedTime", true));
-            this.createdTimeLabel1.Location = new System.Drawing.Point(76, 98);
+            this.createdTimeLabel1.Location = new System.Drawing.Point(114, 151);
+            this.createdTimeLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.createdTimeLabel1.Name = "createdTimeLabel1";
-            this.createdTimeLabel1.Size = new System.Drawing.Size(87, 23);
+            this.createdTimeLabel1.Size = new System.Drawing.Size(130, 35);
             this.createdTimeLabel1.TabIndex = 1;
             // 
             // descriptionTextBox
             // 
             this.descriptionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.postBindingSource, "Description", true));
-            this.descriptionTextBox.Location = new System.Drawing.Point(10, 153);
+            this.descriptionTextBox.Location = new System.Drawing.Point(15, 235);
+            this.descriptionTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.descriptionTextBox.Multiline = true;
             this.descriptionTextBox.Name = "descriptionTextBox";
-            this.descriptionTextBox.Size = new System.Drawing.Size(142, 84);
+            this.descriptionTextBox.Size = new System.Drawing.Size(211, 127);
             this.descriptionTextBox.TabIndex = 3;
             // 
             // updateTimeLabel1
             // 
             this.updateTimeLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.postBindingSource, "UpdateTime", true));
-            this.updateTimeLabel1.Location = new System.Drawing.Point(76, 240);
+            this.updateTimeLabel1.Location = new System.Drawing.Point(114, 369);
+            this.updateTimeLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.updateTimeLabel1.Name = "updateTimeLabel1";
-            this.updateTimeLabel1.Size = new System.Drawing.Size(87, 23);
+            this.updateTimeLabel1.Size = new System.Drawing.Size(130, 35);
             this.updateTimeLabel1.TabIndex = 7;
             this.updateTimeLabel1.Text = "label4";
             // 
@@ -415,17 +442,19 @@
             this.panel2.Controls.Add(this.privacyLabel1);
             this.panel2.Controls.Add(startTimeLabel);
             this.panel2.Controls.Add(this.startTimeLabel1);
-            this.panel2.Location = new System.Drawing.Point(467, 312);
+            this.panel2.Location = new System.Drawing.Point(700, 480);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(180, 277);
+            this.panel2.Size = new System.Drawing.Size(270, 426);
             this.panel2.TabIndex = 41;
             // 
             // eventPictureBox
             // 
             this.eventPictureBox.DataBindings.Add(new System.Windows.Forms.Binding("ImageLocation", this.eventBindingSource, "PictureLargeURL", true));
-            this.eventPictureBox.Location = new System.Drawing.Point(38, 3);
+            this.eventPictureBox.Location = new System.Drawing.Point(57, 5);
+            this.eventPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.eventPictureBox.Name = "eventPictureBox";
-            this.eventPictureBox.Size = new System.Drawing.Size(100, 89);
+            this.eventPictureBox.Size = new System.Drawing.Size(150, 137);
             this.eventPictureBox.TabIndex = 12;
             this.eventPictureBox.TabStop = false;
             // 
@@ -436,54 +465,60 @@
             // descriptionTextBox1
             // 
             this.descriptionTextBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.eventBindingSource, "Description", true));
-            this.descriptionTextBox1.Location = new System.Drawing.Point(9, 183);
+            this.descriptionTextBox1.Location = new System.Drawing.Point(14, 282);
+            this.descriptionTextBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.descriptionTextBox1.Multiline = true;
             this.descriptionTextBox1.Name = "descriptionTextBox1";
-            this.descriptionTextBox1.Size = new System.Drawing.Size(161, 62);
+            this.descriptionTextBox1.Size = new System.Drawing.Size(240, 93);
             this.descriptionTextBox1.TabIndex = 1;
             // 
             // endTimeLabel1
             // 
             this.endTimeLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.eventBindingSource, "EndTime", true));
-            this.endTimeLabel1.Location = new System.Drawing.Point(60, 118);
+            this.endTimeLabel1.Location = new System.Drawing.Point(90, 182);
+            this.endTimeLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.endTimeLabel1.Name = "endTimeLabel1";
-            this.endTimeLabel1.Size = new System.Drawing.Size(110, 23);
+            this.endTimeLabel1.Size = new System.Drawing.Size(165, 35);
             this.endTimeLabel1.TabIndex = 3;
             this.endTimeLabel1.Text = "label4";
             // 
             // nameLabel1
             // 
             this.nameLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.eventBindingSource, "Name", true));
-            this.nameLabel1.Location = new System.Drawing.Point(60, 144);
+            this.nameLabel1.Location = new System.Drawing.Point(90, 222);
+            this.nameLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.nameLabel1.Name = "nameLabel1";
-            this.nameLabel1.Size = new System.Drawing.Size(110, 23);
+            this.nameLabel1.Size = new System.Drawing.Size(165, 35);
             this.nameLabel1.TabIndex = 5;
             this.nameLabel1.Text = "label4";
             // 
             // privacyLabel1
             // 
             this.privacyLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.eventBindingSource, "Privacy", true));
-            this.privacyLabel1.Location = new System.Drawing.Point(60, 250);
+            this.privacyLabel1.Location = new System.Drawing.Point(90, 385);
+            this.privacyLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.privacyLabel1.Name = "privacyLabel1";
-            this.privacyLabel1.Size = new System.Drawing.Size(110, 23);
+            this.privacyLabel1.Size = new System.Drawing.Size(165, 35);
             this.privacyLabel1.TabIndex = 9;
             this.privacyLabel1.Text = "label4";
             // 
             // startTimeLabel1
             // 
             this.startTimeLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.eventBindingSource, "StartTime", true));
-            this.startTimeLabel1.Location = new System.Drawing.Point(60, 95);
+            this.startTimeLabel1.Location = new System.Drawing.Point(90, 146);
+            this.startTimeLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.startTimeLabel1.Name = "startTimeLabel1";
-            this.startTimeLabel1.Size = new System.Drawing.Size(110, 23);
+            this.startTimeLabel1.Size = new System.Drawing.Size(165, 35);
             this.startTimeLabel1.TabIndex = 11;
             this.startTimeLabel1.Text = "label4";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(357, 296);
+            this.label2.Location = new System.Drawing.Point(536, 455);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 13);
+            this.label2.Size = new System.Drawing.Size(100, 20);
             this.label2.TabIndex = 40;
             this.label2.Text = "Your Events:";
             // 
@@ -492,19 +527,22 @@
             this.eventsListBox.DataSource = this.eventBindingSource;
             this.eventsListBox.DisplayMember = "Name";
             this.eventsListBox.FormattingEnabled = true;
-            this.eventsListBox.Location = new System.Drawing.Point(325, 312);
+            this.eventsListBox.ItemHeight = 20;
+            this.eventsListBox.Location = new System.Drawing.Point(488, 480);
+            this.eventsListBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.eventsListBox.Name = "eventsListBox";
-            this.eventsListBox.Size = new System.Drawing.Size(141, 277);
+            this.eventsListBox.Size = new System.Drawing.Size(210, 424);
             this.eventsListBox.TabIndex = 39;
             // 
             // friendsListBox
             // 
             this.friendsListBox.DataSource = this.userBindingSource;
-            this.friendsListBox.DisplayMember = "Name";
             this.friendsListBox.FormattingEnabled = true;
-            this.friendsListBox.Location = new System.Drawing.Point(658, 312);
+            this.friendsListBox.ItemHeight = 20;
+            this.friendsListBox.Location = new System.Drawing.Point(987, 480);
+            this.friendsListBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.friendsListBox.Name = "friendsListBox";
-            this.friendsListBox.Size = new System.Drawing.Size(200, 108);
+            this.friendsListBox.Size = new System.Drawing.Size(298, 164);
             this.friendsListBox.TabIndex = 42;
             // 
             // userBindingSource
@@ -514,37 +552,31 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(675, 296);
+            this.label3.Location = new System.Drawing.Point(1012, 455);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 13);
+            this.label3.Size = new System.Drawing.Size(104, 20);
             this.label3.TabIndex = 43;
             this.label3.Text = "Your Friends:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(675, 502);
+            this.label4.Location = new System.Drawing.Point(1012, 772);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(76, 13);
+            this.label4.Size = new System.Drawing.Size(112, 20);
             this.label4.TabIndex = 46;
             this.label4.Text = "Your Matches:";
             // 
             // matchesComboBox1
             // 
             this.matchesComboBox1.FormattingEnabled = true;
-            this.matchesComboBox1.Location = new System.Drawing.Point(658, 519);
+            this.matchesComboBox1.Location = new System.Drawing.Point(987, 798);
+            this.matchesComboBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.matchesComboBox1.Name = "matchesComboBox1";
-            this.matchesComboBox1.Size = new System.Drawing.Size(200, 21);
+            this.matchesComboBox1.Size = new System.Drawing.Size(298, 28);
             this.matchesComboBox1.TabIndex = 47;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(658, 548);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(200, 38);
-            this.button1.TabIndex = 48;
-            this.button1.Text = "Ask to go out";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // panel3
             // 
@@ -553,56 +585,65 @@
             this.panel3.Controls.Add(this.emailLabel1);
             this.panel3.Controls.Add(this.nameLabel3);
             this.panel3.Controls.Add(this.pictureLargeURLPictureBox);
-            this.panel3.Location = new System.Drawing.Point(658, 427);
+            this.panel3.Location = new System.Drawing.Point(987, 657);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(200, 72);
+            this.panel3.Size = new System.Drawing.Size(300, 111);
             this.panel3.TabIndex = 49;
             // 
             // birthdayLabel1
             // 
             this.birthdayLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Birthday", true));
-            this.birthdayLabel1.Location = new System.Drawing.Point(3, 26);
+            this.birthdayLabel1.Location = new System.Drawing.Point(4, 40);
+            this.birthdayLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.birthdayLabel1.Name = "birthdayLabel1";
-            this.birthdayLabel1.Size = new System.Drawing.Size(134, 23);
+            this.birthdayLabel1.Size = new System.Drawing.Size(201, 35);
             this.birthdayLabel1.TabIndex = 1;
             this.birthdayLabel1.Text = "label5";
             // 
             // emailLabel1
             // 
             this.emailLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Email", true));
-            this.emailLabel1.Location = new System.Drawing.Point(3, 49);
+            this.emailLabel1.Location = new System.Drawing.Point(4, 75);
+            this.emailLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.emailLabel1.Name = "emailLabel1";
-            this.emailLabel1.Size = new System.Drawing.Size(134, 23);
+            this.emailLabel1.Size = new System.Drawing.Size(201, 35);
             this.emailLabel1.TabIndex = 3;
             this.emailLabel1.Text = "label5";
             // 
             // nameLabel3
             // 
             this.nameLabel3.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Name", true));
-            this.nameLabel3.Location = new System.Drawing.Point(3, 3);
+            this.nameLabel3.Location = new System.Drawing.Point(4, 5);
+            this.nameLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.nameLabel3.Name = "nameLabel3";
-            this.nameLabel3.Size = new System.Drawing.Size(134, 23);
+            this.nameLabel3.Size = new System.Drawing.Size(201, 35);
             this.nameLabel3.TabIndex = 5;
             this.nameLabel3.Text = "label5";
             // 
             // pictureLargeURLPictureBox
             // 
             this.pictureLargeURLPictureBox.DataBindings.Add(new System.Windows.Forms.Binding("ImageLocation", this.userBindingSource, "PictureLargeURL", true));
-            this.pictureLargeURLPictureBox.Location = new System.Drawing.Point(143, 11);
+            this.pictureLargeURLPictureBox.Location = new System.Drawing.Point(214, 17);
+            this.pictureLargeURLPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureLargeURLPictureBox.Name = "pictureLargeURLPictureBox";
-            this.pictureLargeURLPictureBox.Size = new System.Drawing.Size(53, 50);
+            this.pictureLargeURLPictureBox.Size = new System.Drawing.Size(80, 77);
             this.pictureLargeURLPictureBox.TabIndex = 7;
             this.pictureLargeURLPictureBox.TabStop = false;
             // 
+            // albumsBindingSource
+            // 
+            this.albumsBindingSource.DataMember = "Albums";
+            this.albumsBindingSource.DataSource = this.userBindingSource;
+            // 
             // MainPageForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(882, 644);
+            this.ClientSize = new System.Drawing.Size(1323, 991);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.matchesComboBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -628,8 +669,9 @@
             this.Controls.Add(this.profilePictureBox);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(898, 669);
+            this.MinimumSize = new System.Drawing.Size(1336, 999);
             this.Name = "MainPageForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "MainPageForm";
@@ -645,6 +687,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureLargeURLPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.albumsBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -685,7 +728,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox matchesComboBox1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox postPictureBox;
         private System.Windows.Forms.PictureBox eventPictureBox;
         private System.Windows.Forms.Panel panel3;
@@ -694,5 +736,6 @@
         private System.Windows.Forms.Label emailLabel1;
         private System.Windows.Forms.Label nameLabel3;
         private System.Windows.Forms.PictureBox pictureLargeURLPictureBox;
+        private System.Windows.Forms.BindingSource albumsBindingSource;
     }
 }
