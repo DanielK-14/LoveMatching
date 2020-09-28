@@ -18,7 +18,6 @@ namespace UI
         private User m_LoggedInUser;
         private List<Post> m_Posts;
         private List<User> m_Friends;
-        private List<User> m_Matches;
         private List<Event> m_Events;
 
         public MainPageForm()
@@ -47,7 +46,6 @@ namespace UI
         {
             m_Events = null;
             m_Friends = null;
-            m_Matches = null;
             m_Posts = null;
 
             eventBindingSource.Clear();
@@ -201,9 +199,18 @@ namespace UI
 
         private void GetMatchesButton_Click(object sender, EventArgs e)
         {
-            m_Matches = AvailableFriends.GetAvailabeFriends(m_LoggedInUser);
+            //use m_Score
+            //Use m_Handler
+            //build handlers;
+
+            int score = 3;
+            IFriendFilterHandler handler = new CriticalHandler();
+            //////////////////////
+            
+            FriendsToMatch friendsThatCanBeMatched = new FriendsToMatch(m_LoggedInUser, handler, score);
             int counter = 0;
-            foreach (User friend in m_Matches)
+
+            foreach (User friend in friendsThatCanBeMatched)
             {
                 if (counter == r_MaximumNumberOfFriendsToShow)
                 {
@@ -211,11 +218,9 @@ namespace UI
                 }
 
                 matchesComboBox1.Items.Add(friend);
-                friend.ReFetch(DynamicWrapper.eLoadOptions.Full);
-                counter++;
             }
 
-            if (m_Matches.Count == 0)
+            if (counter == 0)
             {
                 MessageBox.Show("Could not find anyone for you.");
             }

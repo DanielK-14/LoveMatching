@@ -36,10 +36,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
-    <Compile Include="AvailableFriends.cs" />
+    <Compile Include="CriticalHandler.cs" />
+    <Compile Include="IFriendFilterHandler.cs" />
+    <Compile Include="FriendsToMatch.cs" />
     <Compile Include="IFacebookApplication.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="AppPagesFactory.cs" />
+    <Compile Include="OptionalFilter.cs" />
+    <Compile Include="Request.cs" />
     <Compile Include="ZodiacSign.cs" />
   </ItemGroup>
   <ItemGroup>

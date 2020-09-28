@@ -19,6 +19,7 @@ namespace Logic
             return new ZodiacSign(matchedSign);
         }
 
+
         public enum eZodiacSign
         {
             Aquarius = 0,
