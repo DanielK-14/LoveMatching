@@ -5,12 +5,14 @@ using System.Text;
 
 namespace Logic
 {
-    public class CriticalHandler: IFriendFilterHandler
+    public class CriticalHandler: FriendFilterHandler
     {
-        public IFriendFilterHandler NextHandler { get; set; }
-         public Func<Request, bool> FilterTest { get; set; }
+        public CriticalHandler(Func<Request, bool> i_FilterTest) : base(i_FilterTest)
+        {
+        }
 
-         void IFriendFilterHandler.Handle(Request io_Request, int i_NeededScore)
+
+       public override void Handle(Request io_Request, int i_NeededScore)
         {
             if (FilterTest.Invoke(io_Request))
             {

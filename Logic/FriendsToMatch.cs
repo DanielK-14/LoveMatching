@@ -10,10 +10,10 @@ namespace Logic
 
         User r_User;
         private int r_Score;
-        private readonly IFriendFilterHandler r_FilterTestHandler;
+        private readonly FriendFilterHandler r_FilterTestHandler;
 
 
-        public FriendsToMatch(User i_User, IFriendFilterHandler i_FilterTestHandler,int i_Score)
+        public FriendsToMatch(User i_User, FriendFilterHandler i_FilterTestHandler,int i_Score)
         {
             r_User = i_User;
             r_Friends = i_User.Friends;

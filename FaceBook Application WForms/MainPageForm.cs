@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
@@ -15,6 +16,7 @@ namespace UI
         private readonly int r_MaximumNumberOfFriendsToShow = 15;
         private readonly int r_MaximumNumberOfPostsToShow = 15;
         private readonly int r_MaximumNumberOfEventsToShow = 15;
+        private readonly int r_ScoreToDetermineMatch = 2;
         private User m_LoggedInUser;
         private List<Post> m_Posts;
         private List<User> m_Friends;
@@ -199,15 +201,15 @@ namespace UI
 
         private void GetMatchesButton_Click(object sender, EventArgs e)
         {
-            //use m_Score
-            //Use m_Handler
-            //build handlers;
+            //check which handler are checked
+            //create a chain of with them
+            // pass the first one to FriendsToMatch constructor
 
-            int score = 3;
-            IFriendFilterHandler handler = new CriticalHandler();
+            /// dummy handler////
+            FriendFilterHandler handler = new CriticalHandler((Request r) => true);
             //////////////////////
-            
-            FriendsToMatch friendsThatCanBeMatched = new FriendsToMatch(m_LoggedInUser, handler, score);
+
+            FriendsToMatch friendsThatCanBeMatched = new FriendsToMatch(m_LoggedInUser, handler, r_ScoreToDetermineMatch);
             int counter = 0;
 
             foreach (User friend in friendsThatCanBeMatched)
