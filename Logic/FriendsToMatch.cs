@@ -32,12 +32,16 @@ namespace Logic
             {
                 Request request = new Request(r_User, friend);
                 r_FilterTestHandler.Handle(request, r_Score);
-                if (usersCanBeMatched(friend))
+                if (request.isScoreHighEnough)
                 {
                     yield return friend;
                 }
             }
         }
+
+
+
+        // move below to handelers.
 
         private bool usersCanBeMatched(User i_Friend)
         {
