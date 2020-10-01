@@ -202,6 +202,14 @@ namespace UI
         private void GetMatchesButton_Click(object sender, EventArgs e)
         {
             //check which handler are checked
+
+            FriendFilterHandler criticalHandler = createCriticalFilter();
+            FriendFilterHandler optionalHandler = createOptionalFiltersIfNeeded();
+            if(optionalHandler != null)
+            {
+                criticalHandler.NextHandler = optionalHandler;
+            }
+
             //create a chain of with them
             // pass the first one to FriendsToMatch constructor
 
@@ -225,6 +233,56 @@ namespace UI
             if (counter == 0)
             {
                 MessageBox.Show("Could not find anyone for you.");
+            }
+        }
+
+        private CriticalHandler createCriticalFilter()
+        {
+            CriticalHandler criticalHandler = new CriticalHandler(Handlers.isUserAndFriendIntrestedInEachOtherGender);
+            criticalHandler.NextHandler = new CriticalHandler(Handlers.isFriendSingle);
+            return criticalHandler;
+        }
+
+        private OptionalHandler createOptionalFiltersIfNeeded()
+        {
+            OptionalHandler optionals = null;
+            if(educatedCheckBox.Checked == true)
+            {
+                addOrCreateOptinalHandler(ref optionals, Handlers.isEducated);
+            }
+
+            if (workExpCheckBox.Checked == true)
+            {
+                addOrCreateOptinalHandler(ref optionals, Handlers.hasWorkExperience);
+            }
+
+            if (popularCheckBox.Checked == true)
+            {
+                addOrCreateOptinalHandler(ref optionals, Handlers.isPopular);
+            }
+
+            if (sameRegionCheckBox.Checked == true)
+            {
+                addOrCreateOptinalHandler(ref optionals, Handlers.isFromSameReligion);
+            }
+
+            if (sameTownCheckBox.Checked == true)
+            {
+                addOrCreateOptinalHandler(ref optionals, Handlers.isFromSameTown);
+            }
+
+            return optionals;
+        }
+
+        private void addOrCreateOptinalHandler(ref OptionalHandler io_Optionals,Func<Request, bool> i_OptionalFilterTest)
+        {
+            if(io_Optionals == null)
+            {
+                io_Optionals = new OptionalHandler(i_OptionalFilterTest);
+            }
+            else
+            {
+                io_Optionals.NextHandler = new OptionalHandler(i_OptionalFilterTest);
             }
         }
 
