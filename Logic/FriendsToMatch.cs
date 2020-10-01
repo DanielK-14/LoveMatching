@@ -45,14 +45,15 @@ namespace Logic
 
         private bool usersCanBeMatched(User i_Friend)
         {
+            ////Think if needed or how to change.
+            
             bool isAvailable = false;
             if (r_User.InterestedIn != null && r_User.Gender != null && i_Friend.InterestedIn != null && i_Friend.Gender != null)
             {
                 ///bool userMightBeInterested = userIsInterestedIn(i_Friend.Gender.Value, r_User);
                 ///bool friendMightBeInterested = userIsInterestedIn(r_User.Gender.Value, i_Friend);
-                bool friendIsSingle = i_Friend.RelationshipStatus != User.eRelationshipStatus.Married && i_Friend.RelationshipStatus != User.eRelationshipStatus.Enagaged && i_Friend.RelationshipStatus != User.eRelationshipStatus.InARelationship;
-
-                isAvailable = userMightBeInterested && friendMightBeInterested && friendIsSingle;
+                ///bool friendIsSingle = i_Friend.RelationshipStatus != User.eRelationshipStatus.Married && i_Friend.RelationshipStatus != User.eRelationshipStatus.Enagaged && i_Friend.RelationshipStatus != User.eRelationshipStatus.InARelationship;
+                ///isAvailable = userMightBeInterested && friendMightBeInterested && friendIsSingle;
             }
 
             return isAvailable;
