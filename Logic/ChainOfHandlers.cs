@@ -15,6 +15,15 @@ namespace Logic
 
         private static readonly LinkedList<Func<Request, bool>> sr_CriticalFilterTests = new LinkedList<Func<Request, bool>>();
 
+        public enum eFilters
+        {
+            Educated,
+            WorkExperience,
+            Popular,
+            SameReligion,
+            SameTown
+        }
+
         static ChainOfHandlers()
         {
             sr_StringToOptionalFilterTest.Add("isEducated", isEducated);

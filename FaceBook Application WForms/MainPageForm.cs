@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Threading;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
@@ -243,35 +242,35 @@ namespace UI
             return criticalHandler;
         }
 
-        private OptionalHandler createOptionalFiltersIfNeeded()
+        private LinkedList<ChainOfHandlers.eFilters> createOptionalFiltersIfNeeded()
         {
-            LinkedList<string> listOfFiltersNames = new LinkedList<string>();
+            LinkedList<ChainOfHandlers.eFilters> listOfFiltersENums = new LinkedList<ChainOfHandlers.eFilters>();
             if(educatedCheckBox.Checked == true)
             {
-                listOfFiltersNames.AddLast("isEducated");
+                listOfFiltersENums.AddLast(ChainOfHandlers.eFilters.Educated);
             }
 
             if (workExpCheckBox.Checked == true)
             {
-                listOfFiltersNames.AddLast("isEducated");
+                listOfFiltersENums.AddLast(ChainOfHandlers.eFilters.WorkExperience);
             }
 
             if (popularCheckBox.Checked == true)
             {
-                addOrCreateOptinalHandler(ref optionals, Handlers.isPopular);
+                listOfFiltersENums.AddLast(ChainOfHandlers.eFilters.Popular);
             }
 
             if (sameRegionCheckBox.Checked == true)
             {
-                addOrCreateOptinalHandler(ref optionals, Handlers.isFromSameReligion);
+                listOfFiltersENums.AddLast(ChainOfHandlers.eFilters.SameReligion);
             }
 
             if (sameTownCheckBox.Checked == true)
             {
-                addOrCreateOptinalHandler(ref optionals, Handlers.isFromSameTown);
+                listOfFiltersENums.AddLast(ChainOfHandlers.eFilters.SameTown);
             }
 
-            return optionals;
+            return listOfFiltersENums;
         }
 
         private void addOrCreateOptinalHandler(ref OptionalHandler io_Optionals,Func<Request, bool> i_OptionalFilterTest)
