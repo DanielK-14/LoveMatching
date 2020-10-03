@@ -31,8 +31,8 @@ namespace Logic
             foreach(User friend in r_Friends)
             {
                 Request request = new Request(r_User, friend);
-                r_FilterTestHandler.Handle(request, r_Score);
-                if (request.isScoreHighEnough)
+                r_FilterTestHandler.Proccess(request, r_Score);
+                if (request.IsFriendMatchable)
                 {
                     yield return friend;
                 }

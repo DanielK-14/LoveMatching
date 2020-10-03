@@ -11,13 +11,21 @@ namespace Logic
         {
         }
 
-
-       public override void Handle(Request io_Request, int i_NeededScore)
+        
+       public override void Proccess(Request io_Request)
         {
             if (FilterTest.Invoke(io_Request))
             {
-                NextHandler.Handle(io_Request, i_NeededScore);
+                if (NextHandler != null)
+                {
+                    NextHandler.Proccess(io_Request);
+                }
+                else
+                {
+                    handle(io_Request);
+                }
             }
         }
+        
     }
 }

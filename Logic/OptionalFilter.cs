@@ -8,24 +8,26 @@ namespace Logic
     public class OptionalHandler : FriendFilterHandler
     {
         public OptionalHandler(Func<Request, bool> i_FilterTest) : base(i_FilterTest) 
-        { 
+        {
         }
 
-       public override void Handle(Request io_Request, int i_NeededScore)
+        
+       public override void Proccess(Request io_Request)
         {
             if (FilterTest.Invoke(io_Request))
             {
                 io_Request.Score++;
             }
 
-            if (io_Request.Score >= i_NeededScore)
+            if (io_Request.Score >= io_Request.NeededScore)
             {
-                io_Request.isScoreHighEnough = true;
+                handle(io_Request);
             }
-            else
+            else if (NextHandler != null)
             {
-                NextHandler.Handle(io_Request, i_NeededScore);
+                NextHandler.Proccess(io_Request);
             }
         }
+        
     }
 }

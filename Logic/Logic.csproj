@@ -36,10 +36,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
+    <Compile Include="ChainOfHandelers.cs" />
     <Compile Include="CriticalHandler.cs" />
     <Compile Include="FriendFilterHandler.cs" />
     <Compile Include="FriendsToMatch.cs" />
-    <Compile Include="Handlers.cs" />
+    <Compile Include="ChainOfHandlers.cs" />
     <Compile Include="IFacebookApplication.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="AppPagesFactory.cs" />

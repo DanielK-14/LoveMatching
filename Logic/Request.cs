@@ -10,18 +10,21 @@ namespace Logic
     {
         public int Score { get; set; }
 
+        public int NeededScore { get; private set; }
+
         public User MainUser { get; private set; }
 
         public User Friend { get; private set; }
 
-        public bool isScoreHighEnough { get; set; }
+        public bool IsFriendMatchable { get; set; }
 
-        public Request(User i_MainUser, User i_Friend)
+        public Request(User i_MainUser, User i_Friend, int i_NeededScore)
         {
             MainUser = i_MainUser;
             Friend = i_Friend;
-            isScoreHighEnough = false;
+            IsFriendMatchable = false;
             Score = 0;
+            NeededScore = i_NeededScore;
         }
     }
 }

@@ -245,15 +245,15 @@ namespace UI
 
         private OptionalHandler createOptionalFiltersIfNeeded()
         {
-            OptionalHandler optionals = null;
+            LinkedList<string> listOfFiltersNames = new LinkedList<string>();
             if(educatedCheckBox.Checked == true)
             {
-                addOrCreateOptinalHandler(ref optionals, Handlers.isEducated);
+                listOfFiltersNames.AddLast("isEducated");
             }
 
             if (workExpCheckBox.Checked == true)
             {
-                addOrCreateOptinalHandler(ref optionals, Handlers.hasWorkExperience);
+                listOfFiltersNames.AddLast("isEducated");
             }
 
             if (popularCheckBox.Checked == true)
