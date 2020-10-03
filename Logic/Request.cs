@@ -1,11 +1,11 @@
 ﻿using FacebookWrapper.ObjectModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Logic
 {
+    /// <summary>
+    /// Part of Chain of Responsability pattern.
+    /// The request is Client's friend which we check in our chain of filters.
+    /// </summary>
     public class Request
     {
         public int Score { get; set; }

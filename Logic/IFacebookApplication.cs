@@ -14,6 +14,4 @@ namespace Logic
 
         void Logout();
     }
-
-    
 }

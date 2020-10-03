@@ -1,15 +1,17 @@
-﻿using FacebookWrapper.ObjectModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
+using FacebookWrapper.ObjectModel;
 
 namespace Logic
 {
+    /// <summary>
+    /// Part of the Chain of Resposability pattern.
+    /// Building the filters by the order that we decided is critical.
+    /// Order: Critical filters and than Optional Filters.
+    /// </summary>
     public static class ChainOfHandlers
     {
-        private static readonly int sr_NumberOfFriendsThatMakeSomeonePopular=100;
+        private static readonly int sr_NumberOfFriendsThatMakeSomeonePopular = 100;
 
         private static readonly Dictionary<eFilters, Func<Request, bool>> sr_StringToOptionalFilterTest = new Dictionary<eFilters, Func<Request, bool>>();
 
@@ -35,19 +37,18 @@ namespace Logic
             sr_CriticalFilterTests.AddLast(isUserAndFriendIntrestedInEachOtherGender);
         }
 
-        public static FriendFilterHandler Build(LinkedList<eFilters> i_ListOfOptionalFiltersToAdd)
+        public static FriendFilter Build(LinkedList<eFilters> i_ListOfOptionalFiltersToAdd)
         {
-            FriendFilterHandler firstInChain = null;
-            
-            foreach(Func<Request,bool> criticalFilterTest in sr_CriticalFilterTests)
+            FriendFilter firstInChain = null;
+            foreach(Func<Request, bool> criticalFilterTest in sr_CriticalFilterTests)
             {
-                if (firstInChain==null)
+                if (firstInChain == null)
                 {
-                    firstInChain = new CriticalHandler(criticalFilterTest);
+                    firstInChain = new CriticalFilter(criticalFilterTest);
                 }
                 else
                 {
-                    firstInChain.AddToEndOfChain(new CriticalHandler(criticalFilterTest));
+                    firstInChain.AddToEndOfChain(new CriticalFilter(criticalFilterTest));
                 }
             }
 
@@ -57,17 +58,15 @@ namespace Logic
 
                 if (firstInChain == null)
                 {
-                    firstInChain = new OptionalHandler(optionalFilterTest);
+                    firstInChain = new OptionalFilter(optionalFilterTest);
                 }
                 else
                 {
-                    firstInChain.AddToEndOfChain(new OptionalHandler(optionalFilterTest));
+                    firstInChain.AddToEndOfChain(new OptionalFilter(optionalFilterTest));
                 }
             }
 
             return firstInChain;
-
-
         }
 
        public static bool isEducated(Request i_Request)
@@ -99,16 +98,22 @@ namespace Logic
         {
             bool userMightBeInterested = false;
 
-            foreach (User.eGender gendersUser in i_Request.MainUser.InterestedIn)
+            if (i_Request.MainUser.InterestedIn != null)
             {
-                if (gendersUser == i_Request.Friend.Gender)
+                foreach (User.eGender gendersUser in i_Request.MainUser.InterestedIn)
                 {
-                    foreach (User.eGender gendersFriend in i_Request.MainUser.InterestedIn)
+                    if (gendersUser == i_Request.Friend.Gender)
                     {
-                        if (gendersFriend == i_Request.MainUser.Gender)
+                        if (i_Request.Friend.InterestedIn != null)
                         {
-                            userMightBeInterested = true;
-                            break;
+                            foreach (User.eGender gendersFriend in i_Request.Friend.InterestedIn)
+                            {
+                                if (gendersFriend == i_Request.MainUser.Gender)
+                                {
+                                    userMightBeInterested = true;
+                                    break;
+                                }
+                            }
                         }
                     }
                 }
@@ -119,9 +124,9 @@ namespace Logic
 
         public static bool isFriendSingle(Request i_Request)
         {
-            return (i_Request.Friend.RelationshipStatus == User.eRelationshipStatus.Divorced ||
+            return i_Request.Friend.RelationshipStatus == User.eRelationshipStatus.Divorced ||
                 i_Request.Friend.RelationshipStatus == User.eRelationshipStatus.Single ||
-                i_Request.Friend.RelationshipStatus == User.eRelationshipStatus.Separated);
+                i_Request.Friend.RelationshipStatus == User.eRelationshipStatus.Separated;
         }
     }
 }

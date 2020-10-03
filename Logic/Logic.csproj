@@ -36,8 +36,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
-    <Compile Include="CriticalHandler.cs" />
-    <Compile Include="FriendFilterHandler.cs" />
+    <Compile Include="CriticalFilter.cs" />
+    <Compile Include="FriendFilter.cs" />
     <Compile Include="FriendsToMatch.cs" />
     <Compile Include="ChainOfHandlers.cs" />
     <Compile Include="IFacebookApplication.cs" />

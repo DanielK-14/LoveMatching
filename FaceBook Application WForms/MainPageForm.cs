@@ -212,6 +212,7 @@ namespace UI
                 }
 
                 matchesComboBox1.Items.Add(friend);
+                counter++;
             }
 
             if (counter == 0)
@@ -249,18 +250,6 @@ namespace UI
             }
 
             return listOfFiltersENums;
-        }
-
-        private void addOrCreateOptinalHandler(ref OptionalHandler io_Optionals,Func<Request, bool> i_OptionalFilterTest)
-        {
-            if(io_Optionals == null)
-            {
-                io_Optionals = new OptionalHandler(i_OptionalFilterTest);
-            }
-            else
-            {
-                io_Optionals.NextHandler = new OptionalHandler(i_OptionalFilterTest);
-            }
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

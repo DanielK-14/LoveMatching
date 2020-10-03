@@ -1,17 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Logic
 {
-    public class OptionalHandler : FriendFilterHandler
+    /// <summary>
+    /// Part of Chain of Responsability pattern.
+    /// ConcreteHandler 1
+    /// </summary>
+    public class OptionalFilter : FriendFilter
     {
-        public OptionalHandler(Func<Request, bool> i_FilterTest) : base(i_FilterTest) 
+        public OptionalFilter(Func<Request, bool> i_FilterTest) : base(i_FilterTest) 
         {
         }
 
-        
        public override void Proccess(Request io_Request)
         {
             if (FilterTest.Invoke(io_Request))
@@ -28,6 +28,5 @@ namespace Logic
                 NextHandler.Proccess(io_Request);
             }
         }
-        
     }
 }
