@@ -1,13 +1,12 @@
-﻿using System;
-
-namespace Logic
+﻿namespace Logic
 {
     /// <summary>
     /// 1- Chain of Resposability pattern
     /// Base Handler
     /// 
     /// 2- Includes the Strategy pattern
-    /// FilterTest is the Strategy
+    /// FilterStrategy is the Strategy we choose to filter our input.
+    /// Context
     /// </summary>
     public abstract class FriendFilter
     {
@@ -15,11 +14,11 @@ namespace Logic
 
         public FriendFilter NextHandler { get; set; }
             
-        public Func<Request, bool> FilterTest { get; private set; }
+        public IFilterStrategy FilterStrategy { get; private set; }
 
-        public FriendFilter(Func<Request, bool> i_FilterTest)
+        public FriendFilter(IFilterStrategy i_FilterStrategy)
         {
-            FilterTest = i_FilterTest;
+            FilterStrategy = i_FilterStrategy;
             m_LastHandlerInChain = this;
         }
 

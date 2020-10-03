@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Logic
+﻿namespace Logic
 {
     /// <summary>
     /// Part of Chain of Responsability pattern.
@@ -8,13 +6,13 @@ namespace Logic
     /// </summary>
     public class CriticalFilter : FriendFilter
     {
-        public CriticalFilter(Func<Request, bool> i_FilterTest) : base(i_FilterTest)
+        public CriticalFilter(IFilterStrategy i_FilterTest) : base(i_FilterTest)
         {
         }
 
        public override void Proccess(Request io_Request)
         {
-            if (FilterTest.Invoke(io_Request))
+            if (FilterStrategy.DoFilterOnFriends(io_Request))
             {
                 if (NextHandler != null)
                 {

@@ -37,14 +37,22 @@
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
     <Compile Include="CriticalFilter.cs" />
+    <Compile Include="EducatedFriendsFilterStrategy.cs" />
     <Compile Include="FriendFilter.cs" />
     <Compile Include="FriendsToMatch.cs" />
     <Compile Include="ChainOfHandlers.cs" />
     <Compile Include="IFacebookApplication.cs" />
+    <Compile Include="IFilterStrategy.cs" />
+    <Compile Include="IntrestedInEachOtherFilterStrategy.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="AppPagesFactory.cs" />
     <Compile Include="OptionalFilter.cs" />
+    <Compile Include="PopularFriendsFilterStrategy.cs" />
     <Compile Include="Request.cs" />
+    <Compile Include="SameReligionFilterStrategy.cs" />
+    <Compile Include="SameTownFilterStrategy.cs" />
+    <Compile Include="SingleFilterStrategy.cs" />
+    <Compile Include="WorkExpFriendsFilterStrategy.cs" />
     <Compile Include="ZodiacSign.cs" />
   </ItemGroup>
   <ItemGroup>
