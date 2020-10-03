@@ -200,23 +200,8 @@ namespace UI
 
         private void GetMatchesButton_Click(object sender, EventArgs e)
         {
-            //check which handler are checked
-
-            FriendFilterHandler criticalHandler = createCriticalFilter();
-            FriendFilterHandler optionalHandler = createOptionalFiltersIfNeeded();
-            if(optionalHandler != null)
-            {
-                criticalHandler.NextHandler = optionalHandler;
-            }
-
-            //create a chain of with them
-            // pass the first one to FriendsToMatch constructor
-
-            /// dummy handler////
-            FriendFilterHandler handler = new CriticalHandler((Request r) => true);
-            //////////////////////
-
-            FriendsToMatch friendsThatCanBeMatched = new FriendsToMatch(m_LoggedInUser, handler, r_ScoreToDetermineMatch);
+            LinkedList<ChainOfHandlers.eFilters> listOfOptionalFilters = createListOfOptionalFilters();
+            FriendsToMatch friendsThatCanBeMatched = new FriendsToMatch(m_LoggedInUser, m_Friends, listOfOptionalFilters, r_ScoreToDetermineMatch);
             int counter = 0;
 
             foreach (User friend in friendsThatCanBeMatched)
@@ -235,14 +220,7 @@ namespace UI
             }
         }
 
-        private CriticalHandler createCriticalFilter()
-        {
-            CriticalHandler criticalHandler = new CriticalHandler(Handlers.isUserAndFriendIntrestedInEachOtherGender);
-            criticalHandler.NextHandler = new CriticalHandler(Handlers.isFriendSingle);
-            return criticalHandler;
-        }
-
-        private LinkedList<ChainOfHandlers.eFilters> createOptionalFiltersIfNeeded()
+        private LinkedList<ChainOfHandlers.eFilters> createListOfOptionalFilters()
         {
             LinkedList<ChainOfHandlers.eFilters> listOfFiltersENums = new LinkedList<ChainOfHandlers.eFilters>();
             if(educatedCheckBox.Checked == true)

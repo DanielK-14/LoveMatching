@@ -11,7 +11,7 @@ namespace Logic
     {
         private static readonly int sr_NumberOfFriendsThatMakeSomeonePopular=100;
 
-        private static readonly Dictionary<string, Func<Request, bool>> sr_StringToOptionalFilterTest = new Dictionary<string, Func<Request, bool>>();
+        private static readonly Dictionary<eFilters, Func<Request, bool>> sr_StringToOptionalFilterTest = new Dictionary<eFilters, Func<Request, bool>>();
 
         private static readonly LinkedList<Func<Request, bool>> sr_CriticalFilterTests = new LinkedList<Func<Request, bool>>();
 
@@ -26,16 +26,16 @@ namespace Logic
 
         static ChainOfHandlers()
         {
-            sr_StringToOptionalFilterTest.Add("isEducated", isEducated);
-            sr_StringToOptionalFilterTest.Add("hasWorkExperience", hasWorkExperience);
-            sr_StringToOptionalFilterTest.Add("isPopular", isPopular);
-            sr_StringToOptionalFilterTest.Add("isFromSameReligion", isFromSameReligion);
-            sr_StringToOptionalFilterTest.Add("isFromSameTown", isFromSameTown);
+            sr_StringToOptionalFilterTest.Add(eFilters.Educated, isEducated);
+            sr_StringToOptionalFilterTest.Add(eFilters.WorkExperience, hasWorkExperience);
+            sr_StringToOptionalFilterTest.Add(eFilters.Popular, isPopular);
+            sr_StringToOptionalFilterTest.Add(eFilters.SameReligion, isFromSameReligion);
+            sr_StringToOptionalFilterTest.Add(eFilters.SameTown, isFromSameTown);
 
             sr_CriticalFilterTests.AddLast(isUserAndFriendIntrestedInEachOtherGender);
         }
 
-        public static FriendFilterHandler Build(LinkedList<string> i_ListOfMethodNamesToAdd)
+        public static FriendFilterHandler Build(LinkedList<eFilters> i_ListOfOptionalFiltersToAdd)
         {
             FriendFilterHandler firstInChain = null;
             
@@ -51,7 +51,7 @@ namespace Logic
                 }
             }
 
-            foreach(string nameOfOptionalFilter in i_ListOfMethodNamesToAdd)
+            foreach(eFilters nameOfOptionalFilter in i_ListOfOptionalFiltersToAdd)
             {
                 Func<Request, bool> optionalFilterTest = sr_StringToOptionalFilterTest[nameOfOptionalFilter];
 
