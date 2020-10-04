@@ -13,12 +13,12 @@
         private FriendFilter m_LastHandlerInChain;
 
         public FriendFilter NextHandler { get; set; }
-            
-        public IFilterStrategy FilterStrategy { get; private set; }
+
+        private IFilterStrategy r_FilterStrategy;
 
         public FriendFilter(IFilterStrategy i_FilterStrategy)
         {
-            FilterStrategy = i_FilterStrategy;
+            r_FilterStrategy = i_FilterStrategy;
             m_LastHandlerInChain = this;
         }
 
@@ -28,7 +28,13 @@
             m_LastHandlerInChain = i_Handler;
         }
 
-        public abstract void Proccess(Request io_Request);
+        public void Proccess(Request io_Request)
+        {
+            bool friendPassedTheFilterTest = r_FilterStrategy.DoFilterOnFriends(io_Request);
+            handleRequestOrMoveToNext(io_Request, friendPassedTheFilterTest);
+        }
+
+        protected abstract void handleRequestOrMoveToNext(Request io_Request, bool i_FriendPassedTheFilterTest);
 
         protected void handle(Request io_Request)
         {

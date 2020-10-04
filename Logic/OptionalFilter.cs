@@ -10,9 +10,9 @@
         {
         }
 
-       public override void Proccess(Request io_Request)
+       protected override void handleRequestOrMoveToNext(Request io_Request, bool i_FriendPassedTheFilterTest)
         {
-            if (FilterStrategy.DoFilterOnFriends(io_Request))
+            if (i_FriendPassedTheFilterTest)
             {
                 io_Request.Score++;
             }
